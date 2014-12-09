@@ -1,0 +1,63 @@
+.bloc {
+	background-color:rgb(38,130,213) !important;
+	color:rgba(255,255,255,.84) !important;
+}
+
+.bloc .row:first-child h3 {
+	margin-top: 17px;
+}
+
+.jisuan {
+	background-color: rgb(255,133,0) !important;
+	margin-top: -5px;
+}
+
+.liste {
+	list-style: none;
+}
+
+.fa-liste {
+	width: 35px;
+	height: 35px;
+	font-size: 35px;
+	text-align: center;
+	vertical-align: middle;
+	color: rgb(195,218,26);
+}
+
+#gallery {
+	background-size: 100% auto;
+	height: 500px;
+}
+
+.centerDiv {
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#gallery .gcontainer {
+	color: black;
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.divider {
+	height: 1px;
+	margin: 9px 0;
+	overflow: hidden;
+	background-color: #e5e5e5;
+}
+
+.form-horizontal .form-group:last-child {
+	margin-top: 25px;
+}
+
+@media (min-width: 1200px) {
+	.carousel-inner {
+		width:84%;
+	}
+}

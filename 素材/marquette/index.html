@@ -1,0 +1,283 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<head>
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/ripples.min.css" rel="stylesheet">
+	<link href="css/material-wfont.min.css" rel="stylesheet">
+	<!-- Font awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Custom -->
+	<link href="css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Begin -->
+	<div class="container">
+		<!-- header begins -->
+		<div class="navbar navbar-material-indigo">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="javascript:void(0)">某某物流</a>
+			</div>
+			<div class="navbar-collapse collapse navbar-responsive-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a class="disabled" href="javascript:void(0)"><i class="fa fa-weixin"></i> 微信客服</a></li>
+					<li><a href="tel:+33630021480"><i class="fa fa-phone"></i> 客服电话(0033)6 30 02 14 80</a></li>
+					<li><a class="disabled" href="javascript:void(0)">登录</a></li>
+					<li><a class="disabled" href="javascript:void(0)">注册</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- header ends -->
+
+		<!-- page contents begins -->
+		<div class="row visible-xs-block visible-sm-block">
+			<div class="container">
+				<div class="well">
+					<h1>某某速递也可以是promo信息</h1>
+					<blockquote>为广大华人同胞提供快递及清关运输的物流公司。其中快递服务可通往两百多个国家和地区。<br>本公司凭着多年物流运输经验，敢于承诺对物流运输途中破损包裹做出赔偿。</blockquote>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="well bloc">
+							<div class="row">
+								<div class="col-xs-7">
+									<h3>EMS独家代理</h3>
+								</div>
+								<div class="col-xs-5">
+									<button type="button" class="btn btn-material-ligntyellow btn-raised pull-right jisuan" data-toggle="modal" data-target="#ems"><b>运费计算</b></button>
+									<div class="modal" id="ems">
+										<div class="modal-dialog">
+											<div class="modal-content well">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h4>模拟EMS运费</h4>
+													<li class="divider"></li>
+												</div>
+												<div class="modal-body">
+													<form class="form-horizontal">
+														<fieldset>
+															<div class="form-group">
+																<label class="col-md-3 control-label">物品数量</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">价值(€)</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">估重(kg)</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">长度(cm)</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">宽度(cm)</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">高度(cm)</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="col-xs-6 form-control-static">
+																	<a class="btn btn-success btn-raised centerDiv">运费</a>
+																</div>
+																<div class="col-xs-6 form-control-static" id="fraisEMS">
+																	<a class="btn btn-success btn-raised centerDiv">12 €</a>
+																</div>
+															</div>
+														</fieldset>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div><!-- modal ends -->
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<ul class="liste">
+										<li><i class="mdi-action-grade fa-liste"></i><b> 优势：</b>最低价格 最快速度</li>
+										<li><i class="mdi-maps-local-grocery-store fa-liste"></i><b> 内容：</b>奶粉 红酒 化妆品</li>
+										<li><i class="mdi-notification-event-note fa-liste"></i><b> 发货周期：</b>周三 周五</li>
+										<li><i class="mdi-device-airplanemode-on fa-liste"></i><b> 运输时间：</b>7-10日</li>
+									</ul>
+								</div>
+							</div>
+						</div><!-- ems bloc ends -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="well bloc">
+							<div class="row">
+								<div class="col-xs-7">
+									<h3>La poste</h3>
+								</div>
+								<div class="col-xs-5">
+									<button type="button" class="btn btn-material-ligntyellow btn-raised pull-right jisuan" data-toggle="modal" data-target="#laposte"><b>运费计算</b></button>
+									<div class="modal" id="laposte">
+										<div class="modal-dialog">
+											<div class="modal-content well">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h4>模拟La poste运费</h4>
+													<li class="divider"></li>
+												</div>
+												<div class="modal-body">
+													<form class="form-horizontal">
+														<fieldset>
+															<div class="form-group">
+																<label class="col-md-3 control-label">物品数量</label>
+																<div class="col-md-9">
+																	<input type="number" class="form-control" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">价值(€)</label>
+																<div class="col-md-9">
+																	<input type="number" min="0.1" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">估重(kg)</label>
+																<div class="col-md-9">
+																	<input type="number" min="0" max="30" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">长度(cm)</label>
+																<div class="col-md-9">
+																	<input type="number" min="0.1" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">宽度(cm)</label>
+																<div class="col-md-9">
+																	<input type="number" min="0.1" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-3 control-label">高度(cm)</label>
+																<div class="col-md-9">
+																	<input type="number" min="0.1" class="form-control" step="any" placeholder="eg.20">
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="col-xs-6 form-control-static">
+																	<a class="btn btn-success btn-raised centerDiv">运费</a>
+																</div>
+																<div class="col-xs-6 form-control-static" id="fraisEMS">
+																	<a class="btn btn-success btn-raised centerDiv">12 €</a>
+																</div>
+															</div>
+														</fieldset>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div><!-- modal ends -->
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<ul class="liste">
+										<li><i class="mdi-action-grade fa-liste"></i><b> 优势：</b>发货快</li>
+										<li><i class="mdi-maps-local-grocery-store fa-liste"></i><b> 内容：</b>奶粉 红酒 化妆品</li>
+										<li><i class="mdi-notification-event-note fa-liste"></i><b> 发货周期：</b>每天</li>
+										<li><i class="mdi-device-airplanemode-on fa-liste"></i><b> 运输时间：</b>7-10日</li>
+									</ul>
+								</div>
+							</div>
+						</div><!-- ems bloc ends -->
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8 hidden-xs hidden-sm">
+				<div id="my_carousel" class="carousel slide" data-ride="carousel">
+					<!-- Bulles -->
+					<ol class="carousel-indicators">
+						<li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+						<li data-target="#my_carousel" data-slide-to="1"></li>
+						<li data-target="#my_carousel" data-slide-to="2"></li>
+					</ol>
+					<!-- Slides -->
+					<div class="carousel-inner">
+						<!-- Page 1 -->
+						<div class="item active">  
+							<div class="carousel-page">
+								<img src="./img/tunnel.jpg" class="img-responsive" style="margin:0px auto;" />
+							</div> 
+							<div class="carousel-caption centerDiv">Page 1 de présentation</div>
+						</div>   
+						<!-- Page 2 -->
+						<div class="item"> 
+							<div class="carousel-page"><img src="./img/tunnel.jpg" class="img-responsive img-rounded" 
+								style="margin:0px auto;"  />
+							</div> 
+							<div class="carousel-caption">Page 2 de présentation</div>
+						</div>  
+						<!-- Page 3 -->
+						<div class="item">  
+							<div class="carousel-page">
+								<img src="./img/tunnel.jpg" class="img-responsive img-rounded" 
+								style="margin:0px auto;max-height:100%;"  />
+							</div>  
+							<div class="carousel-caption">Page 2 de présentation</div>
+						</div>     
+					</div>
+					<!-- Contrôles -->
+					<a class="left carousel-control" href="#my_carousel" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+					<a class="right carousel-control" href="#my_carousel" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- page contents ends -->
+
+		<!-- footer -->
+	</div>
+	<!-- End -->
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<script src="js/ripples.min.js"></script>
+	<script src="js/material.min.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+	$(document).ready(function() {
+		$.material.init();
+	});
+	</script>
+
+</body>
+
+</html>
