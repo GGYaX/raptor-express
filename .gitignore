@@ -1,9 +1,9 @@
 #####################MAC################################
 # Joomla
-./joomla/tmp/*
-./joomla/logs/*
-./joomla/_BAK/*
-
+joomla/tmp/*
+joomla/logs/*
+joomla/_BAK/*
+joomla/t3_assets/*
 
 .DS_Store
 .AppleDouble
