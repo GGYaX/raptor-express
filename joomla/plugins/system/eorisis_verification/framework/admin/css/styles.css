@@ -1,0 +1,116 @@
+/**
+ * ----------------------------------------------------------------------------
+ * Software:		eorisis framework
+ * @author		eorisis http://eorisis.com
+ * 
+ * @copyright	Copyright (C) 2012-2014 eorisis. All Rights Reserved.
+ * @license		eorisis Proprietary Use License: http://eorisis.com/license
+ * ----------------------------------------------------------------------------
+**/
+
+.form-horizontal #attrib-EO_INFO .control-label {}
+.form-horizontal #attrib-EO_INFO .controls { margin-left:0; }
+
+.eo_info
+{
+	font-family:'Open Sans', sans-serif, Arial, Helvetica;
+	-webkit-font-smoothing:antialiased;
+	font-size:13px; font-weight:300;
+	padding:10px 0; margin:0 10px 10px;
+	max-width:340px; 
+	display:block; clear:both;
+	vertical-align:top;
+}
+
+.eo_info h1,
+.eo_info h2,
+.eo_info h3,
+.eo_info h4,
+.eo_info h5,
+.eo_info h6
+{
+	background:transparent !important;
+	font-weight:300;
+	margin:0 0 5px 0; padding:0;
+	clear:both;
+}
+
+.eo_info h1 { font-size:16px; }
+.eo_info h1 { font-size:20px; color:#555; }
+.eo_info h2 { font-size:18px; }
+.eo_info h3 { font-size:16px; }
+
+.eo_info #eo_update_check { display:block; }
+
+.eo_info #eo_update_check a,
+.eo_info #server_version
+{ display:none; }
+
+.eo_info #eo_update_check,
+.eo_info #server_version
+{ height:30px; }
+
+.eo_info #eo_latest,
+.eo_info #eo_dl_update,
+.eo_info #eo_infourl
+{
+	font-size:14px; font-weight:400;
+	margin:0 0 3px;
+	display:block;
+}
+
+.eo_info #eo_release_date,
+.eo_info #eo_release_notes
+{
+	display:block;
+	font-size:11px;
+}
+
+#server_version,
+.ver,
+#eo_dl_update,
+#eo_uptodate,
+#eo_version_no
+{ color:#649f40; }
+
+.eo_info #eo_latest { margin:0 0 15px; }
+
+.eo_info #eo_release
+{
+	display:block;
+	margin:10px 0;
+	height:0;
+}
+
+.eo_info #eo_release.new_update { height:55px; }
+
+.eo_info a,
+.eo_info a:link,
+.eo_info a:visited,
+.eo_info .ver.blue,
+.eo_info span#eo_dl_update.blue
+{ color:#0096ff; }
+
+.eo_info span#eo_version_no.error,
+.eo_info span#eo_dl_update.error
+{ color:#555; }
+
+.eo_info span#eo_dl_update.error { font-size:13px; }
+
+span.group
+{
+	display:block;
+	margin-bottom:10px;
+}
+
+.pane-sliders hr,
+.eo_info hr
+{
+	display:block; clear:both;
+	height:1px;
+	color:#ddd;
+	background:#eee;
+	font-size:0;
+	border:0;
+	margin:5px 0;
+}

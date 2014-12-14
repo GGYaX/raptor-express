@@ -1,0 +1,66 @@
+/*
+# ------------------------------------------------------------------------
+# Name - Business Plan
+# ------------------------------------------------------------------------
+# Copyright(C) 2014 www.VinaGecko.com. All Rights Reserved.
+# @license http://www.gnu.org/licenseses/gpl-3.0.html GNU/GPL
+# Author: VinaGecko.com
+# Websites: http://VinaGecko.com
+# ------------------------------------------------------------------------
+*/
+
+.no-modal {
+	border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+    left: auto;
+    margin-left: auto;
+    outline: 0 none;
+    position: inherit;
+    top: auto;
+	margin-right: auto;
+}
+.text-hidden {
+	span {
+		display: none;
+	}
+}
+.border {
+	border: 1px solid @colorboder;
+}
+.rtl {
+	.pull-left {
+		float: right;
+	}.pull-right {
+		float: left;
+	}
+}
+.sp-before(@height:1px, @top: 0) {
+    position:relative;
+    &::before {
+        content: " ";
+        position:absolute;
+        top:@top;
+        left:0;
+        width:100%;
+        height:@height;
+    }
+}
+.sp-after(@height:1px, @bottom: 0) {
+    position:relative;
+    &::after {
+        content: " ";
+        position:absolute;
+        bottom:@bottom;
+        left:0;
+        width:100%;
+        height:@height;
+    }
+}
+/** animation **/
+.animation(@animation) {
+		-webkit-animation: @animation;
+		-moz-animation: @animation;
+		-ms-animation: @animation;
+		animation: @animation;
+}

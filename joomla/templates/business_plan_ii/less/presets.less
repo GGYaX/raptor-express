@@ -1,0 +1,460 @@
+/**
+ * @package Business Plan
+ * @author VinaGecko.com http://VinaGecko.com
+ * @copyright Copyright (C) 2014 www.VinaGecko.com
+ * @license http://www.gnu.org/licenseses/gpl-3.0.html GNU/GPL
+*/
+
+@import 'variables';
+@import 'mixins';
+
+// Button
+
+
+//Link color
+a:not(.btn) {
+	color: @grayLight;
+	&:hover {
+	  color: @link_color;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	a {
+		color: lighten(@black,30%) !important;
+		&:hover {
+			color: @link_color !important;
+		}
+	}
+}
+
+.color {
+	color: @link_color;
+	text-shadow: -1px 1px @link_color;
+}
+
+body {
+	color:@text_color;
+}
+
+//header
+#sp-header-wrapper {
+	  background-color: lighten(@header_color,20%);
+	
+	//Logo
+	.logo{
+		background-image:url(../../images/presets/@{preset}/logo.png);
+	}
+	.search{
+		.button {
+			background: @link_color;
+			&:hover {
+				background: darken(@link_color,5%);
+			}
+		}
+	}
+}
+#sp-menu-wrapper {
+	background-color: lighten(@header_color,20%);
+}
+
+/*breadcrumb */
+.breadcrumb  {
+	.active {
+		i {
+			&:before {
+				color: @link_color;
+			}
+		}
+	}
+	.pathway {
+		color: @link_color;
+		&:hover {
+			color: lighten(@link_color,10%);
+		}
+	}
+}
+
+#sp-main-menu {
+	ul {	
+		&.level-0 {
+			> li {
+				&:hover,
+				&.active {
+					&:after {
+						background: @link_color;
+					}
+					> a {
+						color: @link_color;
+					}
+				}
+			}
+		}
+	}
+	a.active {
+		.menu-title {
+			color: @link_color;
+		}
+	}
+	ul {
+		>li {
+			&:hover {
+				> a {
+					color: @link_color;
+				}
+			}
+		}
+	}
+	li {
+		li:not(.sp-menu-group) {
+			border-top:1px solid @link_color;
+		}
+	}
+	div.sp-menu-group {
+		.sp-menu-group-title {
+			border-bottom:1px solid @link_color;
+		}
+	}
+}
+
+#menu-user {
+	a {
+		&:hover {
+			color: @link_color;
+		}
+	}
+}
+
+#sp-feature-wrapper {
+	//Link
+	a:not(.btn){
+		color:lighten(@link_color, 20%);
+		 
+		&:hover{
+		   color:lighten(@link_color, 40%);
+		}
+	}
+	
+}
+
+
+//slide show
+.tcvn_wowslider {
+	#tcvn_wowslider142{
+		a {
+			.border-radius(50%);
+			overflow: hidden;
+			&.ws_prev {
+				background: url("../../images/presets/@{preset}/arrows.png") no-repeat ;
+			}
+			&.ws_next { 
+				background: url("../../images/presets/@{preset}/arrows.png") no-repeat -45px 0 ;
+			}
+		}
+	}
+}
+
+//Widgets
+.module {
+	&.highlighted {
+		background:darken(@link_color,10%);
+		a:not(.btn){
+		 color:lighten(@link_color, 10%);
+			 
+		&:hover{
+		   color:darken(@link_color, 20%)
+		  }
+		}
+	}
+	&.k2_scroller {
+		.morebutton {
+			color: @link_color;
+			&:after {
+				background:url("../../images/presets/@{preset}/icon-reamore.png") no-repeat right 2px;
+			}
+
+		}
+	}
+}
+
+/*tcvn-title*/
+.tcvn-title {
+	span {
+		color: @link_color;
+	}
+}
+
+#sp-bottom-wrapper,
+#sp-footer-wrapper {
+	background:darken(@link_color,30%);
+	color:@white;
+	h3{
+		color:@white;
+	}
+	p {
+		color: lighten(@grayLight,15%);
+	}
+	a{
+		color: lighten(@grayLight,15%);
+		&:hover {
+				color: @link_color;
+		}
+	}
+	ul.nav li a {
+		&:hover {
+			color: @link_color;
+		}
+	}
+}
+
+
+/*Newsletter*/
+#form_new {
+	.btn {
+		background: @link_color;
+		&:hover,:focus {
+			background: @link_color;
+		}
+	}
+}
+
+/** Joomla Content **/
+	.page-header {
+		a {
+			color: @link_color;
+		}
+	}
+	.progress-striped .bar {
+		background-color: @link_color;
+	}
+	#vina_about_us {
+		.carousel {
+			.item {
+				.incon_bg {
+					background: @link_color;
+				}
+			}
+			.carousel-control {
+				color: @link_color;
+			}
+			&:hover {
+				.carousel-control {
+					&:hover {
+						background: @link_color;
+					}
+				}
+			}
+		}
+		.skill {
+			ul {
+				li {
+					border-left: 2px solid @link_color;;
+				}
+			}
+		}
+	}
+	#vina_company {
+		.img-polaroid {
+			.info_team {
+				ul {
+					li {
+						a {
+							&:hover {
+								background: @link_color;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	#vina_pricing_table {
+		.pricing_table {
+			.thumbnail {
+				button {
+					background: @link_color;
+				}
+			}
+		}
+	}
+	#vina_contact_us {
+		.contact_us {
+			.qlform {
+				.control-group {
+					.controls {
+						width: 100%;
+						display: block;
+						margin: 0;
+						input[type="submit"]{
+							&:hover {
+								color: @white;
+							}
+							&:focus {
+								background: @black;
+							}
+						}
+					}
+				}
+			}
+		}
+		ul.social {
+			li {
+				a {
+					border: 4px solid lighten(@link_color, 30%);
+					background: @link_color;
+					&:hover {
+						border: 4px solid @link_color;
+						em {
+							color: @link_color;
+						}
+					}
+				}
+			}
+		}
+		.map {
+			span {
+				em {
+					color: @link_color;
+				}
+			}
+		}
+	}
+	
+/** Joomla Content End **/
+
+#sp-footer-wrapper {
+	.sp-border();
+}	
+
+
+/*Buttons*/
+.btn-primary, button, input[type='submit'], input[type='button'], submit {
+	background: @link_color;
+	color: @white;
+	&:after {
+		background: @black;
+	}
+	&:hover,&:focus {
+		color: @link_color;
+		background-color: @link_color;
+	}
+}
+
+/*k2 tool*/
+table.calendar {
+	a {
+		color: @link_color;
+	}
+}
+/** Scroller K2 **/
+.tcvn-scroller-k2 {
+	.toolbar {
+		.left , .right {
+			&:hover {
+				&:before {
+					color: @link_color;
+				}
+			}
+		}
+	}
+}
+/*border header*/
+.modhdg2 {
+    background-color: @link_color;
+}
+.modhdg3 {
+    border-left: 4px solid @link_color;
+}
+/*k2*/
+#k2Container {
+	/*-- Style Category Blog --*/
+	&.itemView { /*style item*/
+		.itemCategory {
+			background: @link_color;
+		}
+		#submitCommentButton {
+			background: @link_color;
+		}
+		div.itemBackToTop {
+			a {
+				&:before {
+					color: @link_color;
+				}
+			}
+		}
+	}
+	&.userView {
+		.userItemCategory {
+			background: @link_color;
+		}
+	}
+	&.tagView {
+		.tagItemCategory {
+			background: @link_color;
+		}
+	}
+}
+
+table.calendar {
+	tr {
+		td.calendarToday {
+			background: @link_color;
+		}
+		td.calendarDateLinked {
+			a {
+				&:hover {
+					background: @link_color;
+				}
+			}
+		}
+	}
+}
+
+
+.vina_latest {
+	i {
+		&:before {
+			color: @link_color;
+			background-color: @white;	
+		}
+	}
+	li {
+		border-bottom: 1px dotted @link_color;
+		&.lastItem {
+			border-bottom: 0;
+		}
+		&.even {
+			padding-top: 0;
+		}
+	}
+}
+
+.pagination-active {
+	a {
+		color: @link_color;
+	}
+}
+
+/*categoires*/
+.vina_categories {
+	li {
+		&:before {
+			color: @link_color;
+			background-color: @white;
+		}
+	}
+	.activeCategory {
+		a {
+			color: @link_color;
+		}
+	}
+}
+
+/*Icon*/
+li {
+	> .icon-chevron-sign-right,.icon-calendar {
+		&:before {
+			color: @link_color;
+		}
+	}
+}

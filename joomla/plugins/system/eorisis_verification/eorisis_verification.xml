@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" version="1.6.0" group="system" method="upgrade">
+
+	<title>eorisis: Verification</title>
+	<name>eorisis_verification</name>
+	<author>eorisis.com</author>
+	<authorUrl>http://eorisis.com</authorUrl>
+	<authorEmail>info@eorisis.com</authorEmail>
+	<copyright>Copyright (C) 2012-2014 eorisis. All Rights Reserved.</copyright>
+	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<version>1.1.6</version>
+	<creationDate>10 October 2014</creationDate>
+	<compatibility>Joomla! 1.6 to 3.3 Series</compatibility>
+	<short_url>verification</short_url>
+	<created>23 February 2012</created>
+	<min_php_version>5.2.0</min_php_version>
+	<description>PLG_SYSTEM_EORISIS_VERIFICATION_XML_DESCRIPTION</description>
+	<scriptfile>framework/install/eorisis_installer.php</scriptfile>
+
+	<files>
+		<filename plugin="eorisis_verification">eorisis_verification.php</filename>
+		<folder>framework</folder>
+		<filename>index.html</filename>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_system_eorisis_verification.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_eorisis_verification.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+
+			<!-- Info -->
+			<fieldset name="EO_INFO" addfieldpath="/plugins/system/eorisis_verification/framework/admin/html/fields">
+				<field name="info" type="info" />
+			</fieldset>
+
+			<!-- Google -->
+			<fieldset name="EO_GOOGLE">
+
+				<!-- Meta-Tag ID -->
+				<field name="google_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" description="EO_VER_GOOGLE_META_TAG_DESC" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="google_verify_meta" label="EO_VER_META" default="1" type="radio" class="btn-group" filter="int" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- File ID -->
+				<field name="google_file_id" label="EO_VER_FILE_ID" type="text" size="60" class="span4" description="EO_VER_GOOGLE_FILE_ID_DESC" />
+
+				<!-- File Verification -->
+				<field name="google_verify_file" label="EO_VER_FILE" default="0" type="radio" class="btn-group" filter="int" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- Help -->
+				<field type="spacer" hr="true" class="eo_hr" />
+				<field type="spacer" label="EO_VER_HELP" class="eo_help" description="EO_VER_GOOGLE_HELP" />
+
+			</fieldset><!-- /Google -->
+
+
+			<!-- Bing -->
+			<fieldset name="EO_BING">
+
+				<!-- Meta-Tag ID -->
+				<field name="bing_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" description="EO_VER_BING_META_TAG_DESC" />
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="bing_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- File Verification -->
+				<field name="bing_verify_file" label="EO_VER_FILE" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- Help -->
+				<field type="spacer" hr="true" class="eo_hr" />
+				<field type="spacer" label="EO_VER_HELP" class="eo_help" description="EO_VER_BING_HELP" />
+
+			</fieldset><!-- /Bing -->
+
+
+			<!-- Yandex -->
+			<fieldset name="EO_YANDEX">
+
+				<!-- Meta-Tag ID -->
+				<field name="yandex_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" />
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="yandex_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- File Verification (HTML) -->
+				<field name="yandex_verify_file_html" label="EO_VER_FILE_HTML" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- File Verification (TXT) -->
+				<field name="yandex_verify_file_txt" label="EO_VER_FILE_TXT" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Yandex -->
+
+
+			<!-- Baidu -->
+			<fieldset name="EO_BAIDU">
+
+				<!-- Meta-Tag ID -->
+				<field name="baidu_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" description="EO_VER_BAIDU_META_TAG_DESC" />
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="baidu_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- File Verification -->
+				<field name="baidu_verify_file" label="EO_VER_FILE" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- Help -->
+				<field type="spacer" hr="true" class="eo_hr" />
+				<field type="spacer" label="EO_VER_HELP" class="eo_help" description="EO_VER_BAIDU_HELP" />
+
+			</fieldset><!-- /Baidu -->
+
+
+			<!-- Alexa -->
+			<fieldset name="EO_ALEXA">
+
+				<!-- Meta-Tag ID -->
+				<field name="alexa_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" description="EO_VER_ALEXA_META_TAG_DESC" />
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="alexa_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- File Verification -->
+				<field name="alexa_verify_file" label="EO_VER_FILE" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- Help -->
+				<field type="spacer" hr="true" class="eo_hr" />
+				<field type="spacer" label="EO_VER_HELP" class="eo_help" description="EO_VER_ALEXA_HELP" />
+
+			</fieldset><!-- /Alexa -->
+
+
+			<!-- WOT (Web of Trust) -->
+			<fieldset name="EO_WOT">
+
+				<!-- Meta-Tag ID -->
+				<field name="wot_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="wot_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- File ID -->
+				<field name="wot_file_id" label="EO_VER_FILE_ID" type="text" size="60" class="span4" />
+
+				<!-- File Verification (HTML) -->
+				<field name="wot_verify_file_html" label="EO_VER_FILE_HTML" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /WOT (Web of Trust) -->
+
+
+			<!-- Norton Safe Web -->
+			<fieldset name="EO_NORTON_SAFEWEB">
+
+				<!-- Meta-Tag ID -->
+				<field name="norton_safeweb_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="norton_safeweb_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- File ID -->
+				<field name="norton_safeweb_file_id" label="EO_VER_FILE_ID" type="text" size="60" class="span4" />
+
+				<!-- File Verification (HTML) -->
+				<field name="norton_safeweb_verify_file_html" label="EO_VER_FILE_HTML" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Norton Safe Web -->
+
+
+			<!-- Pinterest -->
+			<fieldset name="EO_PINTEREST">
+
+				<!-- Meta-Tag ID -->
+				<field name="pinterest_id" label="EO_VER_META_TAG_ID" type="text" size="60" class="span4" />
+
+				<field type="spacer" hr="true" class="eo_hr" />
+
+				<!-- Meta-Tag Verification -->
+				<field name="pinterest_verify_meta" label="EO_VER_META" default="1" type="radio" filter="int" class="btn-group" description="EO_VER_META_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<!-- File Verification (HTML) -->
+				<field name="pinterest_verify_file_html" label="EO_VER_FILE_HTML" default="0" type="radio" filter="int" class="btn-group" description="EO_VER_FILE_DESC">
+					<option value="1">JENABLED</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset><!-- /Norton Safe Web -->
+
+
+			<!-- Advanced -->
+			<fieldset name="advanced">
+
+				<!-- File Permissions -->
+				<field name="file_permissions" label="EO_VER_FILE_PERMISSIONS" default="0" type="list" filter="int" description="EO_VER_FILE_PERMISSIONS_DESC">
+					<option value="1">644</option>
+					<option value="0">EO_VER_IGNORE</option>
+				</field>
+
+			</fieldset><!-- /Advanced -->
+
+		</fields>
+	</config>
+
+	<updateservers>
+		<server type="extension" priority="1" name="eorisis: Verification">http://eorisis.com/updates/eorisis-verification/extension.xml</server>
+	</updateservers>
+
+</extension>

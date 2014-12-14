@@ -1,0 +1,308 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+a:not(.btn) {
+  color: #999;
+}
+a:not(.btn):hover {
+  color: #61ad67;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #4d4d4d !important;
+}
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #61ad67 !important;
+}
+.color {
+  color: #61ad67;
+  text-shadow: -1px 1px #61ad67;
+}
+body {
+  color: #333333;
+}
+#sp-header-wrapper {
+  background-color: #ffffff;
+}
+#sp-header-wrapper .logo {
+  background-image: url(../../images/presets/preset4/logo.png);
+}
+#sp-header-wrapper .search .button {
+  background: #61ad67;
+}
+#sp-header-wrapper .search .button:hover {
+  background: #54a15a;
+}
+#sp-menu-wrapper {
+  background-color: #ffffff;
+}
+.breadcrumb .active i:before {
+  color: #61ad67;
+}
+.breadcrumb .pathway {
+  color: #61ad67;
+}
+.breadcrumb .pathway:hover {
+  color: #83be87;
+}
+#sp-main-menu ul.level-0 > li:hover:after,
+#sp-main-menu ul.level-0 > li.active:after {
+  background: #61ad67;
+}
+#sp-main-menu ul.level-0 > li:hover > a,
+#sp-main-menu ul.level-0 > li.active > a {
+  color: #61ad67;
+}
+#sp-main-menu a.active .menu-title {
+  color: #61ad67;
+}
+#sp-main-menu ul >li:hover > a {
+  color: #61ad67;
+}
+#sp-main-menu li li:not(.sp-menu-group) {
+  border-top: 1px solid #61ad67;
+}
+#sp-main-menu div.sp-menu-group .sp-menu-group-title {
+  border-bottom: 1px solid #61ad67;
+}
+#menu-user a:hover {
+  color: #61ad67;
+}
+#sp-feature-wrapper a:not(.btn) {
+  color: #a4d0a8;
+}
+#sp-feature-wrapper a:not(.btn):hover {
+  color: #e7f3e8;
+}
+.tcvn_wowslider #tcvn_wowslider142 a {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.tcvn_wowslider #tcvn_wowslider142 a.ws_prev {
+  background: url("../../images/presets/preset4/arrows.png") no-repeat;
+}
+.tcvn_wowslider #tcvn_wowslider142 a.ws_next {
+  background: url("../../images/presets/preset4/arrows.png") no-repeat -45px 0;
+}
+.module.highlighted {
+  background: #4b9050;
+}
+.module.highlighted a:not(.btn) {
+  color: #83be87;
+}
+.module.highlighted a:not(.btn):hover {
+  color: #396f3e;
+}
+.module.k2_scroller .morebutton {
+  color: #61ad67;
+}
+.module.k2_scroller .morebutton:after {
+  background: url("../../images/presets/preset4/icon-reamore.png") no-repeat right 2px;
+}
+.tcvn-title span {
+  color: #61ad67;
+}
+#sp-bottom-wrapper,
+#sp-footer-wrapper {
+  background: #284d2b;
+  color: #fff;
+}
+#sp-bottom-wrapper h3,
+#sp-footer-wrapper h3 {
+  color: #fff;
+}
+#sp-bottom-wrapper p,
+#sp-footer-wrapper p {
+  color: #bfbfbf;
+}
+#sp-bottom-wrapper a,
+#sp-footer-wrapper a {
+  color: #bfbfbf;
+}
+#sp-bottom-wrapper a:hover,
+#sp-footer-wrapper a:hover {
+  color: #61ad67;
+}
+#sp-bottom-wrapper ul.nav li a:hover,
+#sp-footer-wrapper ul.nav li a:hover {
+  color: #61ad67;
+}
+#form_new .btn {
+  background: #61ad67;
+}
+#form_new .btn:hover,
+#form_new .btn :focus {
+  background: #61ad67;
+}
+.page-header a {
+  color: #61ad67;
+}
+.progress-striped .bar {
+  background-color: #61ad67;
+}
+#vina_about_us .carousel .item .incon_bg {
+  background: #61ad67;
+}
+#vina_about_us .carousel .carousel-control {
+  color: #61ad67;
+}
+#vina_about_us .carousel:hover .carousel-control:hover {
+  background: #61ad67;
+}
+#vina_about_us .skill ul li {
+  border-left: 2px solid #61ad67;
+}
+#vina_company .img-polaroid .info_team ul li a:hover {
+  background: #61ad67;
+}
+#vina_pricing_table .pricing_table .thumbnail button {
+  background: #61ad67;
+}
+#vina_contact_us .contact_us .qlform .control-group .controls {
+  width: 100%;
+  display: block;
+  margin: 0;
+}
+#vina_contact_us .contact_us .qlform .control-group .controls input[type="submit"]:hover {
+  color: #fff;
+}
+#vina_contact_us .contact_us .qlform .control-group .controls input[type="submit"]:focus {
+  background: #000;
+}
+#vina_contact_us ul.social li a {
+  border: 4px solid #c6e1c8;
+  background: #61ad67;
+}
+#vina_contact_us ul.social li a:hover {
+  border: 4px solid #61ad67;
+}
+#vina_contact_us ul.social li a:hover em {
+  color: #61ad67;
+}
+#vina_contact_us .map span em {
+  color: #61ad67;
+}
+.btn-primary,
+button,
+input[type='submit'],
+input[type='button'],
+submit {
+  background: #61ad67;
+  color: #fff;
+}
+.btn-primary:after,
+button:after,
+input[type='submit']:after,
+input[type='button']:after,
+submit:after {
+  background: #000;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+button:hover,
+button:focus,
+input[type='submit']:hover,
+input[type='submit']:focus,
+input[type='button']:hover,
+input[type='button']:focus,
+submit:hover,
+submit:focus {
+  color: #61ad67;
+  background-color: #61ad67;
+}
+table.calendar a {
+  color: #61ad67;
+}
+.tcvn-scroller-k2 .toolbar .left:hover:before,
+.tcvn-scroller-k2 .toolbar .right:hover:before {
+  color: #61ad67;
+}
+.modhdg2 {
+  background-color: #61ad67;
+}
+.modhdg3 {
+  border-left: 4px solid #61ad67;
+}
+#k2Container.itemView .itemCategory {
+  background: #61ad67;
+}
+#k2Container.itemView #submitCommentButton {
+  background: #61ad67;
+}
+#k2Container.itemView div.itemBackToTop a:before {
+  color: #61ad67;
+}
+#k2Container.userView .userItemCategory {
+  background: #61ad67;
+}
+#k2Container.tagView .tagItemCategory {
+  background: #61ad67;
+}
+table.calendar tr td.calendarToday {
+  background: #61ad67;
+}
+table.calendar tr td.calendarDateLinked a:hover {
+  background: #61ad67;
+}
+.vina_latest i:before {
+  color: #61ad67;
+  background-color: #fff;
+}
+.vina_latest li {
+  border-bottom: 1px dotted #61ad67;
+}
+.vina_latest li.lastItem {
+  border-bottom: 0;
+}
+.vina_latest li.even {
+  padding-top: 0;
+}
+.pagination-active a {
+  color: #61ad67;
+}
+.vina_categories li:before {
+  color: #61ad67;
+  background-color: #fff;
+}
+.vina_categories .activeCategory a {
+  color: #61ad67;
+}
+li > .icon-chevron-sign-right:before,
+li .icon-calendar:before {
+  color: #61ad67;
+}
