@@ -1,8 +1,8 @@
 #####################MAC################################
 # Joomla
-./joomla/tmp
-./joomla/logs
-./joomla/_BAK
+./joomla/tmp/*
+./joomla/logs/*
+./joomla/_BAK/*
 
 
 .DS_Store
