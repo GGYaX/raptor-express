@@ -11,8 +11,18 @@ add constraint chk_package_stat check(package_stat in ('DDJ','RKK','CKK','YSZ','
 
 -- t_orders
 alter table t_orders
+add constraint fk_package_id foreign key (package_id) references t_packages(package_id);
+alter table t_orders
+add constraint fk_client_id foreign key (client_id) references gzqxc_users(id);
+alter table t_orders
 add constraint chk_payment_method check (payment_method in ('CHQ','CAS','CBX','CBL','ALI','PAP','PRE'));
 alter table t_orders
 add constraint chk_payment_stat check (payment_stat in ('YFK','WFK','OTH'));
 alter table t_orders
 add constraint chk_media_code check (media_code in ('ONL','FRT'));
+
+-- t_id_cards
+alter table t_id_cards
+add constraint fk_user_id foreign key (user_id) references gzqxc_users(id);
+
+-- t_clients_address

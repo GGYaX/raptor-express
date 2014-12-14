@@ -32,7 +32,18 @@ create table t_orders (
 	package_id int(10) unsigned,
 	client_id int(11)
 ) ENGINE=InnoDB;
-alter table t_orders
-add constraint fk_package_id foreign key (package_id) references t_packages(package_id);
-alter table t_orders
-add constraint fk_client_id foreign key (client_id) references gzqxc_users(id);
+
+-- t_id_cards
+create table t_id_cards(
+	id_card_id int(10) unsigned primary key	not null auto_increment,
+	user_id int(11) not null,
+	filename_recto text,
+	filename_verso text
+);
+
+-- t_clients_address
+create table t_clients_address(
+	fk_client_id int(11),
+	fk_address_id int(0) unsigned,
+	primary key(fk_client_id, fk_address_id)
+);
