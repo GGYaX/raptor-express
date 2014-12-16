@@ -5,39 +5,45 @@ SET @user_table = CONCAT(@joomla_prefix, 'hikashop_address');
 
 -- t_packages
 create table t_packages (
-	package_id int(10) unsigned primary key not null,
-	sender_id int(10) unsigned foreign key references gzqxc_hikashop_address(address_id),
-	recipient_id int(10) unsigned foreign key references gzqxc_hikashop_address(address_id),
+	package_id int(10) unsigned primary key not null auto_increment,
+	sender_id int(10) unsigned not null,
+	recipient_id int(10) unsigned not null,
 	package_stat varchar(3),
 	insured_amount decimal(17,5),
-	cargo_info varchar(256),
+	cargo_info text,
 	weight float,
 	height float,
 	length float,
 	wide float,
 	stock_in_time datetime,
 	stock_out_time datetime,
-	comment varchar(256)
-);
-alter table t_packages
-add constraint chk_package_stat check(package_stat in ('DDJ','RKK','CKK','YSZ','DQG','QGC','GNP'));
+	comment text
+) ENGINE=InnoDB;
 
 -- t_orders
 create table t_orders (
-	order_id int(10) unsigned primary key not null,
+	order_id int(10) unsigned primary key not null auto_increment,
 	payment_method varchar(3),
 	payment_stat varchar(3),
 	order_time datetime,
 	pay_time datetime,
 	payment_amount decimal(17,5),
 	media_code varchar(3),
-	package_id int(10) unsigned foreign key references t_packages(package_id),
-	client_id int(11) foreign key references gzqxc_users(id)
+	package_id int(10) unsigned,
+	client_id int(11)
+) ENGINE=InnoDB;
+
+-- t_id_cards
+create table t_id_cards(
+	id_card_id int(10) unsigned primary key	not null auto_increment,
+	user_id int(11) not null,
+	filename_recto text,
+	filename_verso text
 );
 
-alter table t_orders
-add constraint chk_payment_method check (payment_method in ('CHQ','CAS','CBX','CBL','ALI','PAP','PRE'));
-alter table t_orders
-add constraint chk_payment_stat check (payment_stat in ('YFK','WFK','OTH'));
-alter table t_orders
-add constraint chk_media_code check (media_code in ('ONL','FRT'));
+-- t_clients_address
+create table t_clients_address(
+	fk_client_id int(11),
+	fk_address_id int(0) unsigned,
+	primary key(fk_client_id, fk_address_id)
+);
