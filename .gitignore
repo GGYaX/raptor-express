@@ -3,7 +3,7 @@
 joomla/tmp/*
 joomla/logs/*
 joomla/_BAK/*
-joomla/t3_assets/*
+joomla/t3-assets/*
 
 .DS_Store
 .AppleDouble

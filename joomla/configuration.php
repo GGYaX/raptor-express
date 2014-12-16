@@ -54,8 +54,8 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = '/var/www/html/j/logs';
-	public $tmp_path = '/var/www/html/j/tmp';
+	public $log_path = '/var/www/html/raptor-express/joomla/logs';
+	public $tmp_path = '/var/www/html/raptor-express/joomla/tmp';
 	public $lifetime = '1500';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';
