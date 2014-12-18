@@ -26,3 +26,7 @@ alter table t_id_cards
 add constraint fk_user_id foreign key (user_id) references gzqxc_users(id);
 
 -- t_clients_address
+
+-- t_shipping_historic
+alter table t_shipping_historic
+add constraint chk_package_id foreign key (package_id) references t_packages(package_id);

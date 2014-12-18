@@ -47,3 +47,15 @@ create table t_clients_address(
 	fk_address_id int(0) unsigned,
 	primary key(fk_client_id, fk_address_id)
 );
+
+-- t_shipping_historic
+create table t_shipping_historic(
+	package_id int(10) unsigned not null primary key,
+	DDJ_DATE datetime,
+	RKK_DATE datetime,
+	CKK_DATE datetime,
+	YSZ_DATE datetime,
+	DQG_DATE datetime,
+	QGC_DATE datetime,
+	GNP_DATE datetime
+) ENGINE=InnoDB;
