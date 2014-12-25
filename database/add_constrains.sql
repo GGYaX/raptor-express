@@ -29,4 +29,4 @@ add constraint fk_user_id foreign key (user_id) references gzqxc_users(id);
 
 -- t_shipping_historic
 alter table t_shipping_historic
-add constraint chk_package_id foreign key (package_id) references t_packages(package_id);
+add constraint fk_shipping_historic_package_id foreign key (package_id) references t_packages(package_id);
