@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.3.0" client="site" method="upgrade">
+    <name>PriceCalc</name>
+    <author>Cadmin,Yanxin</author>
+    <version>1.0.0</version>
+    <description>Price Calculator</description>
+    <files>
+        <filename>mod_pricecalc.xml</filename>
+        <filename module="mod_pricecalc">mod_pricecalc.php</filename>
+        <filename>index.html</filename>
+        <filename>jHelper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <config>
+    </config>
+</extension>
