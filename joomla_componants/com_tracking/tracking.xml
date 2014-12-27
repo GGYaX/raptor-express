@@ -8,7 +8,7 @@
 	<authorUrl>http://www.google.com</authorUrl>
 	<copyright>Copyleft if you can</copyright>
 	<license>License free</license>
-	<version>1.0</version>
+	<version>1.2</version>
 	<description>Track waybills</description>
 
 	<files folder="site">
