@@ -8,6 +8,8 @@ alter table t_packages
 add constraint fk_recipient_id foreign key (recipient_id) references gzqxc_hikashop_address(address_id);
 alter table t_packages
 add constraint chk_package_stat check(package_stat in ('DDJ','RKK','CKK','YSZ','DQG','QGC','GNP'));
+alter table t_packages
+add constraint chk_express_mode check(express_mode in ('LAP','BPO','EMS','RAE'));
 
 -- t_orders
 alter table t_orders

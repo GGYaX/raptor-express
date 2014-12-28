@@ -5,11 +5,13 @@ SET @user_table = CONCAT(@joomla_prefix, 'hikashop_address');
 
 -- t_packages
 create table t_packages (
-	package_id varchar(20) primary key not null,
+	package_id int(10) unsigned primary key not null auto_increment,
 	sender_id int(10) unsigned not null,
 	recipient_id int(10) unsigned not null,
 	package_stat varchar(3),
 	insured_amount decimal(17,5),
+	express_id varchar(20),
+	express_mode varchar(3),
 	cargo_info text,
 	weight float,
 	height float,
@@ -22,14 +24,14 @@ create table t_packages (
 
 -- t_orders
 create table t_orders (
-	order_id varchar(20) primary key not null,
+	order_id int(10) unsigned primary key not null auto_increment,
 	payment_method varchar(3),
 	payment_stat varchar(3),
 	order_time datetime,
 	pay_time datetime,
 	payment_amount decimal(17,5),
 	media_code varchar(3),
-	package_id varchar(20),
+	package_id int(10) unsigned,
 	client_id int(11)
 ) ENGINE=InnoDB;
 
@@ -50,7 +52,7 @@ create table t_clients_address(
 
 -- t_shipping_historic
 create table t_shipping_historic(
-	package_id varchar(20) not null primary key,
+	package_id int(10) unsigned not null primary key,
 	DDJ_DATE datetime,
 	RKK_DATE datetime,
 	CKK_DATE datetime,
