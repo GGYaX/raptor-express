@@ -12,6 +12,34 @@
         <filename>tmpl/default.php</filename>
         <filename>tmpl/index.html</filename>
     </files>
+    <media folder="media" destination="mod_pricecalc">
+	<filename>angular.min.js</filename>
+	<filename>angular.min.js.map</filename>
+	<filename>pricecalc.js</filename>
+	<filename>pricecalc.css</filename>
+<!--
+		<folder>js</folder>	
+		<folder>css</folder>
+		<filename>tracking.png</filename>
+-->
+    </media>
+    
     <config>
+	<fields name="params">
+	    <fieldset name="basic">
+		<!--<field name="priceinfo" type="textarea" filter="safehtml" rows="15" cols="40" default="" label="" description="">
+		</field>-->
+		<field name="min_weight" type="text" filter="integer" default="1" label="最小重量" description=""/>
+		<field name="max_weight" type="text" filter="integer" default="30" label="最大重量" description=""/>
+		<field name="re_0" type="text" filter="integer" default="0" label="RE首重" description=""/>
+		<field name="re_1" type="text" filter="integer" default="0" label="RE续重" description=""/>
+		<field name="ems_0" type="text" filter="integer" default="0" label="EMS首重" description=""/>
+		<field name="ems_1" type="text" filter="integer" default="0" label="EMS续重" description=""/>
+		<field name="lap_0" type="text" filter="integer" default="0" label="LaPoste首重" description=""/>
+		<field name="lap_1" type="text" filter="integer" default="0" label="LaPoste续重" description=""/>
+		<field name="bp_0" type="text" filter="integer" default="0" label="BPoste首重" description=""/>
+		<field name="bp_1" type="text" filter="integer" default="0" label="BPoste续重" description=""/>
+	    </fieldset>
+	</fields>
     </config>
 </extension>
