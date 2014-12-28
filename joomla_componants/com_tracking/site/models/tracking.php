@@ -55,7 +55,7 @@ class TrackingModelTracking extends JModelItem
                     );
                 } else {
                     // fetch ems info
-                    $emsInfo = $this->getEmsInfo($localinfo['express_id']);
+                    $emsInfo = $this->getEmsInfo($package['express_id']);
                     /*
                      * kuaidi100 接口：
                      * status:
