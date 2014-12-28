@@ -24,8 +24,6 @@ function resultDiv(r, e) {
 		rDiv = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">'+ 'Error 1000:' +'</span>'+ e['1000'] +'</div>';
 	} else {
 		// no error or no local error
-		rDiv += '<div class="page-header"><h1 id="timeline">国内单号：'+ r['package_id'] +'</h1></div>';
-
 		var TLElem = buildTLElem(r);
 		// ul
 		rDiv += '<ul class="timeline">';
@@ -75,9 +73,11 @@ function buildTLElem(r) {
 	 });
 
 	 // remote info
-	 for (var i = info.length - 1; i >= 0; i--) {
-	 	TLElem.push(buildElem(info[i]['context'], cnGMT000(new Date(info[i]['time'])), buildIcon()));
-	 };
+	 if(info) {
+		 for (var i = info.length - 1; i >= 0; i--) {
+			 TLElem.push(buildElem(info[i]['context'], cnGMT000(new Date(info[i]['time'])), buildIcon()));
+		 };
+	 }
 
 	 return TLElem;
 }

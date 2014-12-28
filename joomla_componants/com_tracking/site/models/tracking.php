@@ -18,7 +18,6 @@ class TrackingModelTracking extends JModelItem
 
     private $emsInfo;
 
-
     /**
      */
     public function getTrackingInfo ()
@@ -36,37 +35,49 @@ class TrackingModelTracking extends JModelItem
         if (isset($id) && ! is_array($this->trackingInfo)) {
 
             $this->trackingInfo = array();
-            // fetch local info
-            $localinfo = $this->getLocalInfo($id);
 
-            if (!isset($localinfo['package_id'])) {
+            $idTechR = $this->unmappingId(strtoupper($id));
+            if (isset($idTechR['error'])) {
                 $this->trackingInfo = array(
-                        "error" => '1000'
+                        "error" => '1000',
+                        "order_id" => $id
                 );
             } else {
-                // fetch ems info
-                $emsInfo = $this->getEmsInfo($localinfo['package_id']);
-                /*
-                 * kuaidi100 接口：
-                 * status:
-                 * 0：物流单暂无结果，
-                 * 1：查询成功，
-                 * 2：接口出现异常，
-                 */
-                if (! isset($emsInfo['status']) ||
-                         ($emsInfo['status'] != '1') && $emsInfo['status'] == '0') {
-                    $this->trackingInfo['error'] = '2000';
-                }
+                $idTech = $idTechR['idTech'];
+                $package = $this->getPackageInfo($idTech);
+                // fetch local info
+                $localinfo = $this->getLocalInfo($package['package_id']);
 
-                $this->trackingInfo = array_merge($localinfo, $emsInfo);
-                $this->trackingInfo['order_id'] = $id;
+                if (! isset($localinfo['package_id'])) {
+                    $this->trackingInfo = array(
+                            "error" => '1000',
+                            "order_id" => $id
+                    );
+                } else {
+                    // fetch ems info
+                    $emsInfo = $this->getEmsInfo($package['express_id']);
+                    /*
+                     * kuaidi100 接口：
+                     * status:
+                     * 0：物流单暂无结果，
+                     * 1：查询成功，
+                     * 2：接口出现异常，
+                     */
+                    if (! isset($emsInfo['status']) || ($emsInfo['status'] != '1') &&
+                             $emsInfo['status'] == '0') {
+                        $this->trackingInfo['error'] = '2000';
+                    }
+
+                    $this->trackingInfo = array_merge($localinfo, $emsInfo);
+                    $this->trackingInfo['order_id'] = $id;
+                }
             }
         }
         // var_dump($this->trackingInfo);
         return $this->trackingInfo;
     }
 
-    private function getLocalInfo ($id)
+    private function getPackageInfo ($id)
     {
         $db = JFactory::getDBO();
         $queryOrder = $db->getQuery(true);
@@ -76,10 +87,25 @@ class TrackingModelTracking extends JModelItem
             ->from('t_orders')
             ->where('order_id = ' . $db->quote($id));
 
+        $query->select('package_id,express_id')
+        ->from('t_packages')
+        ->where('package_id = ' . '(' . $queryOrder->__toString() . ')');
+
+        $db->setQuery((string) $query);
+        $messages = $db->loadObject();
+
+        return (array) $messages;
+    }
+
+    private function getLocalInfo ($packageId)
+    {
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+
         $query->select(
                 'package_id,DDJ_DATE,RKK_DATE,CKK_DATE,YSZ_DATE,DQG_DATE,QGC_DATE,GNP_DATE')
             ->from('t_shipping_historic')
-            ->where('package_id = ' . '(' . $queryOrder->__toString() . ')');
+            ->where('package_id = ' . $db->quote($packageId));
 
         $db->setQuery((string) $query);
         $messages = $db->loadObject();
@@ -121,5 +147,70 @@ class TrackingModelTracking extends JModelItem
     public function getErrorCodeLibelle ()
     {
         return '{"1000":"法国中邮单号不存在","2000":"快递接口返回错误"}';
+    }
+
+    /**
+     * 用来转换数据库id(tech id)跟打印id(id fonctionnel)
+     */
+    private function getOrderIdUnmapping ()
+    {
+        return array(
+                'O' => '0',
+                'U' => '1',
+                'T' => '2',
+                'E' => '3',
+                'D' => '4',
+                'S' => '5',
+                'B' => '6',
+                'T' => '7',
+                'P' => '8',
+                'M' => '9'
+        );
+    }
+
+    /**
+     * 用来转换数据库id(tech id)跟打印id(id fonctionnel)
+     */
+    private function getOrderIdMapping ()
+    {
+        return array(
+                '0' => 'O',
+                '1' => 'U',
+                '2' => 'T',
+                '3' => 'E',
+                '4' => 'D',
+                '5' => 'S',
+                '6' => 'B',
+                '7' => 'T',
+                '8' => 'P',
+                '9' => 'M'
+        );
+    }
+
+    /**
+     * length = 12
+     *
+     * @param unknown $id
+     * @return multitype:number
+     */
+    private function unmappingId ($id)
+    {
+        $r = array();
+        try {
+            if (strlen($id) == 12 && 'FR' == substr($id, 0, 2)) {
+                $idTechStr = '';
+                $unmapping = $this->getOrderIdUnmapping();
+                for ($i = 3; $i < strlen($id); $i ++) {
+                    $idTechStr = $idTechStr . $unmapping[$id[$i]];
+                }
+                $r['idTech'] = intval($idTechStr);
+            } else {
+                $r['error'] = 1000;
+            }
+        } catch (Exception $e) {
+            JLog::add(implode('<br />', $e), JLog::WARNING, 'jerror');
+            $r['error'] = 1000;
+        }
+        return $r;
     }
 }
