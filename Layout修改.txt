@@ -5,10 +5,14 @@
 }
 
 /local/tpls/raptor-express.php : 
+  <!-- CHECK -->
   <?php
   	$app = JFactory::getApplication();
 	$menu = $app->getMenu();
-	if ($menu->getActive() != $menu->getDefault()) {
+	$menuname = $menu->getActive()->alias;
+	//echo $menuname.strcmp($menuname,"products");
+	if (($menu->getActive() != $menu->getDefault())
+       && (strcmp($menuname,"products") != 0)) {
   		$this->loadBlock('mainbody') ;
 	}
-  ?> 
+  ?>
