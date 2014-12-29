@@ -1,0 +1,14 @@
+/local/css/template.css : 
+.ja-submenu > .container {
+  max-width: initial !important;
+  padding: 0 0;
+}
+
+/local/tpls/raptor-express.php : 
+  <?php
+  	$app = JFactory::getApplication();
+	$menu = $app->getMenu();
+	if ($menu->getActive() != $menu->getDefault()) {
+  		$this->loadBlock('mainbody') ;
+	}
+  ?> 
