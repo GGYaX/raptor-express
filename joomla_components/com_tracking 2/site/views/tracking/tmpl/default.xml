@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_TRACKING_VIEW_FRONT_TITLE">
+		<message>
+			<![CDATA[COM_TRACKING_VIEW_FRONT_DESC]]>
+		</message>
+	</layout>
+</metadata>
