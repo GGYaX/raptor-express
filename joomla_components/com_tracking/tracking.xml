@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.3" method="upgrade">
- 
+
 	<name>Tracking</name>
 	<creationDate>Dec 2014</creationDate>
 	<author>Cadmin, Yanxin</author>
@@ -8,7 +8,7 @@
 	<authorUrl>http://www.google.com</authorUrl>
 	<copyright>Copyleft if you can</copyright>
 	<license>License free</license>
-	<version>1.3</version>
+	<version>1.4</version>
 	<description>Track waybills</description>
 
 	<files folder="site">
@@ -18,13 +18,18 @@
 		<folder>views</folder>
 		<folder>models</folder>
 	</files>
+	<media folder="media" destination="com_tracking">
+		<folder>js</folder>
+		<folder>css</folder>
+		<filename>index.html</filename>
+	</media>
 	<languages folder="site">
 		<language tag="en-GB">language/en-GB.com_tracking.ini</language>
 		<language tag="zh-CN">language/zh-CN.com_tracking.ini</language>
 		<language tag="en-GB">language/en-GB.com_tracking.sys.ini</language>
 		<language tag="zh-CN">language/zh-CN.com_tracking.sys.ini</language>
 	</languages>
- 
+
 	<administration>
 		<menu>Tracking</menu>
 		<files folder="admin">
@@ -40,13 +45,8 @@
 			<language tag="zh-CN">language/zh-CN.com_tracking.sys.ini</language>
 		</languages>
 	</administration>
- 
-<!--	
-	<update>
-		<schemas>
-			<schemapath type="mysql">sql/updates/mysql/</schemapath>
-		</schemas>
-	</update> 
--->
- 
+
+	<!-- <update> <schemas> <schemapath type="mysql">sql/updates/mysql/</schemapath> 
+		</schemas> </update> -->
+
 </extension>
