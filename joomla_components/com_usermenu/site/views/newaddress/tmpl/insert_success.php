@@ -9,5 +9,15 @@
 
 // No direct access to this file
 defined('_JEXEC') or die();
-require_once 'formulaire.php';
 ?>
+<div id="system-message-container">
+	<div id="system-message">
+		<div class="alert alert-success">
+			<a class="close" data-dismiss="alert">×</a>
+			<div>
+                <?php echo $result['succes']; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php require_once 'bloc.php';?>

@@ -28,7 +28,6 @@ class UsermenuViewNewaddress extends JViewLegacy {
 			JLog::add ( implode ( '<br />', $errors ), JLog::WARNING, 'jerror' );
 			return false;
 		}
-		$this->msg = $this->get('Msg');
 		parent::display ( $tpl );
 	}
 }
