@@ -61,3 +61,30 @@ create table t_shipping_historic(
 	QGC_DATE datetime,
 	GNP_DATE datetime
 ) ENGINE=InnoDB;
+
+-- 20150104
+-- t_wallets
+create table t_wallets(
+	user_id int(11) primary key,
+	laposte_id varchar(12), -- 'L' + (10000 + user_id)
+	ems_id varchar(12)
+) ENGINE=InnoDB;
+
+-- t_balance_modifications
+create table t_balance_modifications(
+	id int(10) unsigned primary key not null auto_increment,
+	amount decimal(17,5) not null,
+	wallet_id varchar(12) not null,
+	wallet_type varchar(3), -- in EMS/LAP
+	date datetime,
+	comment text
+) ENGINE=InnoDB;
+
+-- t_operation_historic
+create table t_operation_historic(
+	id int(12) unsigned primary key not null auto_increment,
+	user_id int(11) not null, -- references to joomla.user.id and index
+	operation_date datetime not null,
+	operation_type varchar(3) not null, -- in ORD/BMO
+	reference_id int(10) unsigned not null -- reference to t_balance_modifications or t_orders
+) ENGINE=InnoDB;

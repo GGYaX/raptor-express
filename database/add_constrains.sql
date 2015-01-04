@@ -32,3 +32,17 @@ add constraint fk_user_id foreign key (user_id) references gzqxc_users(id);
 -- t_shipping_historic
 alter table t_shipping_historic
 add constraint fk_shipping_historic_package_id foreign key (package_id) references t_packages(package_id);
+
+-- t_wallets
+alter table t_wallets
+add constraint fk_wallets_user_id foreign key(user_id) references gzqxc_users(id);
+
+-- t_balance_modifications
+alter table t_balance_modifications
+add constraint chk_wallet_type check (wallet_type in ('EMS', 'LAP'));
+
+-- t_operation_historic
+alter table t_operation_historic
+add constraint fk_operation_historic_user_id foreign key (user_id) references gzqxc_users(id);
+alter table t_operation_historic
+add constraint chk_operation_type check (operation_type in ('ORD', 'BMO'));
