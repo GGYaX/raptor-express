@@ -30,6 +30,7 @@ create table t_orders (
 	order_time datetime,
 	pay_time datetime,
 	payment_amount decimal(17,5),
+	express_type varchar(3) not null,
 	media_code varchar(3),
 	package_id int(10) unsigned,
 	client_id int(11)
