@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.3" method="upgrade">
+
+	<name>Walletmanagement</name>
+	<creationDate>Dec 2014</creationDate>
+	<author>Cadmin, Yanxin</author>
+	<authorEmail>yanxin.gong22@gmail.com</authorEmail>
+	<authorUrl>http://www.google.com</authorUrl>
+	<copyright>Copyleft if you can</copyright>
+	<license>License free</license>
+	<version>1.2</version>
+	<description>钱包管理</description>
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>walletmanagement.php</filename>
+		<filename>controller.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+	</files>
+	<languages folder="site">
+		<language tag="zh-CN">language/zh-CN.com_walletmanagement.ini</language>
+		<language tag="zh-CN">language/zh-CN.com_walletmanagement.sys.ini</language>
+	</languages>
+
+	<administration>
+		<menu>Walletmanagement</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+		</files>
+		<languages folder="admin">
+			<language tag="zh-CN">language/zh-CN.com_walletmanagement.ini</language>
+			<language tag="zh-CN">language/zh-CN.com_walletmanagement.sys.ini</language>
+		</languages>
+	</administration>
+
+</extension>
