@@ -60,3 +60,37 @@ insert into t_shipping_historic values (
 	'2013-12-12 12:12:12',
 	null,null,null,null,null,null
 );
+
+insert into t_orders (
+	order_id,
+	payment_method,
+	payment_stat,
+	order_time,
+	pay_time,
+	payment_amount,
+	media_code,
+	package_id,
+	express_type,
+	client_id
+) values (
+	11111,
+	'CHQ',
+	'YFK',
+	'2013-12-12 12:12:12',
+	'2013-12-13 12:12:12',
+	12.2,
+	'ONL',
+	1111,
+	'LNO',
+	'287' -- cadmin
+);
+
+insert into t_wallets (
+	user_id,
+	laposte_id,
+	ems_id
+) values (
+	287,
+	'L10287',
+	'E10287'
+);
