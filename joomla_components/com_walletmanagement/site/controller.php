@@ -21,6 +21,7 @@ class WalletmanagementController extends JControllerLegacy
     }
 
     function edit() {
-
+    // JAccess::getGroupsByUser($userId) TODO define usergroup_id (8)
+    // TODO control access
     }
 }
