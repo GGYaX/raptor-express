@@ -7,20 +7,43 @@ require_once (dirname(__FILE__) . '/helper.php');
 class WalletmanagementModelEdit extends JModelItem
 {
 
-    public function getWalletAmount ()
+    protected $accessError;
+
+    protected $userToEdit;
+
+    public function setAccessError ($e)
+    {
+        $this->accessError = $e;
+    }
+
+    public function getAccessError ()
+    {
+        return $this->accessError;
+    }
+
+    public function setUserToEdit ($uid)
+    {
+        $this->userToEdit = $uid;
+    }
+
+    public function getUserToEdit ()
+    {
+        return $this->userToEdit;
+    }
+
+    public function getWalletAmountByUserId ($uid)
     {
         $helper = new comModelWalletmanagementHelper();
-        return $helper->getWalletAmount();
+        return $helper->getWalletAmountByUserId($uid);
     }
 
     public function editWalletAmount ($uid)
     {
         $helper = new comModelWalletmanagementHelper();
-        $wallet = $helper->getWalletAmount();
+        $wallet = $helper->getWalletAmountByUserId($uid);
 
         $toReturn;
         try {
-
             if (isset($wallet['error'])) {
                 JLog::add(implode('<br />', $wallet['error']), JLog::WARNING,
                         'jerror');
@@ -46,18 +69,15 @@ class WalletmanagementModelEdit extends JModelItem
                                         'COM_WALLETMANAGEMENT_VIEW_FRONT_EDIT_AMOUNT_NO_CHANGE')
                         );
                     } else {
-                        // search the wallet id
-                        $walletObjet = $helper->getWalletByUserId($uid);
                         if ($floatEmsM != 0) {
                             // change ems wallet
-                            $this->changeWalletAmount($walletObjet['ems_id'],
+                            $this->changeWalletAmount($wallet['emsId'],
                                     $floatEmsM, 'EMS', $params['comment']);
                         }
                         if ($floatLaposteM != 0) {
                             // change laposte wallet
-                            $this->changeWalletAmount(
-                                    $walletObjet['laposte_id'], $floatLaposteM,
-                                    'LAP', $params['comment']);
+                            $this->changeWalletAmount($wallet['laposteId'],
+                                    $floatLaposteM, 'LAP', $params['comment']);
                         }
                         $toReturn = array(
                                 'succes' => JText::_(
@@ -85,13 +105,17 @@ class WalletmanagementModelEdit extends JModelItem
     private function changeWalletAmount ($walletId, $amount, $walletType,
             $comment)
     {
-        $db = JFactory::getDBO();
-        $query = 'INSERT INTO T_BALANCE_MODIFICATIONS (`amount`, `wallet_id`, `wallet_type`, `date`, `comment`) VALUES (' .
-                 $db->quote($amount) . ',' . $db->quote($walletId) . ',' .
-                 $db->quote($walletType) . ',' . 'NOW()' . $db->quote($comment) .
-                 ');';
+        try {
 
-        $db->setQuery($query);
-        $db->query();
+            $db = JFactory::getDBO();
+            $query = 'INSERT INTO T_BALANCE_MODIFICATIONS (`amount`, `wallet_id`, `wallet_type`, `date`, `comment`) VALUES (' .
+                     $db->quote($amount) . ',' . $db->quote($walletId) . ',' .
+                     $db->quote($walletType) . ',' . 'NOW()' . ',' .
+                     $db->quote($comment) . ');';
+            $db->setQuery($query);
+            $db->query();
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }

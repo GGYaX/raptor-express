@@ -10,8 +10,11 @@
 // No direct access to this file
 defined('_JEXEC') or die();
 ?>
+
 <?php
-$result = $this->get('WalletAmount');
+// here must have a user to edit
+$userToEdit = $model->getUserToEdit();
+$result = $model->getWalletAmountByUserId($userToEdit);
 ?>
 <?php if(isset($result['error'])) :?>
 <?php
@@ -106,9 +109,10 @@ $result = $this->get('WalletAmount');
 			</tr>
 			<tr>
 				<td class="tg-5klj">备注</td>
-				<td class="tg-031e tg-s6z2" ><input type="text" name="jform[comment]"></td>
+				<td class="tg-031e tg-s6z2" colspan="2" ><input type="text" name="jform[comment]" style="margin:0 auto;"></td>
 			</tr>
 		</table>
+		<input type="hidden" name="uid" value="<?php echo $userToEdit;?>">
 		<button type="submit"
 					class="btn btn-rounded btn-primary btn-lg smooth-scroll validate">点击修改</button>
 	</form>

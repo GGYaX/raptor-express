@@ -17,8 +17,6 @@ jimport ( 'joomla.application.component.view' );
  */
 class WalletmanagementViewEdit extends JViewLegacy {
 
-    protected $msg;
-
 	/**
 	 *
 	 * @param string $tpl
@@ -31,8 +29,6 @@ class WalletmanagementViewEdit extends JViewLegacy {
 			JLog::add ( implode ( '<br />', $errors ), JLog::WARNING, 'jerror' );
 			return false;
 		}
-
-		$this->msg = $this->get('Msg');
 
 		parent::display ( $tpl );
 	}

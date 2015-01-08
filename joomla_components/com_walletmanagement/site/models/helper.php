@@ -8,26 +8,30 @@ class comModelWalletmanagementHelper
         $user = JFactory::getUser();
         $uid = $user->id;
         if (isset($uid) && $uid != 0) {
-            try {
-                $result = $this->getWalletByUserId($uid);
-                $emsid = $result['ems_id'];
-                $laposteid = $result['laposte_id'];
-                return array(
-                        'emsAmount' => $this->getEmsAmount($uid, $emsid),
-                        'laposteAmount' => $this->getLaposteAmount($uid,
-                                $laposteid),
-                        'emsId' => $emsid,
-                        'laposteId' => $laposteid
-                );
-            } catch (Exception $e) {
-                JLog::add ( implode ( '<br />', $errors ), JLog::WARNING, 'jerror' );
-                // return error
-                return array(
-                        'error' => JText::_(
-                                'COM_WALLETMANAGEMENT_VIEW_FRONT_ERROR_LABEL')
-                );
-            }
+            return $this->getWalletAmountByUserId($uid);
         } else {
+            // return error
+            return array(
+                    'error' => JText::_(
+                            'COM_WALLETMANAGEMENT_VIEW_FRONT_ERROR_LABEL')
+            );
+        }
+    }
+
+    public function getWalletAmountByUserId($uid) {
+        try {
+            $result = $this->getWalletByUserId($uid);
+            $emsid = $result['ems_id'];
+            $laposteid = $result['laposte_id'];
+            return array(
+                    'emsAmount' => $this->getEmsAmount($uid, $emsid),
+                    'laposteAmount' => $this->getLaposteAmount($uid,
+                            $laposteid),
+                    'emsId' => $emsid,
+                    'laposteId' => $laposteid
+            );
+        } catch (Exception $e) {
+            JLog::add ( implode ( '<br />', $errors ), JLog::WARNING, 'jerror' );
             // return error
             return array(
                     'error' => JText::_(

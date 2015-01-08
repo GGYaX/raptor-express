@@ -10,18 +10,12 @@
 // No direct access to this file
 defined('_JEXEC') or die();
 ?>
-<?php
-
-$model = $this->getModel();
-$accessError = $model->getAccessError();
-?>
-<?php
-
-if (isset($accessError) || ! empty($accessError)) {
-    // access_failure
-    $error = $accessError['error'];
-    require_once 'access_failure.php';
-} else {
-    require_once 'formulaire.php';
-}
-?>
+<div id="system-message-container">
+	<div id="system-message">
+		<div class="alert alert-danger">
+			<div>
+                <p><?php echo $error ;?></p>
+			</div>
+		</div>
+	</div>
+</div>
