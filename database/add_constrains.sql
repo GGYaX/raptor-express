@@ -28,6 +28,8 @@ add constraint chk_express_type check (media_code in ('LNO','ENO', 'ENA'));
 -- t_id_cards
 alter table t_id_cards
 add constraint fk_user_id foreign key (user_id) references gzqxc_users(id);
+alter table t_id_cards
+add constraint fk_order_id foreign key (order_id) references t_orders(order_id);
 
 -- t_clients_address
 

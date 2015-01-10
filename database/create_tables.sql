@@ -40,6 +40,7 @@ create table t_orders (
 create table t_id_cards(
 	id_card_id int(10) unsigned primary key	not null auto_increment,
 	user_id int(11) not null,
+	order_id int(10) unsigned not null,
 	filename_recto text,
 	filename_verso text
 );
