@@ -200,7 +200,7 @@ class TrackingModelTracking extends JModelItem
             if (strlen($id) == 12 && 'FR' == substr($id, 0, 2)) {
                 $idTechStr = '';
                 $unmapping = $this->getOrderIdUnmapping();
-                for ($i = 3; $i < strlen($id); $i ++) {
+                for ($i = 2; $i < strlen($id); $i ++) {
                     $idTechStr = $idTechStr . $unmapping[$id[$i]];
                 }
                 $r['idTech'] = intval($idTechStr);
