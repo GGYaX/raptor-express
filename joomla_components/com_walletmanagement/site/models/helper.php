@@ -69,7 +69,7 @@ class comModelWalletmanagementHelper
     public function getWalletByUserId ($uid)
     {
         $db = JFactory::getDBO();
-        $query = 'SELECT ems_id, laposte_id FROM T_WALLETS WHERE USER_ID = ' .
+        $query = 'SELECT ems_id, laposte_id FROM t_wallets WHERE USER_ID = ' .
                  $db->quote($uid) . ';';
 
         $db->setQuery($query);
@@ -94,9 +94,9 @@ class comModelWalletmanagementHelper
     {
         $db = JFactory::getDBO();
 
-        $queryBalance = 'SELECT SUM(AMOUNT) as sum FROM T_BALANCE_MODIFICATIONS WHERE WALLET_ID = ' .
+        $queryBalance = 'SELECT SUM(AMOUNT) as sum FROM t_balance_modifications WHERE WALLET_ID = ' .
                  $db->quote($id) . ';';
-        $queryOrder = 'SELECT SUM(payment_amount) as sum FROM T_ORDERS WHERE CLIENT_ID = ' .
+        $queryOrder = 'SELECT SUM(payment_amount) as sum FROM t_orders WHERE CLIENT_ID = ' .
                  $db->quote($uid) . ' AND express_type IN (' . $types . ')' . ';';
 
         $db->setQuery($queryBalance);
