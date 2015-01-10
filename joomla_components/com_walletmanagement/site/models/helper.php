@@ -1,5 +1,5 @@
 <?php
-
+jimport('joomla.log.log');
 class comModelWalletmanagementHelper
 {
 
