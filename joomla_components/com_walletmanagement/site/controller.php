@@ -19,7 +19,31 @@ class WalletmanagementController extends JControllerLegacy
 
     function display ()
     {
-         JError::raiseError(404, JText::_('COM_WALLETMANAGEMENT_VIEW_FRONT_PAGE_NOT_FOUND'));
+        $jinput = JFactory::getApplication()->input;
+        $viewRequest = $jinput->get('view');
+        if ($viewRequest == 'display') {
+            parent::display();
+        } else {
+            $user = JFactory::getUser();
+            $uid = $user->id;
+            $model = $this->getModel('edit');
+            if ($uid == 0) {
+                // check if user loggin
+                JError::raiseError(404,
+                    JText::_('COM_WALLETMANAGEMENT_VIEW_FRONT_PAGE_NOT_FOUND'));
+            } else {
+                // if user loggin, check if he has right
+                $allowed = $this->checkUserAllowed($uid);
+                if($allowed == false) {
+                    // raise a 404
+                    JError::raiseError(404,
+                            JText::_(
+                                    'COM_WALLETMANAGEMENT_VIEW_FRONT_PAGE_NOT_FOUND'));
+                } else {
+                    parent::display();
+                }
+            }
+        }
     }
 
     function edit ()
@@ -36,18 +60,7 @@ class WalletmanagementController extends JControllerLegacy
                             'stop' => true
                     ));
         } else {
-            $userGroups = JAccess::getGroupsByUser($uid);
-            $allowed = false;
-            $allowedGroups = array_map('intval',explode('|',
-                    JText::_(
-                            'COM_WALLETMANAGEMENT_VIEW_FRONT_EDIT_ACCES_GROUPS')));
-
-            foreach ($userGroups as $gid) {
-                if (in_array($gid, $allowedGroups)) {
-                    $allowed = true;
-                    break;
-                }
-            }
+            $allowed = $this->checkUserAllowed($uid);
             if ($allowed == true) {
                 $jinput = JFactory::getApplication()->input;
                 $uidToEdit = $jinput->get('uid');
@@ -69,7 +82,7 @@ class WalletmanagementController extends JControllerLegacy
                 }
                 $view = $this->getView('edit', 'html');
                 $view->setModel($model, true);
-                $view->setLayout('default');
+                $view->setLayout('edit');
                 $view->display();
             } else {
                 // not allowed, log this try
@@ -86,5 +99,22 @@ class WalletmanagementController extends JControllerLegacy
                         ));
             }
         }
+    }
+
+    private function checkUserAllowed($uid) {
+        $userGroups = JAccess::getGroupsByUser($uid);
+        $allowed = false;
+        $allowedGroups = array_map('intval',
+                explode('|',
+                        JText::_(
+                                'COM_WALLETMANAGEMENT_VIEW_FRONT_EDIT_ACCES_GROUPS')));
+
+        foreach ($userGroups as $gid) {
+            if (in_array($gid, $allowedGroups)) {
+                $allowed = true;
+                break;
+            }
+        }
+        return $allowed;
     }
 }

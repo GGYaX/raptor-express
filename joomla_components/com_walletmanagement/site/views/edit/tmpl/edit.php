@@ -22,6 +22,6 @@ if (isset($accessError) || ! empty($accessError)) {
     $error = $accessError['error'];
     require_once 'access_failure.php';
 } else {
-    require_once 'list_all_user_with_their_wallet.php';
+    require_once 'formulaire.php';
 }
 ?>

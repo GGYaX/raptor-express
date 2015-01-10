@@ -118,4 +118,9 @@ class WalletmanagementModelEdit extends JModelItem
             throw $e;
         }
     }
+
+    public function getAllUserWithTheirWallet() {
+        $helper = new comModelWalletmanagementHelper();
+        return $helper->getAllUserWithTheirWallet();
+    }
 }

@@ -40,6 +40,32 @@ class comModelWalletmanagementHelper
         }
     }
 
+    public function getAllUserWithTheirWallet() {
+        $allUser = $this->getAllUser();
+        $toReturn = array();
+        foreach ($allUser as $key => $value) {
+            $v = (array) $value;
+            $toReturn[$key] = $this->getWalletAmountByUserId($v['id']);
+            $toReturn[$key]['uid'] = $v['id'];
+        }
+        return $toReturn;
+    }
+
+    public function log($var, $varname) {
+        echo '<br/>'. $varname .'<br/>';
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre><br/>';
+    }
+
+    private  function getAllUser() {
+        $db = JFactory::getDBO();
+        $query = 'SELECT id,username FROM gzqxc_users;';
+        $db->setQuery($query);
+        $db->query();
+        return $db->loadObjectList('username');
+    }
+
     public function getWalletByUserId ($uid)
     {
         $db = JFactory::getDBO();
