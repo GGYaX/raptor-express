@@ -60,6 +60,7 @@ class WalletmanagementModelEdit extends JModelItem
                         'laposteM' => $jform['laposteM'],
                         'comment' => $jform['comment']
                 );
+                $helper->log($params, 'params');
                 if (isset($params['emsM']) || isset($params['laposteM'])) {
                     $floatEmsM = floatval($params['emsM']);
                     $floatLaposteM = floatval($params['laposteM']);

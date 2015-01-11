@@ -9,11 +9,9 @@ class JConfig {
 	public $captcha = '0';
 	public $list_limit = '20';
 	public $access = '1';
-	public $debug = '0';
+	public $debug = '1';
 	public $debug_lang = '0';
 	public $dbtype = 'mysql';
-	//public $host = 'localhost';
-	//public $host = '192.243.118.208';
 	public $host = '127.0.0.1';
 	public $user = 'root';
 	public $password = 'Jacket';
@@ -56,8 +54,8 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = '/var/www/html/raptor-express/joomla/logs';
-	public $tmp_path = '/var/www/html/raptor-express/joomla/tmp';
+	public $log_path = '/Users/yanxingong/Documents/raptor-express/tmp/logs';
+	public $tmp_path = '/Users/yanxingong/Documents/raptor-express/tmp/tmp';
 	public $lifetime = '1500';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';

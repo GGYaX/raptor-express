@@ -1,7 +1,7 @@
 -- trigger 用来自动生成wallet_id
 create trigger trigger_insert_after_gzqxc_users
 	after insert on gzqxc_users for each row
-	insert into t_wallets values (new.id, concat('L', 10000 + new.id), concat('E', 10000 + new.id));
+	insert into t_wallets values (new.id, concat('FR', 10000 + new.id), concat('CN', 10000 + new.id));
 
 -- trigger 当balance被修改的时候，插入到operation historic中
 delimiter //
