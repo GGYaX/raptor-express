@@ -1,5 +1,5 @@
 <?php
-
+jimport('joomla.log.log');
 class comModelWalletmanagementHelper
 {
 
@@ -40,10 +40,36 @@ class comModelWalletmanagementHelper
         }
     }
 
+    public function getAllUserWithTheirWallet() {
+        $allUser = $this->getAllUser();
+        $toReturn = array();
+        foreach ($allUser as $key => $value) {
+            $v = (array) $value;
+            $toReturn[$key] = $this->getWalletAmountByUserId($v['id']);
+            $toReturn[$key]['uid'] = $v['id'];
+        }
+        return $toReturn;
+    }
+
+    public function log($var, $varname) {
+        echo '<br/>'. $varname .'<br/>';
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre><br/>';
+    }
+
+    private  function getAllUser() {
+        $db = JFactory::getDBO();
+        $query = 'SELECT id,username FROM gzqxc_users;';
+        $db->setQuery($query);
+        $db->query();
+        return $db->loadObjectList('username');
+    }
+
     public function getWalletByUserId ($uid)
     {
         $db = JFactory::getDBO();
-        $query = 'SELECT ems_id, laposte_id FROM T_WALLETS WHERE USER_ID = ' .
+        $query = 'SELECT ems_id, laposte_id FROM t_wallets WHERE USER_ID = ' .
                  $db->quote($uid) . ';';
 
         $db->setQuery($query);
@@ -68,9 +94,9 @@ class comModelWalletmanagementHelper
     {
         $db = JFactory::getDBO();
 
-        $queryBalance = 'SELECT SUM(AMOUNT) as sum FROM T_BALANCE_MODIFICATIONS WHERE WALLET_ID = ' .
+        $queryBalance = 'SELECT SUM(AMOUNT) as sum FROM t_balance_modifications WHERE WALLET_ID = ' .
                  $db->quote($id) . ';';
-        $queryOrder = 'SELECT SUM(payment_amount) as sum FROM T_ORDERS WHERE CLIENT_ID = ' .
+        $queryOrder = 'SELECT SUM(payment_amount) as sum FROM t_orders WHERE CLIENT_ID = ' .
                  $db->quote($uid) . ' AND express_type IN (' . $types . ')' . ';';
 
         $db->setQuery($queryBalance);

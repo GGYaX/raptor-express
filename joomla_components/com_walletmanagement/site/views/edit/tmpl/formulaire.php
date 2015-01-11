@@ -94,8 +94,8 @@ $result = $model->getWalletAmountByUserId($userToEdit);
 		<table class="tg">
 			<tr>
 				<th class="tg-dm0n"></th>
-				<th class="tg-s6z2">EMS钱包</th>
-				<th class="tg-s6z2">La Poste钱包</th>
+				<th class="tg-s6z2">EMS钱包(<?php echo $result['emsId'];?>)</th>
+				<th class="tg-s6z2">La Poste钱包(<?php echo $result['laposteId'];?>)</th>
 			</tr>
 			<tr>
 				<td class="tg-5klj">余额</td>
@@ -103,7 +103,7 @@ $result = $model->getWalletAmountByUserId($userToEdit);
 				<td class="tg-031e tg-s6z2" style="<?php if($displayAlertLaposte == true) {echo 'color:#c09853';}?>"><?php echo $result['laposteAmount'];?></td>
 			</tr>
 			<tr>
-				<td class="tg-5klj">修改金额</td>
+				<td class="tg-5klj">添加或减少金额</td>
 				<td class="tg-031e tg-s6z2" ><input type="text" name="jform[emsM]"></td>
 				<td class="tg-031e tg-s6z2" ><input type="text" name="jform[laposteM]"></td>
 			</tr>

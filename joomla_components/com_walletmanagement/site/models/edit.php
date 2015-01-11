@@ -108,7 +108,7 @@ class WalletmanagementModelEdit extends JModelItem
         try {
 
             $db = JFactory::getDBO();
-            $query = 'INSERT INTO T_BALANCE_MODIFICATIONS (`amount`, `wallet_id`, `wallet_type`, `date`, `comment`) VALUES (' .
+            $query = 'INSERT INTO t_balance_modifications (`amount`, `wallet_id`, `wallet_type`, `date`, `comment`) VALUES (' .
                      $db->quote($amount) . ',' . $db->quote($walletId) . ',' .
                      $db->quote($walletType) . ',' . 'NOW()' . ',' .
                      $db->quote($comment) . ');';
@@ -117,5 +117,10 @@ class WalletmanagementModelEdit extends JModelItem
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function getAllUserWithTheirWallet() {
+        $helper = new comModelWalletmanagementHelper();
+        return $helper->getAllUserWithTheirWallet();
     }
 }

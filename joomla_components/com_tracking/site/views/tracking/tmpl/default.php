@@ -22,13 +22,16 @@ if (is_array($trackingInfo) && ! empty($trackingInfo)) {
             <?php endif;?>
 	<div class="login-wrap">
 		<div class="login">
+    		<?php
+    		$itemId = JRequest::getVar( 'Itemid' );
+    		?>
             <?php if($displayResult == true) :?>
 			<form
-				action="<?php echo JURI::root ( true ) ?>/index.php?option=com_tracking"
+				action="<?php echo JURI::current();?>?Itemid=<?php echo $itemId;?>"
 				method="post" class="form-horizontal collapse" id="reDispFr">
 			<?php else :?>
                 <form
-					action="<?php echo JURI::root ( true ) ?>/index.php?option=com_tracking"
+					action="<?php echo JURI::current();?>?Itemid=<?php echo $itemId;?>"
 					method="post" class="form-horizontal" id="reDispFr" style="padding-top: 30px;">
             <?php endif;?>
 				<fieldset>
