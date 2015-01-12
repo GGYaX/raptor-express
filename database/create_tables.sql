@@ -20,7 +20,7 @@ create table t_packages (
 	stock_in_time datetime,
 	stock_out_time datetime,
 	comment text
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- t_orders
 create table t_orders (
@@ -34,7 +34,7 @@ create table t_orders (
 	media_code varchar(3),
 	package_id int(10) unsigned,
 	client_id int(11)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- t_id_cards
 create table t_id_cards(
@@ -43,14 +43,14 @@ create table t_id_cards(
 	order_id int(10) unsigned not null,
 	filename_recto text,
 	filename_verso text
-);
+) DEFAULT CHARSET=utf8;
 
 -- t_clients_address
 create table t_clients_address(
 	fk_client_id int(11),
 	fk_address_id int(0) unsigned,
 	primary key(fk_client_id, fk_address_id)
-);
+) DEFAULT CHARSET=utf8;
 
 -- t_shipping_historic
 create table t_shipping_historic(
@@ -62,7 +62,7 @@ create table t_shipping_historic(
 	DQG_DATE datetime,
 	QGC_DATE datetime,
 	GNP_DATE datetime
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 20150104
 -- t_wallets
@@ -70,7 +70,7 @@ create table t_wallets(
 	user_id int(11) primary key,
 	laposte_id varchar(12), -- 'L' + (10000 + user_id)
 	ems_id varchar(12)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- t_balance_modifications
 create table t_balance_modifications(
@@ -80,7 +80,7 @@ create table t_balance_modifications(
 	wallet_type varchar(3), -- in EMS/LAP
 	date datetime,
 	comment text
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- t_operation_historic
 create table t_operation_historic(
@@ -89,4 +89,4 @@ create table t_operation_historic(
 	operation_date datetime not null,
 	operation_type varchar(3) not null, -- in ORD/BMO
 	reference_id int(10) unsigned not null -- reference to t_balance_modifications or t_orders
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

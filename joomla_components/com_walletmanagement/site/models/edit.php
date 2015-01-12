@@ -55,6 +55,7 @@ class WalletmanagementModelEdit extends JModelItem
                 $jinput = JFactory::getApplication()->input;
                 $jformArray = $jinput->post->getArray();
                 $jform = $jformArray['jform'];
+                $helper->log($jform, 'jform');
                 $params = array(
                         'emsM' => $jform['emsM'],
                         'laposteM' => $jform['laposteM'],
@@ -109,10 +110,13 @@ class WalletmanagementModelEdit extends JModelItem
         try {
 
             $db = JFactory::getDBO();
+            $db->setUTF();
             $query = 'INSERT INTO t_balance_modifications (`amount`, `wallet_id`, `wallet_type`, `date`, `comment`) VALUES (' .
                      $db->quote($amount) . ',' . $db->quote($walletId) . ',' .
                      $db->quote($walletType) . ',' . 'NOW()' . ',' .
                      $db->quote($comment) . ');';
+            $helper = new comModelWalletmanagementHelper();
+            $helper->log($query, 'query');
             $db->setQuery($query);
             $db->query();
         } catch (Exception $e) {
