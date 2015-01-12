@@ -38,10 +38,18 @@ class TrackingModelTracking extends JModelItem
 
             $idTechR = $this->unmappingId(strtoupper($id));
             if (isset($idTechR['error'])) {
-                $this->trackingInfo = array(
-                        "error" => '1000',
-                        "order_id" => $id
-                );
+                // 直接尝试快递100接入
+                $emsInfo = $this->getEmsInfo($id);
+                $emsInfoEncoded = json_decode($emsInfo['data'], true);
+                if(!isset($emsInfoEncoded['nu'])) {
+                    $this->trackingInfo = array(
+                            "error" => '1000',
+                            "order_id" => $id
+                    );
+                } else {
+                    $this->trackingInfo = $emsInfo;
+                    $this->trackingInfo['order_id'] = $id;
+                }
             } else {
                 $idTech = $idTechR['idTech'];
                 $package = $this->getPackageInfo($idTech);
@@ -146,7 +154,7 @@ class TrackingModelTracking extends JModelItem
 
     public function getErrorCodeLibelle ()
     {
-        return '{"1000":"法国中邮单号不存在","2000":"快递接口返回错误"}';
+        return '{"1000":"快递单号不存在","2000":"快递接口返回错误"}';
     }
 
     /**
