@@ -97,7 +97,7 @@ class WalletmanagementController extends JControllerLegacy
         }
     }
 
-    function editWalletId ()
+    function editwalletid ()
     {
         $user = JFactory::getUser();
         $uid = $user->id;
@@ -118,24 +118,26 @@ class WalletmanagementController extends JControllerLegacy
                 $post = $jinput->post->getArray();
                 $newWalletId = $post['newwalletid'];
 
-                if (! isset($walletIdToEdit) || ! isset($walletType) ||
-                         ! isset($newWalletId)) {
+                if (! isset($walletIdToEdit) || ! isset($walletType)) {
                     $model->setAccessError(
                             array(
                                     'error' => JText::_(
                                             'COM_WALLETMANAGEMENT_VIEW_FRONT_NO_WALLET_ID_TO_EDIT')
                             ));
                 } else {
-                    $model->editWalletId($walletIdToEdit, $walletType,
-                            $newWalletId);
-                    $model->setMsgArray(
-                            array(
-                                    array(
-                                            'level' => 'succes',
-                                            'msgBody' => JText::_(
-                                                    'COM_WALLETMANAGEMENT_VIEW_FRONT_WALLET_ID_CHANGED_SUCCES')
-                                    )
-                            ));
+                    if(isset($newWalletId)) {
+
+                        $model->editWalletId($walletIdToEdit, $walletType,
+                                $newWalletId);
+                        $model->setMsgArray(
+                                array(
+                                        array(
+                                                'level' => 'success',
+                                                'msgBody' => JText::_(
+                                                        'COM_WALLETMANAGEMENT_VIEW_FRONT_WALLET_ID_CHANGED_SUCCES')
+                                        )
+                                ));
+                    }
                 }
                 $view = $this->getView('edit', 'html');
                 $view->setModel($model, true);

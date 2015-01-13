@@ -144,7 +144,7 @@ class WalletmanagementModelEdit extends JModelItem
     {
         $db = JFactory::getDbo();
         $query = '';
-        if ($type = 'ems') {
+        if ($type == 'ems') {
             $query = "UPDATE t_wallets SET ems_id = " . $db->quote($newWalletId) .
                      " WHERE ems_id = " . $db->quote($wallet_id) . ";";
         } else {

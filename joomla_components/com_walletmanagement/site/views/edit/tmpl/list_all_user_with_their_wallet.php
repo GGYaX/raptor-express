@@ -86,11 +86,11 @@ $allWallet = $model->getAllUserWithTheirWallet();
                 <tr>
             		<td><?php echo $k;?></td>
             		<td><?php echo $v['name'];?></td>
-            		<td><?php echo $v['emsId'];?></td>
+            		<td><a href="<?php echo JURI::current(); ?>?task=editwalletid&view=edit&walletid=<?php echo $v['emsId'];?>&wallettype=ems"><?php echo $v['emsId'];?></a></td>
             		<td><?php echo $v['emsAmount'];?></td>
-            		<td><?php echo $v['laposteId'];?></td>
+            		<td><a href="<?php echo JURI::current(); ?>?task=editwalletid&view=edit&walletid=<?php echo $v['laposteId'];?>&wallettype=laposte"><?php echo $v['laposteId'];?></a></td>
             		<td><?php echo $v['laposteAmount'];?></td>
-                    <td><a href="<?php echo JURI::current() ?>?task=edit&view=edit&uid=<?php echo $v['uid'];?>">点击修改</a></td>
+                    <td><a href="<?php echo JURI::current(); ?>?task=edit&view=edit&uid=<?php echo $v['uid'];?>">点击修改</a></td>
             	</tr>
                 <?php
                 endforeach;
