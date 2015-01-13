@@ -11,6 +11,16 @@ class WalletmanagementModelEdit extends JModelItem
 
     protected $userToEdit;
 
+    /**
+     * [
+     * ['level': 'succes', 'msgBody': '成功插入', 'msgTitle': '恭喜您'],
+     * ['level': 'danger', 'msgBody': '插入失败', 'msgTitle': '错误'],
+     * ['level': 'warning', 'msgBody': '插入失败', 'msgTitle': '错误']
+     * ]
+     * @var unknown
+     */
+    protected $msgArray;
+
     public function setAccessError ($e)
     {
         $this->accessError = $e;
@@ -124,8 +134,33 @@ class WalletmanagementModelEdit extends JModelItem
         }
     }
 
-    public function getAllUserWithTheirWallet() {
+    public function getAllUserWithTheirWallet ()
+    {
         $helper = new comModelWalletmanagementHelper();
         return $helper->getAllUserWithTheirWallet();
+    }
+
+    public function editWalletId ($wallet_id, $type, $newWalletId)
+    {
+        $db = JFactory::getDbo();
+        $query = '';
+        if ($type = 'ems') {
+            $query = "UPDATE t_wallets SET ems_id = " . $db->quote($newWalletId) .
+                     " WHERE ems_id = " . $db->quote($wallet_id) . ";";
+        } else {
+            $query = "UPDATE t_wallets SET laposte_id = " .
+                     $db->quote($newWalletId) . " WHERE laposte_id = " .
+                     $db->quote($wallet_id) . ";";
+        }
+        $db->setQuery($query);
+        $db->query();
+    }
+
+    public function setMsgArray($a) {
+        $this->msgArray = $a;
+    }
+
+    public function getMsgArray() {
+        return $this->msgArray;
     }
 }

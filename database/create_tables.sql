@@ -68,8 +68,8 @@ create table t_shipping_historic(
 -- t_wallets
 create table t_wallets(
 	user_id int(11) primary key,
-	laposte_id varchar(12), -- 'L' + (10000 + user_id)
-	ems_id varchar(12)
+	laposte_id varchar(12) unique, -- 'L' + (10000 + user_id)
+	ems_id varchar(12) unique
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- t_balance_modifications

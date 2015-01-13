@@ -30,7 +30,7 @@ class WalletmanagementController extends JControllerLegacy
             if ($uid == 0) {
                 // check if user loggin
                 JFactory::getApplication()->redirect(
-                    JURI::base() . 'index.php/login', $error, 'error');
+                        JURI::base() . 'index.php/login', $error, 'error');
             } else {
                 // if user loggin, check if he has right
                 $allowed = $this->checkUserAllowed($uid);
@@ -52,13 +52,9 @@ class WalletmanagementController extends JControllerLegacy
         $uid = $user->id;
         $model = $this->getModel('edit');
         if ($user->guest || $uid <= 0) {
-            // check if user loggin
-            $model->setAccessError(
-                    array(
-                            'error' => JText::_(
-                                    'COM_WALLETMANAGEMENT_VIEW_FRONT_EDIT_NO_USER_LOGIN'),
-                            'stop' => true
-                    ));
+            // check if user no loggin
+            JFactory::getApplication()->redirect(
+                    JURI::base() . 'index.php/login', $error, 'error');
         } else {
             $allowed = $this->checkUserGroupsInAllowedGroups($user->groups);
             if ($allowed == true) {
@@ -105,8 +101,61 @@ class WalletmanagementController extends JControllerLegacy
     {
         $user = JFactory::getUser();
         $uid = $user->id;
-        // 修改一个wallet id
-        $query = "UPDATE t_wallets SET ems_id = '' WHERE ems_id = ''";
+        $user = JFactory::getUser();
+        $uid = $user->id;
+        $model = $this->getModel('edit');
+        if ($user->guest || $uid <= 0) {
+            // check if user no loggin
+            JFactory::getApplication()->redirect(
+                    JURI::base() . 'index.php/login', $error, 'error');
+        } else {
+            $allowed = $this->checkUserGroupsInAllowedGroups($user->groups);
+            if ($allowed == true) {
+                $jinput = JFactory::getApplication()->input;
+                $walletIdToEdit = $jinput->get('walletid');
+                $walletType = $jinput->get('wallettype');
+
+                $post = $jinput->post->getArray();
+                $newWalletId = $post['newwalletid'];
+
+                if (! isset($walletIdToEdit) || ! isset($walletType) ||
+                         ! isset($newWalletId)) {
+                    $model->setAccessError(
+                            array(
+                                    'error' => JText::_(
+                                            'COM_WALLETMANAGEMENT_VIEW_FRONT_NO_WALLET_ID_TO_EDIT')
+                            ));
+                } else {
+                    $model->editWalletId($walletIdToEdit, $walletType,
+                            $newWalletId);
+                    $model->setMsgArray(
+                            array(
+                                    array(
+                                            'level' => 'succes',
+                                            'msgBody' => JText::_(
+                                                    'COM_WALLETMANAGEMENT_VIEW_FRONT_WALLET_ID_CHANGED_SUCCES')
+                                    )
+                            ));
+                }
+                $view = $this->getView('edit', 'html');
+                $view->setModel($model, true);
+                $view->setLayout('edit_wallet_id');
+                $view->display();
+            } else {
+                // not allowed, log this try
+                JLog::add(
+                        implode('<br />',
+                                'user : ' . $uid .
+                                         ' tried to connected to wallet edit'),
+                        JLog::ALERT, 'jerror');
+                $model->setAccessError(
+                        array(
+                                'error' => JText::_(
+                                        'COM_WALLETMANAGEMENT_VIEW_FRONT_EDIT_NO_ACCES_TO_EDIT'),
+                                'stop' => true
+                        ));
+            }
+        }
     }
 
     private function checkUserAllowed ($uid)
