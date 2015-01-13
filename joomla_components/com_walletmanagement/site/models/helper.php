@@ -63,7 +63,6 @@ class comModelWalletmanagementHelper
         $db = JFactory::getDBO();
         $query = 'SELECT id,username,name FROM gzqxc_users;';
         $db->setQuery($query);
-        $db->query();
         return $db->loadObjectList('username');
     }
 
@@ -74,7 +73,6 @@ class comModelWalletmanagementHelper
                  $db->quote($uid) . ';';
 
         $db->setQuery($query);
-        $db->query();
 
         return (array) $db->loadObject();
     }
@@ -101,12 +99,10 @@ class comModelWalletmanagementHelper
                  $db->quote($uid) . ' AND express_type IN (' . $types . ')' . ';';
 
         $db->setQuery($queryBalance);
-        $db->query();
         $r = (array) $db->loadObject();
         $amountBalance = $r['sum'];
 
         $db->setQuery($queryOrder);
-        $db->query();
         $r = (array) $db->loadObject();
         $amountOrder = $r['sum'];
 
