@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.3" method="upgrade">
+
+	<name>WaybillTool</name>
+	<creationDate>Dec 2014</creationDate>
+	<author>Cadmin, Yanxin</author>
+	<authorEmail>900930@gmail.com</authorEmail>
+	<authorUrl>http://www.google.com</authorUrl>
+	<copyright>Copyleft if you can</copyright>
+	<license>License free</license>
+	<version>1.0</version>
+	<description>COM_WAYBILLTOOL_ADMINISTRATOR_DESC</description>
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>waybilltool.php</filename>
+		<filename>controller.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+    <folder>helpers</folder>
+	</files>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_waybilltool.ini</language>
+		<language tag="zh-CN">language/zh-CN.com_waybilltool.ini</language>
+	</languages>
+
+	<administration>
+		<menu>COM_WAYBILLTOOL_ADMINISTRATOR_TITLE</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>waybilltool.php</filename>
+			<folder>sql</folder>
+			<folder>language</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB.com_waybilltool.ini</language>
+			<language tag="zh-CN">language/zh-CN.com_waybilltool.ini</language>
+			<language tag="en-GB">language/en-GB.com_waybilltool.sys.ini</language>
+			<language tag="zh-CN">language/zh-CN.com_waybilltool.sys.ini</language>
+		</languages>
+	</administration>
+
+<!--
+	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql/</schemapath>
+		</schemas>
+	</update>
+-->
+
+</extension>
