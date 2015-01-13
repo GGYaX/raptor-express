@@ -6,6 +6,7 @@ drop table t_orders cascade;
 drop table t_packages cascade;
 
 drop trigger trigger_insert_after_gzqxc_users;
+drop trigger trigger_insert_after_t_balance_modifications;
 
 drop table t_wallets cascade;
 drop table t_balance_modifications cascade;
