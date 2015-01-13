@@ -47,6 +47,7 @@ class comModelWalletmanagementHelper
             $v = (array) $value;
             $toReturn[$key] = $this->getWalletAmountByUserId($v['id']);
             $toReturn[$key]['uid'] = $v['id'];
+            $toReturn[$key]['name'] = $v['name'];
         }
         return $toReturn;
     }
@@ -60,7 +61,7 @@ class comModelWalletmanagementHelper
 
     private  function getAllUser() {
         $db = JFactory::getDBO();
-        $query = 'SELECT id,username FROM gzqxc_users;';
+        $query = 'SELECT id,username,name FROM gzqxc_users;';
         $db->setQuery($query);
         $db->query();
         return $db->loadObjectList('username');

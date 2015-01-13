@@ -71,6 +71,7 @@ $allWallet = $model->getAllUserWithTheirWallet();
             <thead>
             	<tr>
             		<th>用户名</th>
+            		<th>用户姓名</th>
             		<th>EMS钱包号码</th>
             		<th>EMS钱包金额</th>
             		<th>La poste钱包号码</th>
@@ -84,6 +85,7 @@ $allWallet = $model->getAllUserWithTheirWallet();
                 ?>
                 <tr>
             		<td><?php echo $k;?></td>
+            		<td><?php echo $v['name'];?></td>
             		<td><?php echo $v['emsId'];?></td>
             		<td><?php echo $v['emsAmount'];?></td>
             		<td><?php echo $v['laposteId'];?></td>
