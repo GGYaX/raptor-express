@@ -29,12 +29,12 @@ class WalletmanagementController extends JControllerLegacy
             $model = $this->getModel('edit');
             if ($uid == 0) {
                 // check if user loggin
-                JError::raiseError(404,
-                    JText::_('COM_WALLETMANAGEMENT_VIEW_FRONT_PAGE_NOT_FOUND'));
+                JFactory::getApplication()->redirect(
+                    JURI::base() . 'index.php/login', $error, 'error');
             } else {
                 // if user loggin, check if he has right
                 $allowed = $this->checkUserAllowed($uid);
-                if($allowed == false) {
+                if ($allowed == false) {
                     // raise a 404
                     JError::raiseError(404,
                             JText::_(
@@ -51,7 +51,7 @@ class WalletmanagementController extends JControllerLegacy
         $user = JFactory::getUser();
         $uid = $user->id;
         $model = $this->getModel('edit');
-        if ($uid == 0) {
+        if ($user->guest || $uid <= 0) {
             // check if user loggin
             $model->setAccessError(
                     array(
@@ -60,7 +60,7 @@ class WalletmanagementController extends JControllerLegacy
                             'stop' => true
                     ));
         } else {
-            $allowed = $this->checkUserAllowed($uid);
+            $allowed = $this->checkUserGroupsInAllowedGroups($user->groups);
             if ($allowed == true) {
                 $jinput = JFactory::getApplication()->input;
                 $uidToEdit = $jinput->get('uid');
@@ -101,8 +101,22 @@ class WalletmanagementController extends JControllerLegacy
         }
     }
 
-    private function checkUserAllowed($uid) {
+    function editWalletId ()
+    {
+        $user = JFactory::getUser();
+        $uid = $user->id;
+        // 修改一个wallet id
+        $query = "UPDATE t_wallets SET ems_id = '' WHERE ems_id = ''";
+    }
+
+    private function checkUserAllowed ($uid)
+    {
         $userGroups = JAccess::getGroupsByUser($uid);
+        return $this->checkUserGroupsInAllowedGroups($userGroups);
+    }
+
+    private function checkUserGroupsInAllowedGroups ($userGroups)
+    {
         $allowed = false;
         $allowedGroups = array_map('intval',
                 explode('|',
