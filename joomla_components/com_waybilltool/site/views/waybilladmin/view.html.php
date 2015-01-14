@@ -23,7 +23,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
          * @return  void
          */
 	public function display($tpl = null) {
-    echo "Waybill Admin : display()";
+    echo "Modifying table view...";
 		$this->listForm = $this->get('AdminListForm');
 
 		if (count($errors = $this->get('Errors'))) {

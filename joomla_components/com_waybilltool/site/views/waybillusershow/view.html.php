@@ -35,21 +35,23 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 
 		//1
 		if($solution === null){
-			$this->userlist = '<h1>选择快递公司</h1>';
-			$this->userlist = $this->userlist . SolutionChooserHelper::getSolutionChooser();
+			$this->userlist = SolutionChooserHelper::getSolutionChooser();
 		}
 		//3 : details
 		else if($waybillid !== null) {
 			$this->userlist = '<h1>订单：'.$waybillid.'</h1>';
 
 			$model = $this->getModel();
-			$items = $model->getUserOrders($user->id, $solution, $this->unmappingId($waybillid)['idTech']);
+			$mappedOID = WaybillParamsCheckerHelper::unmappingId($waybillid)['idTech'];
+			$items = $model->getUserOrders($user->id, $solution, $mappedOID);
 
+			if($GLOBALS['WAYBILLTOOL_DEBUG']){
+				echo '<pre>';
+				var_dump($items);
+				echo '</pre>';
+			}
 			if($items !== null) {
 				$elem = (array)$items[0];
-				// echo '<pre>';
-				// var_dump($elem);
-				// echo '</pre>';
 
 				$this->userlist = $this->userlist . '（+ViewUserShowDetails+挂载PDF生成模块）<br><br>';
 				$this->userlist = $this->userlist
@@ -155,7 +157,7 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 			foreach($items as $elem){
 				$value = (array)($elem);
 
-				$order_id = $this->mappingId($value['order_id']);
+				$order_id = WaybillParamsCheckerHelper::mappingId($value['order_id']);
 
 				$this->userlist = $this->userlist
 				.'<tr>'
@@ -181,85 +183,4 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 		parent::display($tpl);
 	}
 
-
-
-
-	/**
-	* 用来转换数据库id(tech id)跟打印id(id fonctionnel)
-	*/
-	private function getOrderIdMapping ()
-	{
-		return array(
-			'0' => 'O',
-			'1' => 'U',
-			'2' => 'T',
-			'3' => 'E',
-			'4' => 'D',
-			'5' => 'S',
-			'6' => 'B',
-			'7' => 'Z',
-			'8' => 'P',
-			'9' => 'M'
-		);
-	}
-
-	private function getOrderIdUnMapping ()
-	{
-		return array(
-			'O' => '0',
-			'U' => '1',
-			'T' => '2',
-			'E' => '3',
-			'D' => '4',
-			'S' => '5',
-			'B' => '6',
-			'Z' => '7',
-			'P' => '8',
-			'M' => '9'
-		);
-	}
-
-	/**
-	* length = 12
-	*
-	* @param unknown $id
-	* @return multitype:number
-	*/
-	private function unmappingId ($id)
-	{
-		$r = array();
-		try {
-			if (strlen($id) == 12 && 'FR' == substr($id, 0, 2)) {
-				$idTechStr = '';
-				$unmapping = $this->getOrderIdUnMapping();
-				for ($i = 2; $i < strlen($id); $i ++) {
-					$idTechStr = $idTechStr . $unmapping[$id[$i]];
-				}
-				$r['idTech'] = intval($idTechStr);
-			} else {
-				$r['error'] = 1000;
-			}
-		} catch (Exception $e) {
-			JLog::add(implode('<br />', $e), JLog::WARNING, 'jerror');
-			$r['error'] = 1000;
-		}
-		return $r;
-	}
-
-	/**
-	* length = 12
-	*
-	* @param unknown $id
-	* @return multitype:number
-	*/
-	private function mappingId ($order_id)
-	{
-		$toReturn = 'FR';
-		$mapping = $this->getOrderIdMapping();
-		$stringOrderId = strval($order_id);
-		for ($i = 0; $i < strlen($stringOrderId); $i ++) {
-			$stringOrderId[$i] = $mapping[$stringOrderId[$i]];
-		}
-		return $toReturn . str_pad($stringOrderId, 10, '0', STR_PAD_LEFT);
-	}
 }

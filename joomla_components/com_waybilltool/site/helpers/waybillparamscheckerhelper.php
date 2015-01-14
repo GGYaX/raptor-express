@@ -56,21 +56,21 @@ class WaybillParamsCheckerHelper {
 
     $comment2 = $jinput->get("comment2", null);
 
-    $allParams["id_recto"] = $jinput->get("id_recto", null);
-    $allParams["id_verso"] = $jinput->get("id_verso", null);
+    $allParams["id_recto"] = $jinput->get("id_recto", "");
+    $allParams["id_verso"] = $jinput->get("id_verso", "");
 
     $checked = true;
+
     foreach ($allParams as $key => $value){
       if($value === null) {
         $checked = false;
         break;
       }
     }
-    if(
-        ($solution === "EMS")
+    if( ($solution === "EMS")
           && (
-            ($allParams["id_recto"] === null)
-              || ($allParams["id_verso"] === null)
+            ($allParams["id_recto"] === "")
+              || ($allParams["id_verso"] === "")
           )
     ) {
       $checked = false;
@@ -78,10 +78,9 @@ class WaybillParamsCheckerHelper {
     if($checked) {
       $allParams["comment"] = $allParams["comment"]." ||||||备注信息 : ".$comment2;
       //var_dump($allParams);
-      return $allParams;
     }
 
-    return null;
+    return $checked ? $allParams : null;
   }
 
   public static function checkUsershowParams($cachable = false, $urlparams = false) {
@@ -91,6 +90,87 @@ class WaybillParamsCheckerHelper {
 
   public static function checkAdminParams($cachable = false, $urlparams = false) {
     echo "WaybillParamscheckerhelper : Admin";
+  }
+
+
+  /**
+  * 用来转换数据库id(tech id)跟打印id(id fonctionnel)
+  */
+  private static function getOrderIdMapping ()
+  {
+    return array(
+      '0' => 'O',
+      '1' => 'U',
+      '2' => 'T',
+      '3' => 'E',
+      '4' => 'D',
+      '5' => 'S',
+      '6' => 'B',
+      '7' => 'Z',
+      '8' => 'P',
+      '9' => 'M'
+    );
+  }
+
+  private static function getOrderIdUnMapping ()
+  {
+    return array(
+      'O' => '0',
+      'U' => '1',
+      'T' => '2',
+      'E' => '3',
+      'D' => '4',
+      'S' => '5',
+      'B' => '6',
+      'Z' => '7',
+      'P' => '8',
+      'M' => '9',
+      '0' => '0' //Avoid Notice undefined offset
+    );
+  }
+
+  /**
+  * length = 12
+  *
+  * @param unknown $id
+  * @return multitype:number
+  */
+  public static function unmappingId ($id)
+  {
+    $r = array();
+    try {
+      if (strlen($id) == 12 && 'FR' == substr($id, 0, 2)) {
+        $idTechStr = '';
+        $unmapping = self::getOrderIdUnMapping();
+        for ($i = 2; $i < strlen($id); $i ++) {
+          $idTechStr = $idTechStr . $unmapping[$id[$i]];
+        }
+        $r['idTech'] = intval($idTechStr);
+      } else {
+        $r['error'] = 1000;
+      }
+    } catch (Exception $e) {
+      JLog::add(implode('<br />', $e), JLog::WARNING, 'jerror');
+      $r['error'] = 1000;
+    }
+    return $r;
+  }
+
+  /**
+  * length = 12
+  *
+  * @param unknown $id
+  * @return multitype:number
+  */
+  public static function mappingId ($order_id)
+  {
+    $toReturn = 'FR';
+    $mapping = self::getOrderIdMapping();
+    $stringOrderId = strval($order_id);
+    for ($i = 0; $i < strlen($stringOrderId); $i ++) {
+      $stringOrderId[$i] = $mapping[$stringOrderId[$i]];
+    }
+    return $toReturn . str_pad($stringOrderId, 10, '0', STR_PAD_LEFT);
   }
 
 }

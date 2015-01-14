@@ -35,23 +35,28 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 
     //1
     if($solution === null){
-      $this->form = '<h1>选择快递公司</h1>';
-      $this->form = $this->form . SolutionChooserHelper::getSolutionChooser();
+      $this->form = SolutionChooserHelper::getSolutionChooser();
     }
     //3
     else if($creation !== null) {
 			$toPersistData = WaybillParamsCheckerHelper::checkCreateParams($user->id);
+			if($GLOBALS['WAYBILLTOOL_DEBUG']){
+				echo '<pre>';
+				var_dump($toPersistData);
+				echo '</pre>';
+			}
 			if($toPersistData !== null){
 				$model = $this->getModel();
-
-				if($model->insertNewWaybill($toPersistData)===true){
+				$res = $model->insertNewWaybill($toPersistData);
+				if($res["ok"]===true){
 					$this->form = '<h1>订单已保存:)</h1>';
 					$this->form = $this->form . '<br>';
 					$this->form = $this->form .
 						'<button class="btn btn-lg btn-success" onclick="location.href= \''.
 							JURI::base().
 							'index.php?option=com_waybilltool&view=waybillusershow'.
-							'?exp-solution='.$solution.'&waybillid='.'FR000000UUUT'.
+							'&exp-solution='.$solution.'&waybillid='.
+							WaybillParamsCheckerHelper::mappingId($res["oid"]).
 							'\'">查看此订单</button>';
 				} else {
 					$this->form = '<h1>订单未保存:(</h1>';
@@ -59,7 +64,7 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 				}
 			} else {
 				$this->form = '<h1>订单未保存:(</h1>';
-				$this->form = $this->form . '请联系管理员';
+				$this->form = $this->form . '请检查输入内容';
 			}
     }
     //2

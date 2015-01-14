@@ -12,7 +12,7 @@ class WaybillToolModelWaybillUserShow extends JModelItem {
      * Here we can load anything from DBO...
      * @return string The message to be displayed to the user
      */
-    public function getUserOrders($uid, $solution, $oid = null) {
+    public function getUserOrders($uid, $solution = null, $oid = null) {
       try {
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
@@ -40,7 +40,10 @@ class WaybillToolModelWaybillUserShow extends JModelItem {
         ->join('NATURAL', 't_id_cards id')
         ->join('INNER', '#__hikashop_address send ON send.address_id=sender_id')
         ->join('INNER', '#__hikashop_address recv ON recv.address_id=recipient_id');
-        $whereclause = 'client_id = '.$uid.' AND express_mode = \''.$solution.'\'';
+        $whereclause = 'client_id = '.$uid;
+        if ($solution !== null) {
+          $whereclause = $whereclause . ' AND express_mode = \''.$solution.'\'';
+        }
         if ($oid !== null) {
           $whereclause = $whereclause . ' AND order_id = '.$oid;
         }
@@ -48,8 +51,16 @@ class WaybillToolModelWaybillUserShow extends JModelItem {
         $query->order('package_id DESC');
         $db->setQuery((string)$query);
         $list = $db->loadObjectList();
+        if($GLOBALS['WAYBILLTOOL_DEBUG']) {
+          echo '<pre>';
+          var_dump($query);
+          var_dump($list);
+          echo '</pre>';
+        }
         return $list;
       } catch (Exception $e) {
+        /* DEBUG */
+        if($GLOBALS['WAYBILLTOOL_DEBUG']) throw $e;
         return false;
       }
     }
