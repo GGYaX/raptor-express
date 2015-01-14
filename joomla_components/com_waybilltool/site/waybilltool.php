@@ -6,6 +6,7 @@
 
   require_once JPATH_COMPONENT.DS.'helpers'.DS.'waybillparamscheckerhelper.php';
   require_once JPATH_COMPONENT.DS.'helpers'.DS.'solutionchooserhelper.php';
+  require_once JPATH_COMPONENT.DS.'helpers'.DS.'userwallethelper.php';
 
   $controller = JControllerLegacy::getInstance('WaybillTool');
 

@@ -32,6 +32,8 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 		$solution = SolutionChooserHelper::chosenSolution();
 
 		$waybillid = JFactory::getApplication()->input->get('waybillid', null);
+		
+		$walletHelper = new UserWalletHelper();
 
 		//1
 		if($solution === null){

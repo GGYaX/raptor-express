@@ -33,9 +33,12 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 
 		$creation = JFactory::getApplication()->input->get('exp-creation', null);
 
+		$walletHelper = new UserWalletHelper();
+
     //1
     if($solution === null){
-      $this->form = SolutionChooserHelper::getSolutionChooser();
+			$this->form = $walletHelper->getUserWalletHtml();
+      $this->form = $this->form . SolutionChooserHelper::getSolutionChooser();
     }
     //3
     else if($creation !== null) {
@@ -69,7 +72,7 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
     }
     //2
     else {
-			$this->form = '<h1>填写订单信息</h1>' . "（显示对应钱包余额）<br>";;
+			$this->form = $walletHelper->getUserWalletHtml();
       //FIXME hard coded solution types
       switch ($solution) {
         case "LAP":
@@ -96,6 +99,8 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 		}
 		parent::display($tpl);
 	}
+
+
 
   private static function getHtmlCreateForm($solution = null, $productList = null, $needIdCard = false) {
 
