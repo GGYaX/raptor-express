@@ -32,7 +32,7 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 		$solution = SolutionChooserHelper::chosenSolution();
 
 		$waybillid = JFactory::getApplication()->input->get('waybillid', null);
-		
+
 		$walletHelper = new UserWalletHelper();
 
 		//1
@@ -78,7 +78,7 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">收件人地址</th>'
-				.'<td class="tg-huh2">RUE XXX</th>'
+				.'<td class="tg-huh2">'.$elem['recv_street'].' '.$elem['recv_post_code'].' '.$elem['recv_city'].' '.$elem['recv_state'].' '.$elem['recv_country'].'</th>'
 				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">收件人电话</th>'
