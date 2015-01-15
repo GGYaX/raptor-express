@@ -15,3 +15,8 @@ end//
 
 -- 恢复delimiter
 delimiter ;
+
+-- trigger 当有package时候，自动插入到t_shipping_historic中
+create trigger trigger_insert_after_t_packages
+	after insert on t_packages for each row
+	insert into t_shipping_historic(package_id, DDJ_DATE) values (new.package_id, now());
