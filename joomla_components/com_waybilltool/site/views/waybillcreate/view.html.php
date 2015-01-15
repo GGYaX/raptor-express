@@ -102,7 +102,7 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 
 
 
-  private static function getHtmlCreateForm($solution = null, $productList = null, $needIdCard = false) {
+  private static function getHtmlCreateFormOld($solution = null, $productList = null, $needIdCard = false) {
 
     $output ='（显示地址本列表？）<br>'.
       '<form method="POST" class="form-validate" id="exp-wb-create" action="'.JRoute::_(JURI::current()).'">'
@@ -197,4 +197,42 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
     return $output;
   }
 
+  private static function getHtmlCreateForm($solution = null, $productList = null, $needIdCard = false) {
+
+      $output =
+      '<div class="registration">'
+              .'<form method="POST" class="form-validate form-horizontal" id="exp-wb-create" action="'.JRoute::_(JURI::current()).'">'
+                      .'<input type="hidden" value="1" name="exp-creation" />'
+                              .'<input type="hidden" value="'.$solution.'" name="exp-solution" />'
+                                      .'<fieldset><div class="form-box"><legend>寄件人信息</legend><div class="row"><div class="col-sm-6"><div class="control-label"><span class="spacer"><span class="before"></span><span class="text"><label id="jform_spacer-lbl" class=""><strongclass="red">*</strong> 必填字段</label></span><span class="after"></span></span></div><div class=""></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人姓名: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="name_send"></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人街道: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="addr_send_stre"></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人邮编: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="addr_send_post"></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人城市: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username"type="text" name="addr_send_city"></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人省份: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="addr_send_stat"></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人国家: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="addr_send_cnty"></div></div><div class="col-sm-6"><div class="control-label"><label> 寄件人电话: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="phone_send"></div></div></div></div></fieldset><fieldset><div class="form-box"><legend>收件人信息</legend><div class="row"><div class="col-sm-6"><div class="control-label"><span class="spacer"><span class="before"></span><span class="text"><label id="jform_spacer-lbl" class=""><strongclass="red">*</strong> 必填字段</label></span><span class="after"></span></span></div><div class=""></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人姓名: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="name_recv"></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人街道: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="addr_recv_stre"></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人邮编: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="addr_recv_post"></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人城市: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username"type="text" name="addr_recv_city"></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人省份: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="addr_recv_stat"></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人国家: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-username" type="text"name="addr_recv_cnty"></div></div><div class="col-sm-6"><div class="control-label"><label> 收件人电话: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="phone_recv"></div></div></div></div></fieldset>'
+                                              .'<fieldset><div class="form-box"><legend>货物信息</legend><div class="row"><div class="col-sm-6"><div class="control-label"><span class="spacer"><span class="before"></span><span class="text"><label id="jform_spacer-lbl" class=""><strongclass="red">*</strong> 必填字段</label></span><span class="after"></span></span><div class=""></div></div><div class="col-sm-6"><div class="control-label"><label> 保价金额: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="insu_amnt"></div>'
+                                                      .'</div>';
+
+      if(!($productList === null)
+              && !empty($productList)){
+          $output = $output
+          .'<div class="col-sm-6"><div class="control-label"><label> 快递产品类别: <span class="star">&nbsp;*</span></label></div><div class=""><select name="exp-product">';
+          foreach ($productList as $key => $value) {
+              $output = $output
+              .'<option value="'.$value.'">'.$key.'</option>';
+          }
+          $output = $output.'</select></div></div>';
+      }
+
+      $output = $output
+      .'<div class="col-sm-6"><div class="control-label"><label> 包裹内容（请如实填报）: <span class="star">&nbsp;*</span></label></div><div class=""><textarea class="required" rows="10" cols="50" name="comment" form="exp-wb-create"></textarea></div></div><div class="col-sm-6"><div class="control-label"><label> 重量（kg）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="weight"></div></div><div class="col-sm-6"><div class="control-label"><label> 长（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="length"></div></div><div class="col-sm-6"><div class="control-label"><label> 宽（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="width"></div></div><div class="col-sm-6"><div class="control-label"><label> 高（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="height"></div></div><div class="col-sm-6"><div class="control-label"><label> 备注 : <span class="star">&nbsp;*</span></label></div><div class=""><textarea rows="10" cols="50" name="comment2" form="exp-wb-create"></textarea></div></div>'
+              .'</div></div></fieldset>';
+
+      if($needIdCard) {
+          $output = $output.'<fieldset><div class="form-box"><legend>身份证信息</legend><div class="row"><div class="col-sm-6"><div class="control-label"><span class="spacer"><span class="before"></span><span class="text"><label id="jform_spacer-lbl" class=""><strongclass="red">*</strong> 必填字段</label></span><span class="after"></span></span></div><div class=""></div></div><div class="col-sm-6"><div class="control-label"><label> 身份证正面 : <span class="star">&nbsp;*</span></label></div><div class=""><input class="required" type="file" name="id_recto" id="id_recto"></div></div><div class="col-sm-6"><div class="control-label"><label> 身份证反面 : <span class="star">&nbsp;*</span></label></div><div class=""><input class="required" type="file" name="id_verso" id="id_verso"></div></div></div></div></fieldset>';
+      }
+
+      $output = $output
+      .'<br><br>'
+              .'<input class="btn btn-lg btn-success" type="submit" value="确认订单">'
+                      .'</form>'
+                              .'</div>';
+
+      return $output;
+  }
 }
