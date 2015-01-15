@@ -63,11 +63,13 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 							'\'">查看此订单</button>';
 				} else {
 					$this->form = '<h1>订单未保存:(</h1>';
-					$this->form = $this->form . '请联系管理员';
+					$this->form = $this->form . '请联系管理员<br/>';
+					$this->form = $this->form . $res["msg"];
 				}
 			} else {
 				$this->form = '<h1>订单未保存:(</h1>';
-				$this->form = $this->form . '请检查输入内容';
+				$this->form = $this->form . '请检查输入内容<br/>';
+				$this->form = $this->form . $res["msg"];
 			}
     }
     //2

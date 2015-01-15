@@ -79,7 +79,18 @@ class WaybillToolModelWaybillCreate extends JModelItem {
             return array('ok'=>false,'msg'=>$priceCalculed['error']);
         } else {
             $walletAmount = $wallethelper->getWalletAmount();
-            if($data['product'] == 'ENA' || $data['product'] == 'EMS') {
+            if($GLOBALS['WAYBILLTOOL_DEBUG']){
+                echo '<pre> result';
+                var_dump($priceCalculed);
+                echo '</pre>';
+                echo '<pre> $canInsert';
+                var_dump($canInsert);
+                echo '</pre>';
+                echo '<pre> $walletAmount';
+                var_dump($walletAmount);
+                echo '</pre>';
+            }
+            if($data['product'] == 'ENA' || $data['product'] == 'ENO') {
                 // ems
                 if(floatval($walletAmount['emsAmount']) < floatval($priceCalculed['result'])) {
                     $canInsert = false;
@@ -90,6 +101,14 @@ class WaybillToolModelWaybillCreate extends JModelItem {
                     $canInsert = false;
                 }
             }
+        }
+        if($GLOBALS['WAYBILLTOOL_DEBUG']){
+            echo '<pre> result';
+            var_dump($priceCalculed['result']);
+            echo '</pre>';
+            echo '<pre> $canInsert';
+            var_dump($canInsert);
+            echo '</pre>';
         }
         if($canInsert == true) {
             $resAddrSent = $this->insertNewAddress($data["uid"], $data["name_send"],
