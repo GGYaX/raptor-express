@@ -170,7 +170,7 @@ class TrackingModelTracking extends JModelItem
                 'D' => '4',
                 'S' => '5',
                 'B' => '6',
-                'T' => '7',
+                'Z' => '7',
                 'P' => '8',
                 'M' => '9'
         );
@@ -189,7 +189,7 @@ class TrackingModelTracking extends JModelItem
                 '4' => 'D',
                 '5' => 'S',
                 '6' => 'B',
-                '7' => 'T',
+                '7' => 'Z',
                 '8' => 'P',
                 '9' => 'M'
         );
