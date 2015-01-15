@@ -76,7 +76,7 @@ class WaybillToolModelWaybillCreate extends JModelItem {
 
         $values = array($db->quote($address_user_id), $db->quote($address_firstname),
           $db->quote($address_street), $db->quote($address_post_code), $db->quote($address_city),
-          $db->quote($address_state), $db->quote($address_country), $db->quote($address_telephone));
+          $db->quote($address_telephone), $db->quote($address_state), $db->quote($address_country));
 
         $query->insert($db->quoteName('#__hikashop_address'))
           ->columns($db->quoteName($col))
