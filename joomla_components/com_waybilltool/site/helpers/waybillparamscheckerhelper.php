@@ -78,7 +78,7 @@ class WaybillParamsCheckerHelper {
       $checked = false;
     }
     if($checked) {
-      $allParams["comment"] = $allParams["comment"]." ||||||备注信息 : ".$comment2;
+      $allParams["comment"] = $allParams["comment"]." \n备注信息 : ".$comment2;
       //var_dump($allParams);
     }
 
