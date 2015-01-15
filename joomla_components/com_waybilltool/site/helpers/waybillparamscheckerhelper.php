@@ -15,10 +15,12 @@ class WaybillParamsCheckerHelper {
 
   public static function checkCreateParams($uid,
       $solution = 'exp-solution', $creation = 'exp-creation') {
-    $jinput = JFactory::getApplication()->input;
+    $jinputOrigin = JFactory::getApplication()->input;
 
-    $solution = $jinput->get($solution, null);
-    $creation = $jinput->get($creation, null);
+    $solution = $jinputOrigin->get($solution, null);
+    $creation = $jinputOrigin->get($creation, null);
+
+    $jinput = $jinputOrigin->post->getArray();
 
     $allParams = array();
 
@@ -27,37 +29,37 @@ class WaybillParamsCheckerHelper {
 
     $allParams["solution"] = $solution;
 
-    $allParams["name_send"] = $jinput->get("name_send", null);
-    $allParams["addr_send_stre"] = $jinput->get("addr_send_stre", null);
-    $allParams["addr_send_post"] = $jinput->get("addr_send_post", null);
-    $allParams["addr_send_city"] = $jinput->get("addr_send_city", null);
-    $allParams["addr_send_stat"] = $jinput->get("addr_send_stat", null);
-    $allParams["addr_send_cnty"] = $jinput->get("addr_send_cnty", null);
-    $allParams["phone_send"] = $jinput->get("phone_send", null);
+    $allParams["name_send"] = $jinput["name_send"];
+    $allParams["addr_send_stre"] = $jinput["addr_send_stre"];
+    $allParams["addr_send_post"] = $jinput["addr_send_post"];
+    $allParams["addr_send_city"] = $jinput["addr_send_city"];
+    $allParams["addr_send_stat"] = $jinput["addr_send_stat"];
+    $allParams["addr_send_cnty"] = $jinput["addr_send_cnty"];
+    $allParams["phone_send"] = $jinput["phone_send"];
 
 
-    $allParams["name_recv"] = $jinput->get("name_recv", null);
-    $allParams["addr_recv_stre"] = $jinput->get("addr_recv_stre", null);
-    $allParams["addr_recv_post"] = $jinput->get("addr_recv_post", null);
-    $allParams["addr_recv_city"] = $jinput->get("addr_recv_city", null);
-    $allParams["addr_recv_stat"] = $jinput->get("addr_recv_stat", null);
-    $allParams["addr_recv_cnty"] = $jinput->get("addr_recv_cnty", null);
-    $allParams["phone_recv"] = $jinput->get("phone_recv", null);
+    $allParams["name_recv"] = $jinput["name_recv"];
+    $allParams["addr_recv_stre"] = $jinput["addr_recv_stre"];
+    $allParams["addr_recv_post"] = $jinput["addr_recv_post"];
+    $allParams["addr_recv_city"] = $jinput["addr_recv_city"];
+    $allParams["addr_recv_stat"] = $jinput["addr_recv_stat"];
+    $allParams["addr_recv_cnty"] = $jinput["addr_recv_cnty"];
+    $allParams["phone_recv"] = $jinput["phone_recv"];
 
-    $allParams["insu_amnt"] = $jinput->get("insu_amnt", null);
-    $allParams["product"] = $jinput->get("exp-product", null);
+    $allParams["insu_amnt"] = $jinput["insu_amnt"];
+    $allParams["product"] = $jinput["exp-product"];
 
-    $allParams["comment"] = $jinput->get("comment", null);
+    $allParams["comment"] = $jinput["comment"];
 
-    $allParams["weight"] = $jinput->get("weight", null);
-    $allParams["length"] = $jinput->get("length", null);
-    $allParams["width"] = $jinput->get("width", null);
-    $allParams["height"] = $jinput->get("height", null);
+    $allParams["weight"] = $jinput["weight"];
+    $allParams["length"] = $jinput["length"];
+    $allParams["width"] = $jinput["width"];
+    $allParams["height"] = $jinput["height"];
 
-    $comment2 = $jinput->get("comment2", null);
+    $comment2 = $jinput["comment2"];
 
-    $allParams["id_recto"] = $jinput->get("id_recto", "");
-    $allParams["id_verso"] = $jinput->get("id_verso", "");
+    $allParams["id_recto"] = $jinput["id_recto"];
+    $allParams["id_verso"] = $jinput["id_verso"];
 
     $checked = true;
 
