@@ -3,11 +3,64 @@ defined('_JEXEC') or die('404');
 jimport('joomla.application.component.modelitem');
 class WaybillToolModelWaybillCreate extends JModelItem {
 
+    // la poste报价
+    protected $laposteArray = array(
+            '1KG'=>21,
+            '2KG'=>28,
+            '3KG'=>31,
+            '4KG'=>32,
+            '5KG'=>35,
+            '6KG'=>38,
+            '7KG'=>41,
+            '8KG'=>51,
+            '9KG'=>60,
+            '10KG'=>68,
+            '11KG'=>96,
+            '12KG'=>96,
+            '13KG'=>96,
+            '14KG'=>96,
+            '15KG'=>96
+    );
 
-    /**
-     * @var string msg
-     */
-    protected $msg;
+    // ems 奶粉
+    protected $enaArray = array(
+            '2|900|2KG'=>19,
+            '2|800|2KG'=>19,
+            '2|12004KG'=>26,
+            '3|800|3KG'=>21,
+            '3|900|4KG'=>30,
+            '3|1200|6KG'=>40,
+            '4|800|4KG'=>31,
+            '4|900|5KG'=>32,
+            '4|1200|7KG'=>43,
+            '5|800|5.5KG'=>38,
+            '5|900|6KG'=>42,
+            '6|800|7KG'=>43,
+            '6|900|7KG'=>45
+    );
+
+    protected $emsArray = array(
+            '1KG'=>11,
+            '2KG'=>15,
+            '3KG'=>19,
+            '4KG'=>23,
+            '5KG'=>27,
+            '6KG'=>31,
+            '7KG'=>35,
+            '8KG'=>39,
+            '9KG'=>43,
+            '10KG'=>47,
+            '11KG'=>51,
+            '12KG'=>55,
+            '13KG'=>59,
+            '14KG'=>63,
+            '15KG'=>67,
+            '16KG'=>71,
+            '17KG'=>75,
+            '18KG'=>79,
+            '19KG'=>83,
+            '20KG'=>87
+    );
 
     /**
      长宽高重状态付款方式付款状态
@@ -17,39 +70,63 @@ class WaybillToolModelWaybillCreate extends JModelItem {
     public function insertNewWaybill($data) {
       if($GLOBALS['WAYBILLTOOL_DEBUG']) echo "写入WayBill<br>";
       try {
-        $resAddrSent = $this->insertNewAddress($data["uid"], $data["name_send"],
-          $data["addr_send_stre"], $data["addr_send_post"], $data["addr_send_city"],
-          $data["addr_send_stat"], $data["addr_send_cnty"], $data["phone_send"]);
-        $resAddrRecv = $this->insertNewAddress($data["uid"], $data["name_recv"],
-          $data["addr_recv_stre"], $data["addr_recv_post"], $data["addr_recv_city"],
-          $data["addr_recv_stat"], $data["addr_recv_cnty"], $data["phone_recv"]);
-        $resPackage = $this->insertNewPackage($resAddrSent["id"], $resAddrRecv["id"],
-          $data["insu_amnt"], $data["solution"],
-          $data["weight"], $data["height"], $data["length"],
-          $data["width"], $data["comment"]);
-          //FIXME Calculate price
-        $resOrder = $this->insertNewOrder(9999, $resPackage["id"],
-          $data["uid"], $data["product"]);
-        $resIDCards = $this->insertNewIDCards($data["uid"], $data["id_recto"],
-          $data["id_verso"], $resOrder["id"]);
-        if($GLOBALS['WAYBILLTOOL_DEBUG']){
-          echo '<pre>';
-          var_dump($resAddrSent);
-          echo '</pre>';
-          echo '<pre>';
-          var_dump($resAddrRecv);
-          echo '</pre>';
-          echo '<pre>';
-          var_dump($resPackage);
-          echo '</pre>';
-          echo '<pre>';
-          var_dump($resOrder);
-          echo '</pre>';
-          echo '<pre>';
-          var_dump($resOrder);
-          echo '</pre>';
+
+        $wallethelper = new UserWalletHelper();
+        $priceCalculed = $this->calculPrice($data['product'],$data['height'],$data['length'],$data['width'],$data['weight'],$data['enaDemand']);
+        $canInsert = true;
+        if(isset($priceCalculed['error'])) {
+            // 计算价格错误
+            return array('ok'=>false,'msg'=>$priceCalculed['error']);
+        } else {
+            $walletAmount = $wallethelper->getWalletAmount();
+            if($data['product'] == 'ENA' || $data['product'] == 'EMS') {
+                // ems
+                if(floatval($walletAmount['emsAmount']) < floatval($priceCalculed['result'])) {
+                    $canInsert = false;
+                }
+            } else {
+                // la poste
+                if(floatval($walletAmount['laposteAmount']) < floatval($priceCalculed['result'])) {
+                    $canInsert = false;
+                }
+            }
         }
-        return array("ok"=>true, "oid"=>$resOrder["id"]);
+        if($canInsert == true) {
+            $resAddrSent = $this->insertNewAddress($data["uid"], $data["name_send"],
+                    $data["addr_send_stre"], $data["addr_send_post"], $data["addr_send_city"],
+                    $data["addr_send_stat"], $data["addr_send_cnty"], $data["phone_send"]);
+            $resAddrRecv = $this->insertNewAddress($data["uid"], $data["name_recv"],
+                    $data["addr_recv_stre"], $data["addr_recv_post"], $data["addr_recv_city"],
+                    $data["addr_recv_stat"], $data["addr_recv_cnty"], $data["phone_recv"]);
+            $resPackage = $this->insertNewPackage($resAddrSent["id"], $resAddrRecv["id"],
+                    $data["insu_amnt"], $data["solution"],
+                    $data["weight"], $data["height"], $data["length"],
+                    $data["width"], $data["comment"]);
+            $resOrder = $this->insertNewOrder(floatval($priceCalculed['result']), $resPackage["id"],
+                    $data["uid"], $data["product"]);
+            $resIDCards = $this->insertNewIDCards($data["uid"], $data["id_recto"],
+                    $data["id_verso"], $resOrder["id"]);
+            if($GLOBALS['WAYBILLTOOL_DEBUG']){
+                echo '<pre>';
+                var_dump($resAddrSent);
+                echo '</pre>';
+                echo '<pre>';
+                var_dump($resAddrRecv);
+                echo '</pre>';
+                echo '<pre>';
+                var_dump($resPackage);
+                echo '</pre>';
+                echo '<pre>';
+                var_dump($resOrder);
+                echo '</pre>';
+                echo '<pre>';
+                var_dump($resOrder);
+                echo '</pre>';
+            }
+            return array("ok"=>true, "oid"=>$resOrder["id"]);
+        }
+        // 没钱错误
+        return array('ok'=>false,'msg'=>JText::_('COM_WAYBILLTOOL_VIEW_FONT_OUT_OF_AMOUNT'));
       } catch (Exception $e) {
         /* DEBUG */
         if($GLOBALS['WAYBILLTOOL_DEBUG']) throw $e;
@@ -258,5 +335,46 @@ class WaybillToolModelWaybillCreate extends JModelItem {
       $db->setQuery($queryVerif);
 
       return $db->loadObjectList();
+    }
+
+    /**
+     * 计算价格
+     */
+    private function calculPrice($express_type, $high = 0, $length = 0, $width = 0, $weight = 0, $enaDemand) {
+        $toReturn = array();
+        if($high == 0 || $length == 0 || $width == 0 || $weight == 0) {
+            $toReturn = array('error'=>JText::_('COM_WAYBILLTOOL_VIEW_FONT_NO_WAY_TO_CREATE_ORDER'));
+        } else {
+            if($express_type = 'EMS') {
+                $weightCalculed = $this->calculeWeight($high, $length, $width, $weight);
+                if($weightCalculed > 20) {
+                    $toReturn = array('error'=>JText::_('COM_WAYBILLTOOL_VIEW_FONT_OUT_OF_BOUND'));
+                } else {
+                    $toReturn = array('result' => $this->emsArray[$weightCalculed . 'KG']);
+                }
+            } else if($express_type = 'ENA') {
+                if(isset($enaDemand) && isset($this->enaArray[$enaDemand])) {
+                    $toReturn = array('result'=>$this->enaArray[$enaDemand]);
+                } else {
+                    $toReturn = array('error'=>JText::_('COM_WAYBILLTOOL_VIEW_FONT_NO_WAY_TO_CREATE_ORDER'));
+                }
+            } else if($express_type = 'LAP') {
+                if($weightCalculed > 15) {
+                    $toReturn = array('error'=>JText::_('COM_WAYBILLTOOL_VIEW_FONT_OUT_OF_BOUND'));
+                } else {
+                    $toReturn = array('result' => $this->laposteArray[intval($weightCalculed) . 'KG']);
+                }
+            } else {
+                $toReturn = array('error'=>JText::_('COM_WAYBILLTOOL_VIEW_FONT_NO_WAY_TO_CREATE_ORDER'));
+            }
+        }
+        return $toReturn;
+    }
+
+    // 计算体积重
+    private function calculeWeight($high = 1, $length = 1, $width = 1, $weight = 1) {
+        $volumeWeight = ceil(($high *$length * $width) / 5000);
+        $weightCeiled = ceil($weight);
+        return intval(max($volumeWeight, $weightCeiled));
     }
 }
