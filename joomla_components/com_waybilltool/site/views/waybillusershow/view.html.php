@@ -95,7 +95,7 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">包裹内容及备注</th>'
-				.'<td class="tg-huh2">'.nl2br($elem['comment']).'</th>'
+				.'<td class="tg-huh2">'.str_replace('||||||', '<br/>', $elem['comment']).'</th>'
 				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">长x宽x高（cm）</th>'
