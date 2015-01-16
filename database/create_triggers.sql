@@ -20,3 +20,47 @@ delimiter ;
 create trigger trigger_insert_after_t_packages
 	after insert on t_packages for each row
 	insert into t_shipping_historic(package_id, DDJ_DATE) values (new.package_id, now());
+
+-- trigger 当生成一个order时候，需要放进t_operation_historic中
+DELIMITER //
+DROP TRIGGER IF EXISTS exp_insert_trigger//
+CREATE TRIGGER exp_insert_trigger
+    AFTER INSERT ON `t_orders`
+    FOR EACH ROW
+BEGIN
+	INSERT INTO t_operation_historic(user_id, operation_date, operation_type, reference_id) values(NEW.client_id, NOW(), 'ORD', NEW.order_id);
+END//
+DELIMITER ;
+
+-- trigger 每次更新订单，需重新更新历史记录
+DELIMITER //
+DROP TRIGGER IF EXISTS exp_update_trigger//
+CREATE TRIGGER exp_update_trigger
+    AFTER UPDATE ON `t_orders`
+    FOR EACH ROW
+BEGIN
+	INSERT INTO t_operation_historic(user_id, operation_date, operation_type, reference_id) values(NEW.client_id, NOW(), 'OUP', NEW.order_id);
+	set @package_stat := (select package_stat from t_packages where package_id = NEW.package_id);
+	if @package_stat = 'DDJ' then
+		UPDATE t_shipping_historic set DDJ_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+	if @package_stat = 'RKK' then
+		UPDATE t_shipping_historic set RKK_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+	if @package_stat = 'CKK' then
+		UPDATE t_shipping_historic set CKK_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+	if @package_stat = 'YSZ' then
+		UPDATE t_shipping_historic set YSZ_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+	if @package_stat = 'DQG' then
+		UPDATE t_shipping_historic set DQG_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+	if @package_stat = 'QGC' then
+		UPDATE t_shipping_historic set QGC_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+	if @package_stat = 'GNP' then
+		UPDATE t_shipping_historic set GNP_DATE = NOW() WHERE package_id = NEW.package_id;
+	end if;
+END//
+DELIMITER ;
