@@ -9,4 +9,4 @@
 defined('_JEXEC') or die;
 ?>
 
-<?php echo $this->listForm; ?>
+<?php echo $this->userlist; ?>

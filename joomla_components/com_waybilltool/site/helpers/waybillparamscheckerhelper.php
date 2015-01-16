@@ -77,7 +77,7 @@ class WaybillParamsCheckerHelper
             }
         }
         if ($checked) {
-            $allParams["comment"] = $allParams["comment"] . " \n备注信息 : " .
+            $allParams["comment"] = $allParams["comment"] . "||||||" .
                      $comment2;
             // var_dump($allParams);
         }
@@ -85,14 +85,100 @@ class WaybillParamsCheckerHelper
         return $checked ? $allParams : null;
     }
 
+
+
+
+
     public static function checkUsershowParams ($cachable = false, $urlparams = false)
     {
         echo "WaybillParamscheckerhelper : Usershow";
     }
 
-    public static function checkAdminParams ($cachable = false, $urlparams = false)
+
+
+
+
+    public static function checkAdminUpdateParams ($uid)
     {
-        echo "WaybillParamscheckerhelper : Admin";
+
+      $jinputOrigin = JFactory::getApplication()->input;
+
+      $jinput = $jinputOrigin->post->getArray();
+
+      $allParams = array();
+      $allParams["uid"] = $uid;
+
+      $allParams["payment_stat"] = $jinput["paystat"];
+      $allParams["package_stat"] = $jinput["packstat"];
+
+      $allParams["id_card_id"] = $jinput["ididc"];
+      $allParams["package_id"] = $jinput["idpkg"];
+      $oid = $jinputOrigin->get("exp-oid", null);
+      $allParams["order_id"] = self::unmappingId($oid)['idTech'];
+      $allParams["send_id"] = $jinput["idsend"];
+      $allParams["recv_id"] = $jinput["idrecv"];
+
+      $allParams["name_send"] = $jinput["name_send"];
+      $allParams["addr_send_stre"] = $jinput["addr_send_stre"];
+      $allParams["addr_send_post"] = $jinput["addr_send_post"];
+      $allParams["addr_send_city"] = $jinput["addr_send_city"];
+      $allParams["addr_send_stat"] = $jinput["addr_send_stat"];
+      $allParams["addr_send_cnty"] = $jinput["addr_send_cnty"];
+      $allParams["phone_send"] = $jinput["phone_send"];
+
+      $allParams["name_recv"] = $jinput["name_recv"];
+      $allParams["addr_recv_stre"] = $jinput["addr_recv_stre"];
+      $allParams["addr_recv_post"] = $jinput["addr_recv_post"];
+      $allParams["addr_recv_city"] = $jinput["addr_recv_city"];
+      $allParams["addr_recv_stat"] = $jinput["addr_recv_stat"];
+      $allParams["addr_recv_cnty"] = $jinput["addr_recv_cnty"];
+      $allParams["phone_recv"] = $jinput["phone_recv"];
+
+      $allParams["insu_amnt"] = $jinput["insu_amnt"];
+
+      $allParams["solution"] = $jinput["exp-solution"];
+      $allParams["product"] = $jinput["exp-product"];
+
+      $allParams["comment"] = $jinput["comment"];
+
+      $allParams["weight"] = $jinput["weight"];
+      $allParams["length"] = $jinput["length"];
+      $allParams["width"] = $jinput["width"];
+      $allParams["height"] = $jinput["height"];
+
+      $allParams["payment_amount"] = $jinput["price"];
+
+      $comment2 = $jinput["comment2"];
+
+      $checked = true;
+
+      //var_dump($allParams);
+
+      foreach ($allParams as $key => $value) {
+        if ($value === null) {
+          $checked = false;
+          break;
+        }
+      }
+      if (($allParams["solution"] === "EMS")) {
+        $allParams["id_recto"] = $jinput["id_recto"];
+        $allParams["id_verso"] = $jinput["id_verso"];
+        if (($allParams["id_recto"] === "") ||
+        ($allParams["id_verso"] === "")) {
+          //$checked = false;
+          $allParams["id_recto"] = false;
+          $allParams["id_verso"] = false;
+        }
+      } else {
+        $allParams["id_recto"] = false;
+        $allParams["id_verso"] = false;
+      }
+      if ($checked) {
+        $allParams["comment"] = $allParams["comment"] . "||||||" .
+        $comment2;
+      }
+
+      return $checked ? $allParams : null;
     }
 
     /**
