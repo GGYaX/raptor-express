@@ -34,7 +34,7 @@ class UsermenuModelListhistoric extends JModelItem
         $db = JFactory::getDBO();
 
         $query = 'select id, operation_date, operation_type, reference_id from t_operation_historic where user_id = ' .
-                 $db->quote($uid) . ';';
+                 $db->quote($uid) . ' and operation_type in ('.$db->quote('ORD').', '.$db->quote('BMO').');';
         $db->setQuery($query);
         $db->query();
 
