@@ -343,7 +343,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
      * @return last inserted id and inserted values for later verification
      */
     private function insertNewOrder ($payment_amount, $package_id, $client_id,
-            $express_type, $payment_stat = "WFK", $media_code = "ONL")
+            $express_type, $payment_stat = "YFK", $media_code = "ONL")
     {
         if ($GLOBALS['WAYBILLTOOL_DEBUG'])
             echo "写入ORDER<br>";
