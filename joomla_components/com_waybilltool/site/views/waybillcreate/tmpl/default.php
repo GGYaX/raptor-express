@@ -19,35 +19,54 @@ jQuery(document).ready(function() {
 	var hight = jQuery('[name=height]');
 	var weight = jQuery('[name=weight]');
 	var enaDemand = jQuery('[name=enaDemand]');
+	var insuAmount = jQuery('[name=insu_amnt');
 	c(expProduct);
 	expProduct.change(function() {
     	c(expProduct);
 	});
 	for (var i = blocs.length - 1; i >= 0; i--) {
 		jQuery(blocs[i]).change(function() {
-			var lengthFloat = parseFloat(length.val());
-			var widthFloat = parseFloat(width.val());
-			var hightFloat = parseFloat(hight.val());
-			var weightFloat = parseFloat(weight.val());
-			if((isFinite(lengthFloat)&&isFinite(widthFloat)&&isFinite(hightFloat)&&isFinite(weightFloat)) || expProduct.val() === 'ENA') {
-				var r = calcul();
-				if(r && isFinite(r)) {
-					cleanResult(r+'€')
-					jQuery('#shippingResultBloc').show();
-				} else {
-					cleanResult('暂时无法计算，请直接点击确认订单');
-					jQuery('#shippingResultBloc').show();
+			if(expProduct.val() === 'ENO' || expProduct.val() === 'LNO') {
+				var lengthFloat = parseFloat(length.val());
+				var widthFloat = parseFloat(width.val());
+				var hightFloat = parseFloat(hight.val());
+				var weightFloat = parseFloat(weight.val());
+				if((isFinite(lengthFloat)&&isFinite(widthFloat)&&isFinite(hightFloat)&&isFinite(weightFloat))) {
+					calculAndDisplay();
 				}
+			} else {
+				if(!length.val()) length.val('1');
+				if(!width.val()) width.val('1');
+				if(!hight.val()) hight.val('1');
+				if(!weight.val()) weight.val('1');
+				calculAndDisplay();
 			}
 		});
 	};
+	function calculAndDisplay() {
+		var r = calcul();
+		if(r && isFinite(r)) {
+			cleanResult(r+'€')
+			jQuery('#shippingResultBloc').show();
+		} else {
+			cleanResult('暂时无法计算，请直接点击确认订单');
+			jQuery('#shippingResultBloc').show();
+		}
+	}
 	function c (expProduct) {
+		cleanResult('');
+		jQuery('#shippingResultBloc').hide();
 		if(expProduct.val() === 'ENO' || expProduct.val() === 'LNO') {
     		jQuery('.ena').hide();
     		jQuery('.ems').show();
     	} else if(expProduct.val() === 'ENA') {
+    		calculAndDisplay();
     		jQuery('.ems').hide();
     		jQuery('.ena').show();
+    		if(!length.val()) length.val('1');
+			if(!width.val()) width.val('1');
+			if(!hight.val()) hight.val('1');
+			if(!weight.val()) weight.val('1');
     	}
 	}
 
@@ -63,14 +82,14 @@ jQuery(document).ready(function() {
 		var widthFloat = parseFloat(width.val());
 		var hightFloat = parseFloat(hight.val());
 		var weightFloat = parseFloat(weight.val());
-		if(isFinite(lengthFloat)&&isFinite(widthFloat)&&isFinite(hightFloat)&&isFinite(weightFloat)) {
+		if(expProduct.val() === 'ENA') {
+			return parseFloat(ENA['' + enaDemand.val()] + parseFloat(insuAmount.val()));
+		} else if(isFinite(lengthFloat)&&isFinite(widthFloat)&&isFinite(hightFloat)&&isFinite(weightFloat)) {
 			if(expProduct.val() === 'ENO') {
-				return ENO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'];
+				return parseFloat(ENO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'] + parseFloat(insuAmount.val()));
 			} else if(expProduct.val() === 'LNO') {
-				return ENO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'];
+				return parseFloat(ENO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'] + parseFloat(insuAmount.val()));
 			}
-		} else if(expProduct.val() === 'ENA') {
-			return ENA['' + enaDemand.val()];
 		}
 		return '';
 	}

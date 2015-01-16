@@ -54,7 +54,7 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 			}
 			if($items !== null) {
 				$elem = (array)$items[0];
-
+                $arrayElemExpressType = array('ENO'=>'EMS包税普通包裹','LNP'=>'La Poste普通包裹','ENA'=>'奶粉包税专线');
 				$this->userlist = $this->userlist . '（+ViewUserShowDetails+挂载PDF生成模块）<br><br>';
 				$this->userlist = $this->userlist
 				.'<div class="container">'
@@ -91,32 +91,40 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">快递产品类别</th>'
-				.'<td class="tg-huh2">'.$elem['express_type'].'</th>'
+				.'<td class="tg-huh2">'.$arrayElemExpressType[$elem['express_type']].'</th>'
 				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">包裹内容及备注</th>'
 				.'<td class="tg-huh2">'.str_replace('||||||', '<br/>', $elem['comment']).'</th>'
 				.'</tr>'
-				.'<tr>'
-				.'<th class="tg-wvvv">长x宽x高（cm）</th>'
-				.'<td class="tg-huh2">'.$elem['length'].' * '.$elem['width'].' * '.$elem['height'].'</th>'
-				.'</tr>'
-				.'<tr>'
-				.'<th class="tg-wvvv">重量（kg）</th>'
-				.'<td class="tg-huh2">'.$elem['height'].'</th>'
-				.'</tr>'
-				.'<tr>'
+				.'<tr>';
+				if($elem['express_type'] != 'ENA') {
+    				$this->userlist = $this->userlist
+    				.'<th class="tg-wvvv">长x宽x高（cm）</th>'
+    				.'<td class="tg-huh2">'.$elem['length'].' * '.$elem['width'].' * '.$elem['height'].'</th>'
+    				.'</tr>'
+    				.'<tr>'
+    				.'<th class="tg-wvvv">重量（kg）</th>'
+    				.'<td class="tg-huh2">'.$elem['height'].'</th>'
+    				.'</tr>'
+    				.'<tr>';
+				}
+				$this->userlist = $this->userlist
 				.'<th class="tg-wvvv">邮寄费用</th>'
 				.'<td class="tg-huh2">'.$elem['payment_amount'].'</th>'
 				.'</tr>'
-				.'<tr>'
-				.'<th class="tg-wvvv">身份证正面</th>'
-				.'<td class="tg-huh2">'.$elem['filename_recto'].'</th>'
-				.'</tr>'
-				.'<tr>'
-				.'<th class="tg-wvvv">身份证反面</th>'
-				.'<td class="tg-huh2">'.$elem['filename_verso'].'</th>'
-				.'</tr>'
+				.'<tr>';
+				if($elem['express_type'] != 'LNO') {
+				    $this->userlist = $this->userlist
+				    .'<th class="tg-wvvv">身份证正面</th>'
+	                .'<td class="tg-huh2">'.$elem['filename_recto'].'</th>'
+                    .'</tr>'
+                    .'<tr>'
+                    .'<th class="tg-wvvv">身份证反面</th>'
+                    .'<td class="tg-huh2">'.$elem['filename_verso'].'</th>'
+                    .'</tr>';
+				}
+				$this->userlist = $this->userlist
 				.'</tbody>'
 				.'</table>'
 				.'</div>';
