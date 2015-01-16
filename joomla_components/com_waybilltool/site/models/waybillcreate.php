@@ -164,8 +164,8 @@ class WaybillToolModelWaybillCreate extends JModelItem
                     echo '</pre>';
                     echo '<uploading filebr/>';
                 }
-                $id_recto = $this->upload('id_recto','/'.JText::_('COM_WAYBILLTOOL_VIEW_FONT_UPLOAD_FOLDER').$filenameRecto,1048576, array('png','gif','jpg','jpeg'));
-                $id_verso = $this->upload('id_verso','/'.JText::_('COM_WAYBILLTOOL_VIEW_FONT_UPLOAD_FOLDER').$filenameVerso,1048576, array('png','gif','jpg','jpeg'));
+                $id_recto = $this->upload('id_recto',JText::_('COM_WAYBILLTOOL_VIEW_FONT_UPLOAD_FOLDER'),$filenameRecto,1048576, array('png','gif','jpg','jpeg'));
+                $id_verso = $this->upload('id_verso',JText::_('COM_WAYBILLTOOL_VIEW_FONT_UPLOAD_FOLDER'),$filenameVerso,1048576, array('png','gif','jpg','jpeg'));
                 return array(
                         "ok" => true,
                         "oid" => $resOrder["id"]
@@ -540,7 +540,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
     }
 
     // 存文件
-    private function upload ($index, $destination, $maxsize = FALSE,
+    private function upload ($index, $folder, $filename, $maxsize = FALSE,
             $extensions = FALSE)
     {
         // Test1: fichier correctement uploadé
@@ -558,9 +558,13 @@ class WaybillToolModelWaybillCreate extends JModelItem
             echo 'hehe <pre>';
             var_dump($_FILES[$index]);
             echo ' extension <br/>';
-            var_dump($destination.'.'.$ext);
+            var_dump($filename.'.'.$ext);
             echo '</pre>';
         }
-        return move_uploaded_file($_FILES[$index]['tmp_name'], $destination.'.'.$ext);
+        if(file_exists($folder) && is_writable($folder)) {
+            return move_uploaded_file($_FILES[$index]['tmp_name'], $folder.$filename.'.'.$ext);
+        } else {
+            return FALSE;
+        }
     }
 }
