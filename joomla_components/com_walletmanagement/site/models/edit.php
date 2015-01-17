@@ -65,13 +65,13 @@ class WalletmanagementModelEdit extends JModelItem
                 $jinput = JFactory::getApplication()->input;
                 $jformArray = $jinput->post->getArray();
                 $jform = $jformArray['jform'];
-                $helper->log($jform, 'jform');
+//                 $helper->log($jform, 'jform');
                 $params = array(
                         'emsM' => $jform['emsM'],
                         'laposteM' => $jform['laposteM'],
                         'comment' => $jform['comment']
                 );
-                $helper->log($params, 'params');
+//                 $helper->log($params, 'params');
                 if (isset($params['emsM']) || isset($params['laposteM'])) {
                     $floatEmsM = floatval($params['emsM']);
                     $floatLaposteM = floatval($params['laposteM']);
@@ -126,7 +126,7 @@ class WalletmanagementModelEdit extends JModelItem
                      $db->quote($walletType) . ',' . 'NOW()' . ',' .
                      $db->quote($comment) . ');';
             $helper = new comModelWalletmanagementHelper();
-            $helper->log($query, 'query');
+//             $helper->log($query, 'query');
             $db->setQuery($query);
             $db->query();
         } catch (Exception $e) {
