@@ -64,7 +64,7 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
          ->join('INNER', '#__hikashop_address recv ON recv.address_id=recipient_id')
          ->join('LEFT', 't_id_cards t ON t.order_id=o.order_id');
          $whereclause = '1';
-         if ($uid === null) {
+         if ($uid !== null) {
            $whereclause = 'client_id = '.$uid;
            //$whereclause = $whereclause . ' AND order_id = '.$oid;
          }
