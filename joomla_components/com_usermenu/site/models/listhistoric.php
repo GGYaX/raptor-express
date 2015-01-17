@@ -36,7 +36,6 @@ class UsermenuModelListhistoric extends JModelItem
         $query = 'select id, operation_date, operation_type, reference_id from t_operation_historic where user_id = ' .
                  $db->quote($uid) . ' and operation_type in ('.$db->quote('ORD').', '.$db->quote('BMO').');';
         $db->setQuery($query);
-        $db->query();
 
         $r = $db->loadObjectList('id');
 
@@ -84,7 +83,6 @@ class UsermenuModelListhistoric extends JModelItem
                  $db->quote($id) . ';';
 
         $db->setQuery($query);
-        $db->query();
 
         return (array) $db->loadObject();
     }
@@ -102,7 +100,6 @@ class UsermenuModelListhistoric extends JModelItem
                  $db->quote($order_id) . ';';
 
         $db->setQuery($query);
-        $db->query();
 
         return (array) $db->loadObject();
     }
@@ -115,7 +112,6 @@ class UsermenuModelListhistoric extends JModelItem
                  $db->quote($package_id) . ';';
 
         $db->setQuery($query);
-        $db->query();
 
         return (array) $db->loadObject();
     }
@@ -128,7 +124,6 @@ class UsermenuModelListhistoric extends JModelItem
                  $db->quote($id) . ';';
 
         $db->setQuery($query);
-        $db->query();
 
         return (array) $db->loadObject();
     }
