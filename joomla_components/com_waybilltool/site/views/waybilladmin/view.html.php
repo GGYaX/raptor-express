@@ -200,9 +200,9 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 
 					$output = $output
 					.'<div class="col-sm-6"><div class="control-label"><label> 价格（请核对钱包修改）: <span class="star">&nbsp;*</span></label></div><div class="">
-					<input class="required validate-numeric" value='.$elem['payment_amount'].' type="text" name="price"></div></div>
+					<input class="required validate-numeric" value="'.$elem['payment_amount'].'" type="text" name="price"></div></div>
 					<div class="col-sm-6"><div class="control-label"><label> 国内物流单号: </label></div><div class="">
-					<input class="validate-username" value='.$elem['express_id'].' type="text" name="express_id"></div></div>
+					<input class="validate-username" value="'.$elem['express_id'].'" type="text" name="express_id"></div></div>
 					</fieldset>';
 
 					$output = $output.'<fieldset><div class="form-box"><legend>寄件人信息</legend><div class="row"><div class="col-sm-6"><div class="control-label"><span class="spacer">
