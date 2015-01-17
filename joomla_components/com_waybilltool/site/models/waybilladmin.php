@@ -33,7 +33,8 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
      * Here we can load anything from DBO...
      * @return string The message to be displayed to the user
      */
-    public function getOrders($uid = null, $oid = null) {
+  // filtreExpressId = true代表只需要返回express_id为空的order
+    public function getOrders($uid = null, $oid = null, $filtreExpressId = false) {
        try {
          $db = JFactory::getDBO();
          $query = $db->getQuery(true);
@@ -55,6 +56,7 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
          recv.address_state as recv_state,
          recv.address_country as recv_country,
          recv.address_telephone as recv_telephone,
+         p.express_id as express_id,
 
          wide as width
          ');
@@ -67,6 +69,9 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
          if ($uid !== null) {
            $whereclause = 'client_id = '.$uid;
            //$whereclause = $whereclause . ' AND order_id = '.$oid;
+         }
+         if($filtreExpressId == true) {
+             $whereclause = $whereclause . 'AND p.express_id = NULL';
          }
          $query->where($whereclause);
          $query->order('package_id DESC');

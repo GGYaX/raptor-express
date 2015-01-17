@@ -33,12 +33,17 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 
 		$express_uid = JFactory::getApplication()->input->get('exp-uid', null);
 		$express_oid = JFactory::getApplication()->input->get('exp-oid', null);
+		$displayNoExpressId = JFactory::getApplication()->input->get('exp-no-express-id', false);
 		$express_oid_edt = JFactory::getApplication()->input->get('exp-oid-edit', null);
 
 		$walletHelper = new UserWalletHelper();
 
 		$model = $this->getModel();
-
+        // if $displayNoExpressId == true，则显示所有没有express_id的订单
+        if($displayNoExpressId == true) {
+            $items = $model->getOrders($express_uid);
+            $this->displayOrders($items);
+        } else
 		//1 : choose user
 		if($express_uid === null){
 			$items = $model->getUserInfo();
@@ -87,42 +92,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 		else if($express_oid === null) {
 			$items = $model->getOrders($express_uid);
 			if($items !== null) {
-				$this->userlist = '<div class="container">'
-				.'<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" /><script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>'
-				.'<table style="width: 100%;" class="tg" id="dataTable">'
-				.'<thead>'
-				.'<tr>'
-				.'<th class="tg-wvvv">订单号</th>'
-				.'<th class="tg-huh2">下单时间</th>'
-				.'<th class="tg-huh2">发件人</th>'
-				.'<th class="tg-huh2">收件人</th>'
-				.'<th class="tg-huh2">付款状态</th>'
-				.'<th class="tg-huh2">查看修改详细信息</th>'
-				.'</tr>'
-				.'</thead>'
-				.'<tbody>';
-
-				foreach($items as $elem){
-					$value = (array)($elem);
-
-					$order_id = WaybillParamsCheckerHelper::mappingId($value['oid']);
-
-					$this->userlist = $this->userlist
-					.'<tr>'
-					.'<td class="tg-xaq9">'.$order_id.'</td>'
-					.'<td class="tg-s6z2">'.$value['order_time'].'</td>'
-					.'<td class="tg-s6z2">'.$value['send_name'].'</td>'
-					.'<td class="tg-s6z2">'.$value['recv_name'].'</td>'
-					.'<td class="tg-s6z2">'.$value['payment_stat'].'</td>'
-					.'<td class="tg-s6z2"><a href="'.JURI::base()
-					.'index.php?option=com_waybilltool&view=waybilladmin&exp-oid='.$order_id.'&exp-uid='.$express_uid.'">点击查看修改</a></td>'
-					.'</tr>';//JRoute::_(JURI::current()).'
-				}
-				$this->userlist = $this->userlist
-				.'</tbody>'
-				.'</table>'
-				.'</div>'
-				.'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>';
+				$this->displayOrders($items);
 
 			} else {
 				$this->userlist = '<h1>用户订单载入出错:(</h1>';
@@ -359,6 +329,47 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 		}
 
 		parent::display($tpl);
+	}
+
+	private function displayOrders($items) {
+	    $this->userlist = '<div class="container">'
+	            .'<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" /><script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>'
+	                    .'<table style="width: 100%;" class="tg" id="dataTable">'
+	                            .'<thead>'
+	                                    .'<tr>'
+	                                            .'<th class="tg-wvvv">订单号</th>'
+	                                                    .'<th class="tg-huh2">国内运单号</th>'
+	                                                            .'<th class="tg-huh2">下单时间</th>'
+	                                                                    .'<th class="tg-huh2">发件人</th>'
+	                                                                            .'<th class="tg-huh2">收件人</th>'
+	                                                                                    .'<th class="tg-huh2">付款状态</th>'
+	                                                                                            .'<th class="tg-huh2">查看修改详细信息</th>'
+	                                                                                                    .'</tr>'
+	                                                                                                            .'</thead>'
+	                                                                                                                    .'<tbody>';
+
+	    foreach($items as $elem){
+	        $value = (array)($elem);
+
+	        $order_id = WaybillParamsCheckerHelper::mappingId($value['oid']);
+
+	        $this->userlist = $this->userlist
+	        .'<tr>'
+	                .'<td class="tg-xaq9">'.$order_id.'</td>'
+	                        .'<td class="tg-s6z2">'.((!isset ($value['express_id'])) ? '暂无' : $value['express_id']).'</td>'
+	                                .'<td class="tg-s6z2">'.$value['order_time'].'</td>'
+	                                        .'<td class="tg-s6z2">'.$value['send_name'].'</td>'
+	                                                .'<td class="tg-s6z2">'.$value['recv_name'].'</td>'
+	                                                        .'<td class="tg-s6z2">'.$value['payment_stat'].'</td>'
+	                                                                .'<td class="tg-s6z2"><a href="'.JURI::base()
+	                                                                .'index.php?option=com_waybilltool&view=waybilladmin&exp-oid='.$order_id.'&exp-uid='.$express_uid.'">点击查看修改</a></td>'
+	                                                                        .'</tr>';//JRoute::_(JURI::current()).'
+	    }
+	    $this->userlist = $this->userlist
+	    .'</tbody>'
+	            .'</table>'
+	                    .'</div>'
+	                            .'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>';
 	}
 
 }
