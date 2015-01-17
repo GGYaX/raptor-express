@@ -26,6 +26,7 @@ $historic = $this->get('HistoricByCurrentUser');
             		<th>包裹-寄信人姓名</th>
             		<th>包裹-收件人姓名</th>
             		<th>包裹-长宽高重</th>
+            		<th>包裹-包裹内容</th>
             		<th>包裹-备注</th>
             		<th>钱包-金额变动</th>
             		<th>钱包-哪个钱包</th>
@@ -46,11 +47,13 @@ $historic = $this->get('HistoricByCurrentUser');
             		<td><?php echo $v['oSenderName'];?></td>
             		<td><?php echo $v['oReceiverName'];?></td>
             		<td><?php echo $v['oLength'] . 'cm - ' . $v['oWide'] . 'cm - '. $v['oHeight'] . 'cm / ' . $v['oWeight'] . 'kg';?></td>
+            		<td><?php echo $v['oCargoInfo'];?></td>
             		<td><?php echo $v['oComment'];?></td>
             		<td>N/A</td>
             		<td>N/A</td>
             		<td>N/A</td>
             		<?php else :?>
+            		<td>N/A</td>
             		<td>N/A</td>
             		<td>N/A</td>
             		<td>N/A</td>

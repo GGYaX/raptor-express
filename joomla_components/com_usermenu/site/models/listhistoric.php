@@ -34,12 +34,13 @@ class UsermenuModelListhistoric extends JModelItem
         $db = JFactory::getDBO();
 
         $query = 'select id, operation_date, operation_type, reference_id from t_operation_historic where user_id = ' .
-                 $db->quote($uid) . ' and operation_type in ('.$db->quote('ORD').', '.$db->quote('BMO').');';
+                 $db->quote($uid) . ' and operation_type in (' .
+                 $db->quote('ORD') . ', ' . $db->quote('BMO') . ');';
         $db->setQuery($query);
 
         $r = $db->loadObjectList('id');
 
-//         $this->log($r, 't_operation_historic');
+        // $this->log($r, 't_operation_historic');
 
         if (empty($r)) {
             return array(
@@ -57,13 +58,29 @@ class UsermenuModelListhistoric extends JModelItem
                     $orderInfo = $this->getOrder($referenceId);
                     $toReturn[$k]['orderId'] = $this->mapOrderId($referenceId);
                     $toReturn[$k]['oAmount'] = $orderInfo['payment_amount'];
+                    $packageInfo = $this->getPackage($orderInfo['package_id']);
+                    $senderInfo = $this->getAddress($packageInfo['sender_id']);
+                    $receiverInfo = $this->getAddress(
+                            $packageInfo['recipient_id']);
+                    $toReturn[$k]['oSenderName'] = $senderInfo['name'];
+                    $toReturn[$k]['oReceiverName'] = $receiverInfo['name'];
+                    $toReturn[$k]['oComment'] = $packageInfo['comment'];
+                    $toReturn[$k]['oCargoInfo'] = $packageInfo['cargo_info'];
+                    $toReturn[$k]['oWeight'] = number_format(
+                            floatval($packageInfo['weight']));
+                    $toReturn[$k]['oHeight'] = number_format(
+                            floatval($packageInfo['height']));
+                    $toReturn[$k]['oLength'] = number_format(
+                            floatval($packageInfo['length']));
+                    $toReturn[$k]['oWide'] = number_format(
+                            floatval($packageInfo['wide']));
 
                     // $v['oAmount'] = $orderInfo['payment_amount'];
                 } else {
                     // balance_modifications
                     $balanceModifications = $this->getBalanceModifications(
                             $referenceId);
-//                     $this->log($balanceModifications, 'balance is');
+                    // $this->log($balanceModifications, 'balance is');
                     $toReturn[$k]['bAmount'] = $balanceModifications['amount'];
                     $toReturn[$k]['bComment'] = $balanceModifications['comment'];
                     $toReturn[$k]['bWalletId'] = $balanceModifications['wallet_id'];
@@ -108,7 +125,7 @@ class UsermenuModelListhistoric extends JModelItem
     private function getPackage ($package_id)
     {
         $db = JFactory::getDBO();
-        $query = 'select sender_id, recipient_id, weight, height, length, wide, stock_in_time, stock_out_time from t_packages where package_id = ' .
+        $query = 'select sender_id, recipient_id, weight, height, length, wide, stock_in_time, stock_out_time, cargo_info, comment from t_packages where package_id = ' .
                  $db->quote($package_id) . ';';
 
         $db->setQuery($query);
@@ -120,7 +137,7 @@ class UsermenuModelListhistoric extends JModelItem
     private function getAddress ($id)
     {
         $db = JFactory::getDBO();
-        $query = 'select address_firstname as name, address_street as street,  from gzqxc_hikashop_address where order_id = ' .
+        $query = 'select address_firstname as name, address_street as street  from gzqxc_hikashop_address where address_id = ' .
                  $db->quote($id) . ';';
 
         $db->setQuery($query);
