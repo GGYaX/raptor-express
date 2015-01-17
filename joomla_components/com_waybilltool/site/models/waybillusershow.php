@@ -45,7 +45,7 @@ class WaybillToolModelWaybillUserShow extends JModelItem {
           $whereclause = $whereclause . ' AND express_mode = \''.$solution.'\'';
         }
         if ($oid !== null) {
-          $whereclause = $whereclause . ' AND oid = '.$oid;
+          $whereclause = $whereclause . ' AND o.order_id = '.$oid;
         }
         $query->where($whereclause);
         $query->order('package_id DESC');
