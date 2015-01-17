@@ -525,6 +525,13 @@ class WaybillToolModelWaybillCreate extends JModelItem
                     }
                 } else
                     if ($express_type == 'LNO') {
+                        $weightCalculed = $this->calculeWeight($high, $length, $width,
+                                $weight);
+                        if($GLOBALS['WAYBILLTOOL_DEBUG']) {
+                            echo 'weight calculed></pre>';
+                            var_dump($weightCalculed);
+                            echo '<pre>';
+                        }
                         if ($weightCalculed > 15) {
                             $toReturn = array(
                                     'error' => JText::_(
