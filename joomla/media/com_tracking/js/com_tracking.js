@@ -48,7 +48,7 @@ function buildTLElem(r) {
 	var info = remoteData['data'];
 	// code
 		var c = {
-			"DDJ_DATE":"等待缴费",
+			"DDJ_DATE":"已缴费",
 			"RKK_DATE":"入库",
 			"CKK_DATE":"出库",
 			"YSZ_DATE":"运送中",
