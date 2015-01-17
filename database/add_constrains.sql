@@ -23,7 +23,7 @@ add constraint chk_payment_stat check (payment_stat in ('YFK','WFK','OTH'));
 alter table t_orders
 add constraint chk_media_code check (media_code in ('ONL','FRT'));
 alter table t_orders
-add constraint chk_express_type check (media_code in ('LNO','ENO', 'ENA'));
+add constraint chk_express_type check (express_type in ('LNO','ENO', 'ENA'));
 
 -- t_id_cards
 alter table t_id_cards
