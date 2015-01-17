@@ -16,7 +16,7 @@ class WaybillToolModelWaybillUserShow extends JModelItem {
       try {
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
-        $query->select('*,
+        $query->select('*, o.order_id as oid,
         send.address_firstname as send_name,
         send.address_street as send_street,
         send.address_post_code as send_post_code,
@@ -37,15 +37,15 @@ class WaybillToolModelWaybillUserShow extends JModelItem {
         ');
         $query->from('t_packages p');
         $query->join('NATURAL', 't_orders o')
-        ->join('NATURAL', 't_id_cards id')
         ->join('INNER', '#__hikashop_address send ON send.address_id=sender_id')
-        ->join('INNER', '#__hikashop_address recv ON recv.address_id=recipient_id');
+        ->join('INNER', '#__hikashop_address recv ON recv.address_id=recipient_id')
+        ->join('LEFT', 't_id_cards t ON t.order_id=o.order_id');
         $whereclause = 'client_id = '.$uid;
         if ($solution !== null) {
           $whereclause = $whereclause . ' AND express_mode = \''.$solution.'\'';
         }
         if ($oid !== null) {
-          $whereclause = $whereclause . ' AND order_id = '.$oid;
+          $whereclause = $whereclause . ' AND oid = '.$oid;
         }
         $query->where($whereclause);
         $query->order('package_id DESC');
