@@ -38,6 +38,6 @@ if(
 <?php endif; ?>
 
 <?php if(($solution === "LAP") && ($waybill !== null)) : ?>
-  <button name="Download" class="btn btn-primary" onclick="window.location.href=www.google.fr'">用户说明下载</button>
+  <button name="Download" class="btn btn-primary" onclick="window.location.href=<?php echo JUri::base();?>/media/about.pdf'">用户说明下载</button>
   <br>
 <?php endif; ?>
