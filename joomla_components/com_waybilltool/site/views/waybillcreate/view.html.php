@@ -27,7 +27,7 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
     if (($user->guest)
         || !($user->id > 0)){
       JFactory::getApplication()->redirect(JURI::base()
-        .'index.php?option=com_users&view=login', $error, 'error' );
+        .'index.php/login', $error, 'error' );
     }
     $solution = SolutionChooserHelper::chosenSolution();
 
