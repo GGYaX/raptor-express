@@ -58,6 +58,7 @@ class WaybillParamsCheckerHelper
         $allParams["length"] = $jinput["length"];
         $allParams["width"] = $jinput["width"];
         $allParams["height"] = $jinput["height"];
+        $allParams["enaDemand"] = $jinput["enaDemand"];
 
         //$comment2 = $jinput["comment2"];
 

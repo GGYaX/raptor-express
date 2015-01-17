@@ -80,6 +80,11 @@ class WaybillToolModelWaybillCreate extends JModelItem
             $priceCalculed = $this->calculPrice($data['product'],
                     $data['height'], $data['length'], $data['width'],
                     $data['weight'], $data['enaDemand']);
+            if($GLOBALS['WAYBILLTOOL_DEBUG']) {
+                echo 'product<pre>';
+                var_dump($data['product']);
+                echo '</pre>';
+            }
             $canInsert = true;
             if (isset($priceCalculed['error'])) {
                 // 计算价格错误
@@ -479,13 +484,21 @@ class WaybillToolModelWaybillCreate extends JModelItem
             $width = 0, $weight = 0, $enaDemand)
     {
         $toReturn = array();
+        if ($GLOBALS['WAYBILLTOOL_DEBUG']) {
+            echo 'expresstype<pre>';
+            var_dump($express_type);
+            echo '</pre>';
+            echo 'enaDemand<pre>';
+            var_dump($enaDemand);
+            echo '</pre>';
+        }
         if ($high == 0 || $length == 0 || $width == 0 || $weight == 0) {
             $toReturn = array(
                     'error' => JText::_(
                             'COM_WAYBILLTOOL_VIEW_FONT_NO_WAY_TO_CREATE_ORDER')
             );
         } else {
-            if ($express_type = 'EMS') {
+            if ($express_type == 'ENO') {
                 $weightCalculed = $this->calculeWeight($high, $length, $width,
                         $weight);
                 if ($weightCalculed > 20) {
@@ -499,7 +512,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
                     );
                 }
             } else
-                if ($express_type = 'ENA') {
+                if ($express_type == 'ENA') {
                     if (isset($enaDemand) && isset($this->enaArray[$enaDemand])) {
                         $toReturn = array(
                                 'result' => $this->enaArray[$enaDemand]
@@ -511,7 +524,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
                         );
                     }
                 } else
-                    if ($express_type = 'LAP') {
+                    if ($express_type == 'LNO') {
                         if ($weightCalculed > 15) {
                             $toReturn = array(
                                     'error' => JText::_(
