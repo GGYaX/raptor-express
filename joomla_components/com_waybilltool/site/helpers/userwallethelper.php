@@ -1,4 +1,5 @@
 <?php
+defined('_JEXEC') or die();
 jimport('joomla.log.log');
 /**
 * @since 1.0.0
