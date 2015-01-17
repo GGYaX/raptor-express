@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
 			if(expProduct.val() === 'ENO') {
 				return parseFloat(ENO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'] + parseFloat(insuAmount.val()));
 			} else if(expProduct.val() === 'LNO') {
-				return parseFloat(ENO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'] + parseFloat(insuAmount.val()));
+				return parseFloat(LNO['' + calculWeight((lengthFloat),(widthFloat),(hightFloat),(weightFloat)) + 'KG'] + parseFloat(insuAmount.val()));
 			}
 		}
 		return '';
