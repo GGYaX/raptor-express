@@ -42,8 +42,9 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 			$items = $model->getUserInfo();
 			if($items !== null) {
 				$this->userlist = '<div class="container">'
-				.'<table style="width: 100%;" class="tg">'
-				.'<tbody>'
+				.'<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" /><script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>'
+				.'<table style="width: 100%;" class="tg" id="dataTable">'
+				.'<thead>'
 				.'<tr>'
 				.'<th class="tg-wvvv">用户ID</th>'
 				.'<th class="tg-huh2">用户名</th>'
@@ -52,7 +53,9 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				.'<th class="tg-huh2">注册日期</th>'
 				.'<th class="tg-huh2">最后访问日期</th>'
 				.'<th class="tg-huh2">用户订单列表</th>'
-				.'</tr>';
+				.'</tr>'
+				.'</thead>'
+				.'<tbody>';
 
 				foreach($items as $elem){
 					$value = (array)($elem);
@@ -71,6 +74,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				$this->userlist = $this->userlist
 				.'</tbody>'
 				.'</table>'
+                .'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>'
 				.'</div>';
 			} else {
 				$this->userlist = '<h1>用户列表载入出错:(</h1>';
@@ -82,8 +86,9 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 			$items = $model->getOrders($express_uid);
 			if($items !== null) {
 				$this->userlist = '<div class="container">'
-				.'<table style="width: 100%;" class="tg">'
-				.'<tbody>'
+                .'<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" /><script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>'
+				.'<table style="width: 100%;" class="tg" id="dataTable">'
+				.'<thead>'
 				.'<tr>'
 				.'<th class="tg-wvvv">订单号</th>'
 				.'<th class="tg-huh2">下单时间</th>'
@@ -91,7 +96,9 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				.'<th class="tg-huh2">收件人</th>'
 				.'<th class="tg-huh2">付款状态</th>'
 				.'<th class="tg-huh2">查看修改详细信息</th>'
-				.'</tr>';
+				.'</tr>'
+                .'</thead>'
+				.'<tbody>';
 
 				foreach($items as $elem){
 					$value = (array)($elem);
@@ -112,7 +119,8 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				$this->userlist = $this->userlist
 					.'</tbody>'
 					.'</table>'
-					.'</div>';
+					.'</div>'
+					.'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>';
 
 				} else {
 					$this->userlist = '<h1>用户订单载入出错:(</h1>';
