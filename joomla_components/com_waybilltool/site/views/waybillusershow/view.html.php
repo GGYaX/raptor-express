@@ -37,7 +37,7 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 
 		//1
 		if($solution === null){
-			$this->userlist = SolutionChooserHelper::getSolutionChooser();
+			$this->userlist = SolutionChooserHelper::getSolutionChooser('进入查看');
 		}
 		//3 : details
 		else if($waybillid !== null) {
@@ -54,12 +54,21 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 			}
 			if($items !== null) {
 				$elem = (array)$items[0];
-                $arrayElemExpressType = array('ENO'=>'EMS包税普通包裹','LNP'=>'La Poste普通包裹','ENA'=>'奶粉包税专线');
-				$this->userlist = $this->userlist . '（+ViewUserShowDetails+挂载PDF生成模块）<br><br>';
+
+				// FIXME Hard coded arrays
+        $arrayElemExpressType = array('ENO'=>'EMS包税普通包裹','LNP'=>'La Poste普通包裹','ENA'=>'奶粉包税专线');
+
+				$chinaID = ($elem['express_id']===null || strlen($elem['express_id'])==0) ? "暂无" : $elem['express_id'];
+
+				//$this->userlist = $this->userlist . '（+ViewUserShowDetails+挂载PDF生成模块）<br><br>';
 				$this->userlist = $this->userlist
 				.'<div class="container">'
 				.'<table style="width: 100%;" class="tg">'
 				.'<tbody>'
+				.'<tr>'
+				.'<th class="tg-wvvv">国内物流单号：</th>'
+				.'<td class="tg-huh2">'.$chinaID.'</th>'
+				.'</tr>'
 				.'<tr>'
 				.'<th class="tg-wvvv">寄件人姓名</th>'
 				.'<td class="tg-huh2">'.$elem['send_name'].'</th>'
@@ -94,8 +103,13 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 				.'<td class="tg-huh2">'.$arrayElemExpressType[$elem['express_type']].'</th>'
 				.'</tr>'
 				.'<tr>'
-				.'<th class="tg-wvvv">包裹内容及备注</th>'
-				.'<td class="tg-huh2">'.str_replace('||||||', '<br/>', $elem['comment']).'</th>'
+				.'<th class="tg-wvvv">包裹内容</th>'
+				.'<td class="tg-huh2">'.$elem['cargo_info'].'</th>'
+				//.'<td class="tg-huh2">'.str_replace('||||||', '<br/>', $elem['comment']).'</th>'
+				.'</tr>'
+				.'<tr>'
+				.'<th class="tg-wvvv">备注</th>'
+				.'<td class="tg-huh2">'.$elem['comment'].'</th>'
 				.'</tr>'
 				.'<tr>';
 				if($elem['express_type'] != 'ENA') {
@@ -170,13 +184,18 @@ class WaybillToolViewWaybillUsershow extends JViewLegacy
 
 				$order_id = WaybillParamsCheckerHelper::mappingId($value['order_id']);
 
+
+
+				// FIXME Hard coded arrays
+				$payment_statList = array("YFK"=>"已付款", "WFK"=>"未付款", "OTH"=>"其他");
+
 				$this->userlist = $this->userlist
 				.'<tr>'
 				.'<td class="tg-xaq9">'.$order_id.'</td>'
 				.'<td class="tg-s6z2">'.$value['order_time'].'</td>'
 				.'<td class="tg-s6z2">'.$value['send_name'].'</td>'
 				.'<td class="tg-s6z2">'.$value['recv_name'].'</td>'
-				.'<td class="tg-s6z2">'.$value['payment_stat'].'</td>'
+				.'<td class="tg-s6z2">'.$payment_statList[$value['payment_stat']].'</td>'
 				.'<td class="tg-s6z2"><a href="'.JRoute::_(JURI::current()).'?exp-solution='.$solution.'&waybillid='.$order_id.'">详细信息</a></td>'
 				.'</tr>';
 			}

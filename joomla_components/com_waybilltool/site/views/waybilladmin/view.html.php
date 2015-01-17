@@ -74,7 +74,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				$this->userlist = $this->userlist
 				.'</tbody>'
 				.'</table>'
-                .'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>'
+				.'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>'
 				.'</div>';
 			} else {
 				$this->userlist = '<h1>用户列表载入出错:(</h1>';
@@ -86,7 +86,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 			$items = $model->getOrders($express_uid);
 			if($items !== null) {
 				$this->userlist = '<div class="container">'
-                .'<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" /><script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>'
+				.'<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" /><script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>'
 				.'<table style="width: 100%;" class="tg" id="dataTable">'
 				.'<thead>'
 				.'<tr>'
@@ -97,7 +97,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				.'<th class="tg-huh2">付款状态</th>'
 				.'<th class="tg-huh2">查看修改详细信息</th>'
 				.'</tr>'
-                .'</thead>'
+				.'</thead>'
 				.'<tbody>';
 
 				foreach($items as $elem){
@@ -106,26 +106,26 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 					$order_id = WaybillParamsCheckerHelper::mappingId($value['oid']);
 
 					$this->userlist = $this->userlist
-						.'<tr>'
-						.'<td class="tg-xaq9">'.$order_id.'</td>'
-						.'<td class="tg-s6z2">'.$value['order_time'].'</td>'
-						.'<td class="tg-s6z2">'.$value['send_name'].'</td>'
-						.'<td class="tg-s6z2">'.$value['recv_name'].'</td>'
-						.'<td class="tg-s6z2">'.$value['payment_stat'].'</td>'
-						.'<td class="tg-s6z2"><a href="'.JURI::base()
-						.'index.php?option=com_waybilltool&view=waybilladmin&exp-oid='.$order_id.'&exp-uid='.$express_uid.'">点击查看修改</a></td>'
-						.'</tr>';//JRoute::_(JURI::current()).'
+					.'<tr>'
+					.'<td class="tg-xaq9">'.$order_id.'</td>'
+					.'<td class="tg-s6z2">'.$value['order_time'].'</td>'
+					.'<td class="tg-s6z2">'.$value['send_name'].'</td>'
+					.'<td class="tg-s6z2">'.$value['recv_name'].'</td>'
+					.'<td class="tg-s6z2">'.$value['payment_stat'].'</td>'
+					.'<td class="tg-s6z2"><a href="'.JURI::base()
+					.'index.php?option=com_waybilltool&view=waybilladmin&exp-oid='.$order_id.'&exp-uid='.$express_uid.'">点击查看修改</a></td>'
+					.'</tr>';//JRoute::_(JURI::current()).'
 				}
 				$this->userlist = $this->userlist
-					.'</tbody>'
-					.'</table>'
-					.'</div>'
-					.'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>';
+				.'</tbody>'
+				.'</table>'
+				.'</div>'
+				.'<script>jQuery(document).ready(function() {jQuery("#dataTable").DataTable();} );</script>';
 
-				} else {
-					$this->userlist = '<h1>用户订单载入出错:(</h1>';
-					$this->userlist = $this->userlist . '请联系管理员';
-				}
+			} else {
+				$this->userlist = '<h1>用户订单载入出错:(</h1>';
+				$this->userlist = $this->userlist . '请联系管理员';
+			}
 
 				$this->userlist = $this->userlist .
 				'<button class="btn btn-lg btn-success" onclick="location.href= \''.
@@ -147,7 +147,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 				if($items !== null) {
 					$elem = (array)$items[0];
 
-					$comments = explode("||||||", $elem['comment']);
+					//$comments = explode("||||||", $elem['comment']);
 
 					// FIXME Hard coded arrays
 					$productList = array("La Poste普通包裹"=>"LNO", "EMS普通包裹"=>"ENO", "EMS奶粉"=>"ENA");
@@ -173,8 +173,8 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 						foreach ($payment_statList as $key => $value) {
 							$output = $output.'<option ';
 
-							if($value==$elem['payment_stat'])
-							$output = $output.'selected="selected" ';
+							if($value === $elem['payment_stat'])
+								$output = $output.'selected="selected" ';
 
 							$output = $output.'value="'.$value.'">'.$key.'</option>';
 						}
@@ -188,16 +188,20 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 						foreach ($package_statList as $key => $value) {
 							$output = $output.'<option ';
 
-							if($value==$elem['package_stat'])
-							$output = $output.'selected="selected" ';
+							if($value === $elem['package_stat'])
+								$output = $output.'selected="selected" ';
 
 							$output = $output.'value="'.$value.'">'.$key.'</option>';
 						}
 						$output = $output.'</select></div></div>';
 					}
 
-					$output = $output.'<div class="col-sm-6"><div class="control-label"><label> 价格（请核对钱包修改）: <span class="star">&nbsp;*</span></label></div><div class="">
-					<input class="required validate-numeric" value='.$elem['payment_amount'].' type="text" name="price"></div></div></fieldset>';
+					$output = $output
+					.'<div class="col-sm-6"><div class="control-label"><label> 价格（请核对钱包修改）: <span class="star">&nbsp;*</span></label></div><div class="">
+					<input class="required validate-numeric" value='.$elem['payment_amount'].' type="text" name="price"></div></div>
+					<div class="col-sm-6"><div class="control-label"><label> 国内物流单号: </label></div><div class="">
+					<input class="validate-username" value='.$elem['express_id'].' type="text" name="express_id"></div></div>
+					</fieldset>';
 
 					$output = $output.'<fieldset><div class="form-box"><legend>寄件人信息</legend><div class="row"><div class="col-sm-6"><div class="control-label"><span class="spacer">
 					<span class="before"></span><span class="text"><label id="jform_spacer-lbl" class=""><strongclass="red">*</strong> 必填字段</label></span>
@@ -248,7 +252,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 						foreach ($solutionList as $key => $value) {
 							$output = $output.'<option ';
 
-							if($value==$elem['express_mode'])
+							if($value === $elem['express_mode'])
 							$output = $output.'selected="selected" ';
 
 							$output = $output.'value="'.$value.'">'.$key.'</option>';
@@ -263,7 +267,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 						foreach ($productList as $key => $value) {
 							$output = $output.'<option ';
 
-							if($value==$elem['express_type'])
+							if($value === $elem['express_type'])
 								$output = $output.'selected="selected" ';
 
 							$output = $output.'value="'.$value.'">'.$key.'</option>';
@@ -273,7 +277,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 
 					$output = $output
 					.'<div class="col-sm-6"><div class="control-label"><label> 包裹内容（请如实填报）: <span class="star">&nbsp;*</span></label></div><div class="">
-					<textarea class="required" rows="10" cols="50" name="comment" form="exp-wb-create">'.$comments[0].'</textarea></div></div>
+					<textarea class="required" rows="10" cols="50" name="cargo_info" form="exp-wb-create">'.$elem['cargo_info'].'</textarea></div></div>
 					<div class="col-sm-6"><div class="control-label"><label> 重量（kg）: <span class="star">&nbsp;*</span></label></div><div class="">
 					<input class="required validate-numeric" value='.$elem['weight'].' type="text" name="weight"></div></div><div class="col-sm-6">
 					<div class="control-label"><label> 长（cm）: <span class="star">&nbsp;*</span></label></div><div class="">
@@ -283,7 +287,7 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
 					<div class="control-label"><label> 高（cm）: <span class="star">&nbsp;*</span></label></div><div class="">
 					<input class="required validate-numeric" value='.$elem['height'].' type="text" name="height"></div></div><div class="col-sm-6">
 					<div class="control-label"><label> 备注 : <span class="star">&nbsp;*</span></label></div><div class="">
-					<textarea rows="10" cols="50" name="comment2" form="exp-wb-create">'.$comments[1].'</textarea></div></div>'
+					<textarea rows="10" cols="50" name="comment" form="exp-wb-create">'.$elem['comment'].'</textarea></div></div>'
 					.'</div></div></fieldset>';
 
 					$output = $output.'<fieldset><div class="form-box"><legend>身份证信息</legend><div class="row"><div class="col-sm-6"><div class="control-label">

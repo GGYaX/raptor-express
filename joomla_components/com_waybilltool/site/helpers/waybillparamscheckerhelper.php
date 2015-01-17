@@ -51,6 +51,7 @@ class WaybillParamsCheckerHelper
         $allParams["insu_amnt"] = $jinput["insu_amnt"];
         $allParams["product"] = $jinput["exp-product"];
 
+        $allParams["cargo_info"] = $jinput["cargo_info"];
         $allParams["comment"] = $jinput["comment"];
 
         $allParams["weight"] = $jinput["weight"];
@@ -58,7 +59,7 @@ class WaybillParamsCheckerHelper
         $allParams["width"] = $jinput["width"];
         $allParams["height"] = $jinput["height"];
 
-        $comment2 = $jinput["comment2"];
+        //$comment2 = $jinput["comment2"];
 
         $checked = true;
 
@@ -76,11 +77,11 @@ class WaybillParamsCheckerHelper
                 $checked = false;
             }
         }
-        if ($checked) {
-            $allParams["comment"] = $allParams["comment"] . "||||||" .
-                     $comment2;
-            // var_dump($allParams);
-        }
+        // if ($checked) {
+        //     $allParams["comment"] = $allParams["comment"] . "||||||" .
+        //              $comment2;
+        //     // var_dump($allParams);
+        // }
 
         return $checked ? $allParams : null;
     }
@@ -108,6 +109,7 @@ class WaybillParamsCheckerHelper
       $allParams = array();
       $allParams["uid"] = $uid;
 
+      $allParams["express_id"] = $jinput["express_id"];
       $allParams["payment_stat"] = $jinput["paystat"];
       $allParams["package_stat"] = $jinput["packstat"];
 
@@ -139,6 +141,7 @@ class WaybillParamsCheckerHelper
       $allParams["solution"] = $jinput["exp-solution"];
       $allParams["product"] = $jinput["exp-product"];
 
+      $allParams["cargo_info"] = $jinput["cargo_info"];
       $allParams["comment"] = $jinput["comment"];
 
       $allParams["weight"] = $jinput["weight"];
@@ -148,11 +151,9 @@ class WaybillParamsCheckerHelper
 
       $allParams["payment_amount"] = $jinput["price"];
 
-      $comment2 = $jinput["comment2"];
+      //$comment2 = $jinput["comment2"];
 
       $checked = true;
-
-      //var_dump($allParams);
 
       foreach ($allParams as $key => $value) {
         if ($value === null) {
@@ -173,10 +174,10 @@ class WaybillParamsCheckerHelper
         $allParams["id_recto"] = false;
         $allParams["id_verso"] = false;
       }
-      if ($checked) {
-        $allParams["comment"] = $allParams["comment"] . "||||||" .
-        $comment2;
-      }
+      // if ($checked) {
+      //   $allParams["comment"] = $allParams["comment"] . "||||||" .
+      //     $comment2;
+      // }
 
       return $checked ? $allParams : null;
     }
