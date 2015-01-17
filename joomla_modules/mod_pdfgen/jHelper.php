@@ -150,7 +150,7 @@ class modPDFGenHelper
       	$pdf->Cell(85, 35, $datetime, 'LTR', 'L', 1, 0);
       	$x = $pdf->GetX();
       	$y = $pdf->GetY();
-      	$pdf->write1DBarcode($data['package_id'], 'C39+', '', '', '', 33, 0.5, $style, 'N');
+      	$pdf->write1DBarcode($data['express_id'], 'C39+', '', '', '', 33, 0.5, $style, 'N');
       	$pdf->SetXY($x,$y);
       	$pdf->SetFont('DroidSansFallback', '', 16, '', false);
       	$pdf->MultiCell(115, 35, '', 'LTR', 'C', 1, 0);
@@ -194,7 +194,7 @@ class modPDFGenHelper
       	$pdf->Ln();
       	$x = $pdf->GetX();
       	$y = $pdf->GetY();
-      	$pdf->write1DBarcode($data['package_id'], 'C39+', '', '', '', 23, 0.4, $style, 'N');
+      	$pdf->write1DBarcode($data['express_id'], 'C39+', '', '', '', 23, 0.4, $style, 'N');
       	$pdf->SetXY($x,$y);
       	$pdf->MultiCell(200, 25, '', 'LTR', 'C', 1, 0);
 
@@ -210,7 +210,7 @@ class modPDFGenHelper
       	$pdf->MultiCell(50, 42, '', 1, 'C', 1, 0);
       	$pdf->write2DBarcode('www.ems.com.cn', 'QRCODE,H', $x+150, $y, 42, 42, $style, 'N');
       	$pdf->SetXY($x,$y+30);
-      	$pdf->MultiCell(150, 12, '客服电话：+33122334455      网址：www.raptor-express.com', 1, 'L', 1, 0);
+      	$pdf->MultiCell(150, 12, '客服电话：+33650997649      网址：www.ems-china.cn', 1, 'L', 1, 0);
 
       	// ---------------------------------------------------------
 
