@@ -23,11 +23,13 @@ class WaybillToolViewWaybillAdmin extends JViewLegacy
          * @return  void
          */
 	public function display($tpl = null) {
-		$user = JFactory::getUser();
-		if (($user->guest) || !($user->id > 0)){
-			JFactory::getApplication()->redirect(JURI::base()
-			.'index.php?option=com_users&view=login', $error, 'error' );
-		}
+// 		$user = JFactory::getUser();
+// 		if (($user->guest) || !($user->id > 0)){
+// 			JFactory::getApplication()->redirect(JURI::base()
+// 			.'index.php?option=com_users&view=login', $error, 'error' );
+// 		}
+        $checkUserHasRightHelper = new CheckUserHasRightHelper();
+        $checkUserHasRightHelper->checkUserHasRight();
 
 		$express_uid = JFactory::getApplication()->input->get('exp-uid', null);
 		$express_oid = JFactory::getApplication()->input->get('exp-oid', null);
