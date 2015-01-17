@@ -57,6 +57,7 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
          recv.address_country as recv_country,
          recv.address_telephone as recv_telephone,
          p.express_id as express_id,
+         o.express_type as express_type,
 
          wide as width
          ');
@@ -66,12 +67,15 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
          ->join('INNER', '#__hikashop_address recv ON recv.address_id=recipient_id')
          ->join('LEFT', 't_id_cards t ON t.order_id=o.order_id');
          $whereclause = '1';
-         if ($uid !== null) {
+         if (isset($uid) && !empty($uid)) {
            $whereclause = 'client_id = '.$uid;
            //$whereclause = $whereclause . ' AND order_id = '.$oid;
          }
+         if(isset($oid)) {
+           $whereclause = $whereclause . ' AND t.order_id = '.$oid;
+         }
          if($filtreExpressId == true) {
-             $whereclause = $whereclause . 'AND p.express_id = NULL';
+             $whereclause = $whereclause . ' AND p.express_id is NULL';
          }
          $query->where($whereclause);
          $query->order('package_id DESC');
