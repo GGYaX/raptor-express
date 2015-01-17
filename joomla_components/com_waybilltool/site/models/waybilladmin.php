@@ -106,7 +106,8 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
           $data["send_id"], $data["recv_id"],
           $data["insu_amnt"], $data["solution"],
           $data["weight"], $data["height"], $data["length"],
-          $data["width"], $data["comment"], $data["package_stat"]);
+          $data["width"], $data["cargo_info"], $data["comment"],
+          $data["package_stat"], $data["express_id"]);
 
         $resOrder = $this->updateOrder($data["order_id"],
           $data["payment_amount"], $data["product"], $data["payment_stat"]);
@@ -117,18 +118,23 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
         }
         if($GLOBALS['WAYBILLTOOL_DEBUG']){
           echo '<pre>';
+          echo 'ADDRESS_SEND<br>';
           var_dump($resAddrSent);
           echo '</pre>';
           echo '<pre>';
+          echo 'ADDRESS_RECV<br>';
           var_dump($resAddrRecv);
           echo '</pre>';
           echo '<pre>';
+          echo 'PKG<br>';
           var_dump($resPackage);
           echo '</pre>';
           echo '<pre>';
+          echo 'ORDER<br>';
           var_dump($resOrder);
           echo '</pre>';
           echo '<pre>';
+          echo 'IDCARD<br>';
           var_dump($resIDCards);
           echo '</pre>';
         }
@@ -186,7 +192,7 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
     $sender_id, $recipient_id,
     $insured_amount, $express_mode,
     $weight, $height, $length,
-    $wide, $comment, $package_stat) {
+    $wide, $cargo_info, $comment, $package_stat, $express_id) {
       if($GLOBALS['WAYBILLTOOL_DEBUG']) echo "修改PACKAGE<br>";
 
       $db = JFactory::getDBO();
@@ -195,15 +201,16 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
       $fields = array(
         $db->quoteName('sender_id').'='.$db->quote($sender_id),
         $db->quoteName('recipient_id').'='.$db->quote($recipient_id),
-        $db->quoteName('package_stat').'='.$db->quote($package_stat),
         $db->quoteName('insured_amount').'='.$db->quote($insured_amount),
         $db->quoteName('express_mode').'='.$db->quote($express_mode),
         $db->quoteName('weight').'='.$db->quote($weight),
         $db->quoteName('height').'='.$db->quote($height),
         $db->quoteName('length').'='.$db->quote($length),
         $db->quoteName('wide').'='.$db->quote($wide),
+        $db->quoteName('cargo_info').'='.$db->quote($cargo_info),
         $db->quoteName('comment').'='.$db->quote($comment),
-        $db->quoteName('package_stat').'='.$db->quote($package_stat)
+        $db->quoteName('package_stat').'='.$db->quote($package_stat),
+        $db->quoteName('express_id').'='.$db->quote($express_id)
       );
 
       $conditions = array(

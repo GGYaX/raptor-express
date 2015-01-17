@@ -38,7 +38,7 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
     //1
     if($solution === null){
 			$this->form = $walletHelper->getUserWalletHtml();
-      $this->form = $this->form . SolutionChooserHelper::getSolutionChooser();
+      $this->form = $this->form . SolutionChooserHelper::getSolutionChooser('点击下单');
     }
     //3
     else if($creation !== null) {
@@ -104,100 +104,100 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
 
 
 
-  private static function getHtmlCreateFormOld($solution = null, $productList = null, $needIdCard = false) {
-
-    $output ='（显示地址本列表？）<br>'.
-      '<form method="POST" class="form-validate" id="exp-wb-create" action="'.JRoute::_(JURI::current()).'" enctype="multipart/form-data">'
-      .'<input type="hidden" value="1" name="exp-creation" />'
-      .'<input type="hidden" value="'.$solution.'" name="exp-solution" />'
-      .'<div style="display: inline-block; padding: 0 20px 0 0;">'
-      .'寄件人姓名 : <input class="required validate-username" type="text" name="name_send">'
-      .'<br>'
-      .'寄件人街道 : <input class="required validate-username" type="text" name="addr_send_stre">'
-      .'<br>'
-			.'寄件人邮编 : <input class="required validate-numeric" type="text" name="addr_send_post">'
-			.'<br>'
-			.'寄件人城市 : <input class="required validate-username" type="text" name="addr_send_city">'
-			.'<br>'
-			.'寄件人省份 : <input class="required validate-username" type="text" name="addr_send_stat">'
-			.'<br>'
-			.'寄件人国家 : <input class="required validate-username" type="text" name="addr_send_cnty">'
-			.'<br>'
-      .'寄件人电话 : <input class="required validate-numeric" type="text" name="phone_send">'
-      .'</div>'
-      .'<div style="display: inline-block">'
-      .'收件人姓名 : <input class="required validate-username" type="text" name="name_recv">'
-      .'<br>'
-			.'收件人街道 : <input class="required validate-username" type="text" name="addr_recv_stre">'
-			.'<br>'
-			.'收件人邮编 : <input class="required validate-numeric" type="text" name="addr_recv_post">'
-			.'<br>'
-			.'收件人城市 : <input class="required validate-username" type="text" name="addr_recv_city">'
-			.'<br>'
-			.'收件人省份 : <input class="required validate-username" type="text" name="addr_recv_stat">'
-			.'<br>'
-			.'收件人国家 : <input class="required validate-username" type="text" name="addr_recv_cnty">'
-			.'<br>'
-      .'收件人电话 : <input class="required validate-numeric" type="text" name="phone_recv">'
-      .'</div>'
-      .'<br><br>'
-      .'<div style="display: inline-block; padding: 0 20px 0 0;">'
-      .'保价金额 : <input class="required validate-numeric" type="text" name="insu_amnt">'
-      .'</div>';
-
-    if(!($productList === null)
-        && !empty($productList)){
-      $output = $output
-        .'<div style="display: inline-block">'
-        .'快递产品类别 : '
-        .'<select name="exp-product">';
-      foreach ($productList as $key => $value) {
-        $output = $output
-          .'<option value="'.$value.'">'.$key.'</option>';
-      }
-      $output = $output.'</select></div>';
-    }
-
-    $output = $output . '<br><br>'
-      .'包裹内容（请如实填报） : '
-      .'<textarea class="required" rows="10" cols="50" name="comment" form="exp-wb-create"></textarea>'
-      .'<br>'
-      .'重量（kg） : <input class="required validate-numeric" type="text" name="weight">'
-      .'<br>'
-      .'<div style="display: inline-block; padding: 0 20px 0 0;">'
-      .'长（cm） : <input class="required validate-numeric" type="text" name="length">'
-      .'</div>'
-      .'<div style="display: inline-block; padding: 0 20px 0 0;">'
-      .'宽（cm） : <input class="required validate-numeric" type="text" name="width">'
-      .'</div>'
-      .'<div style="display: inline-block;">'
-      .'高（cm） : <input class="required validate-numeric" type="text" name="height">'
-      .'</div>'
-      .'<br><br>'
-      .'备注 : '
-      .'<textarea rows="10" cols="50" name="comment2" form="exp-wb-create"></textarea>'
-      .'<br>';
-
-    if($needIdCard) {
-      $output = $output.'<br>'
-        .'<div style="display: inline-block; padding: 0 10px 0 0;">'
-        .'身份证正面'
-        .'<input class="required" type="file" name="id_recto" id="id_recto">'
-        .'</div>'
-        .'<div style="display: inline-block;">'
-        .'身份证反面'
-        .'<input class="required" type="file" name="id_verso" id="id_verso">'
-        .'</div>';
-    }
-
-    $output = $output
-    .'<br><br>'
-    .'<input class="btn btn-lg btn-success" type="submit" value="确认订单">'
-    .'</form>'
-    .'（自动生成价格，在订单管理中显示可见）';
-
-    return $output;
-  }
+  // private static function getHtmlCreateFormOld($solution = null, $productList = null, $needIdCard = false) {
+	//
+  //   $output ='（显示地址本列表？）<br>'.
+  //     '<form method="POST" class="form-validate" id="exp-wb-create" action="'.JRoute::_(JURI::current()).'" enctype="multipart/form-data">'
+  //     .'<input type="hidden" value="1" name="exp-creation" />'
+  //     .'<input type="hidden" value="'.$solution.'" name="exp-solution" />'
+  //     .'<div style="display: inline-block; padding: 0 20px 0 0;">'
+  //     .'寄件人姓名 : <input class="required validate-username" type="text" name="name_send">'
+  //     .'<br>'
+  //     .'寄件人街道 : <input class="required validate-username" type="text" name="addr_send_stre">'
+  //     .'<br>'
+	// 		.'寄件人邮编 : <input class="required validate-numeric" type="text" name="addr_send_post">'
+	// 		.'<br>'
+	// 		.'寄件人城市 : <input class="required validate-username" type="text" name="addr_send_city">'
+	// 		.'<br>'
+	// 		.'寄件人省份 : <input class="required validate-username" type="text" name="addr_send_stat">'
+	// 		.'<br>'
+	// 		.'寄件人国家 : <input class="required validate-username" type="text" name="addr_send_cnty">'
+	// 		.'<br>'
+  //     .'寄件人电话 : <input class="required validate-numeric" type="text" name="phone_send">'
+  //     .'</div>'
+  //     .'<div style="display: inline-block">'
+  //     .'收件人姓名 : <input class="required validate-username" type="text" name="name_recv">'
+  //     .'<br>'
+	// 		.'收件人街道 : <input class="required validate-username" type="text" name="addr_recv_stre">'
+	// 		.'<br>'
+	// 		.'收件人邮编 : <input class="required validate-numeric" type="text" name="addr_recv_post">'
+	// 		.'<br>'
+	// 		.'收件人城市 : <input class="required validate-username" type="text" name="addr_recv_city">'
+	// 		.'<br>'
+	// 		.'收件人省份 : <input class="required validate-username" type="text" name="addr_recv_stat">'
+	// 		.'<br>'
+	// 		.'收件人国家 : <input class="required validate-username" type="text" name="addr_recv_cnty">'
+	// 		.'<br>'
+  //     .'收件人电话 : <input class="required validate-numeric" type="text" name="phone_recv">'
+  //     .'</div>'
+  //     .'<br><br>'
+  //     .'<div style="display: inline-block; padding: 0 20px 0 0;">'
+  //     .'保价金额 : <input class="required validate-numeric" type="text" name="insu_amnt">'
+  //     .'</div>';
+	//
+  //   if(!($productList === null)
+  //       && !empty($productList)){
+  //     $output = $output
+  //       .'<div style="display: inline-block">'
+  //       .'快递产品类别 : '
+  //       .'<select name="exp-product">';
+  //     foreach ($productList as $key => $value) {
+  //       $output = $output
+  //         .'<option value="'.$value.'">'.$key.'</option>';
+  //     }
+  //     $output = $output.'</select></div>';
+  //   }
+	//
+  //   $output = $output . '<br><br>'
+  //     .'包裹内容（请如实填报） : '
+  //     .'<textarea class="required" rows="10" cols="50" name="cargo_info" form="exp-wb-create"></textarea>'
+  //     .'<br>'
+  //     .'重量（kg） : <input class="required validate-numeric" type="text" name="weight">'
+  //     .'<br>'
+  //     .'<div style="display: inline-block; padding: 0 20px 0 0;">'
+  //     .'长（cm） : <input class="required validate-numeric" type="text" name="length">'
+  //     .'</div>'
+  //     .'<div style="display: inline-block; padding: 0 20px 0 0;">'
+  //     .'宽（cm） : <input class="required validate-numeric" type="text" name="width">'
+  //     .'</div>'
+  //     .'<div style="display: inline-block;">'
+  //     .'高（cm） : <input class="required validate-numeric" type="text" name="height">'
+  //     .'</div>'
+  //     .'<br><br>'
+  //     .'备注 : '
+  //     .'<textarea rows="10" cols="50" name="comment" form="exp-wb-create"></textarea>'
+  //     .'<br>';
+	//
+  //   if($needIdCard) {
+  //     $output = $output.'<br>'
+  //       .'<div style="display: inline-block; padding: 0 10px 0 0;">'
+  //       .'身份证正面'
+  //       .'<input class="required" type="file" name="id_recto" id="id_recto">'
+  //       .'</div>'
+  //       .'<div style="display: inline-block;">'
+  //       .'身份证反面'
+  //       .'<input class="required" type="file" name="id_verso" id="id_verso">'
+  //       .'</div>';
+  //   }
+	//
+  //   $output = $output
+  //   .'<br><br>'
+  //   .'<input class="btn btn-lg btn-success" type="submit" value="确认订单">'
+  //   .'</form>'
+  //   .'（自动生成价格，在订单管理中显示可见）';
+	//
+  //   return $output;
+  // }
 
   private static function getHtmlCreateForm($solution = null, $productList = null, $needIdCard = false) {
 
@@ -222,7 +222,7 @@ class WaybillToolViewWaybillCreate extends JViewLegacy
       }
 
       $output = $output
-      .'<div class="col-sm-6 repackage ems"><div class="control-label"><label> 重量（kg）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="weight"></div></div><div class="col-sm-6 repackage ems"><div class="control-label"><label> 长（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="length"></div></div><div class="col-sm-6 repackage ems"><div class="control-label"><label> 宽（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="width"></div></div><div class="col-sm-6 repackage ems"><div class="control-label"><label> 高（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="height"></div></div><div class="col-sm-12 ena"><div class="control-label"><label> 请选择: <span class="star">&nbsp;*</span></label></div><div class=""><select name="enaDemand" class="repackage" aria-invalid="false"><optionvalue="2|900|2KG">2罐900克（包税）|2KG</option><option value="2|800|2KG">2罐800克（包税）|2KG</option><option value="2|12004KG">2罐1200克（包税）|4KG</option><option value="3|800|3KG">3罐800克（包税）|3KG</option><option value="3|900|4KG">3罐900克（包税）|4KG</option><option value="3|1200|6KG">3罐1200克（包税）|6KG</option><option value="4|800|4KG">4罐800克（包税）|4KG</option><option value="4|900|5KG">4罐900克（包税）|5KG</option><option value="4|1200|7KG">4罐1200克（包税）|7KG</option><option value="5|800|5.5KG">5罐800克（包税）|5,5KG</option><option value="5|900|6KG">5罐900克（包税）|6KG</option><option value="6|800|7KG">6罐800克（包税）|7KG</option><option value="6|900|7KG">6罐900克（包税）|7KG</option></select></div></div><div class="col-sm-6"><div class="control-label"><label> 包裹内容（请如实填报）: <span class="star">&nbsp;*</span></label></div><div class=""><textarea class="required" rows="10" cols="50" name="comment"form="exp-wb-create"></textarea></div></div><div class="col-sm-6"><div class="control-label"><label> 备注 : <span class="star">&nbsp;*</span></label></div><div class=""><textarea rows="10" cols="50" name="comment2" form="exp-wb-create"></textarea></div></div>'
+      .'<div class="col-sm-6 repackage ems"><div class="control-label"><label> 重量（kg）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="weight"></div></div><div class="col-sm-6 repackage ems"><div class="control-label"><label> 长（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="length"></div></div><div class="col-sm-6 repackage ems"><div class="control-label"><label> 宽（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="width"></div></div><div class="col-sm-6 repackage ems"><div class="control-label"><label> 高（cm）: <span class="star">&nbsp;*</span></label></div><div class=""><input class="required validate-numeric" type="text" name="height"></div></div><div class="col-sm-12 ena"><div class="control-label"><label> 请选择: <span class="star">&nbsp;*</span></label></div><div class=""><select name="enaDemand" class="repackage" aria-invalid="false"><optionvalue="2|900|2KG">2罐900克（包税）|2KG</option><option value="2|800|2KG">2罐800克（包税）|2KG</option><option value="2|12004KG">2罐1200克（包税）|4KG</option><option value="3|800|3KG">3罐800克（包税）|3KG</option><option value="3|900|4KG">3罐900克（包税）|4KG</option><option value="3|1200|6KG">3罐1200克（包税）|6KG</option><option value="4|800|4KG">4罐800克（包税）|4KG</option><option value="4|900|5KG">4罐900克（包税）|5KG</option><option value="4|1200|7KG">4罐1200克（包税）|7KG</option><option value="5|800|5.5KG">5罐800克（包税）|5,5KG</option><option value="5|900|6KG">5罐900克（包税）|6KG</option><option value="6|800|7KG">6罐800克（包税）|7KG</option><option value="6|900|7KG">6罐900克（包税）|7KG</option></select></div></div><div class="col-sm-6"><div class="control-label"><label> 包裹内容（请如实填报）: <span class="star">&nbsp;*</span></label></div><div class=""><textarea class="required" rows="10" cols="50" name="cargo_info" form="exp-wb-create"></textarea></div></div><div class="col-sm-6"><div class="control-label"><label> 备注 : <span class="star">&nbsp;*</span></label></div><div class=""><textarea rows="10" cols="50" name="comment" form="exp-wb-create"></textarea></div></div>'
               .'</div></div></fieldset>';
 
       if($needIdCard) {

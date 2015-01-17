@@ -19,7 +19,7 @@ class SolutionChooserHelper {
     return ($solution === null) ? null : $solution;
   }
 
-  public static function getSolutionChooser($varname = 'exp-solution') {
+  public static function getSolutionChooser($btnStr, $varname = 'exp-solution') {
     //FIXME hard coded solution types
     $output = '<form method="post" action="'.JRoute::_(JURI::current()).'">'
     .'<div class="acm-features style-light style-1">'
@@ -28,17 +28,17 @@ class SolutionChooserHelper {
     .'<div class="features-item col-sm-4 center">'
     .'<h3>La Poste通道</h3>'
     .'<p>La Poste通道请点击：</p>'
-    .'<button class="btn btn-lg btn-success" name="'.$varname.'" value="LAP">点击下单</button>'
+    .'<button class="btn btn-lg btn-success" name="'.$varname.'" value="LAP">'.$btnStr.'</button>'
     .'</div>'
     .'<div class="features-item col-sm-4 center">'
     .'<h3>奶粉专用通道</h3>'
     .'<p>奶粉专用通道请点击：</p>'
-    .'<button class="btn btn-lg btn-success" name="'.$varname.'" value="EMS">点击下单</button>'
+    .'<button class="btn btn-lg btn-success" name="'.$varname.'" value="EMS">'.$btnStr.'</button>'
     .'</div>'
     .'<div class="features-item col-sm-4 center">'
     .'<h3>EMS通道</h3>'
     .'<p>EMS通道请点击：</p>'
-    .'<button class="btn btn-lg btn-success" name="'.$varname.'" value="EMS">点击下单</button>'
+    .'<button class="btn btn-lg btn-success" name="'.$varname.'" value="EMS">'.$btnStr.'</button>'
     .'</div>'
     .'</div>'
     .'</div>'

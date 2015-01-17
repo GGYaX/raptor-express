@@ -136,7 +136,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
                 $resPackage = $this->insertNewPackage($resAddrSent["id"],
                         $resAddrRecv["id"], $data["insu_amnt"],
                         $data["solution"], $data["weight"], $data["height"],
-                        $data["length"], $data["width"], $data["comment"]);
+                        $data["length"], $data["width"], $data["cargo_info"], $data["comment"]);
                 $resOrder = $this->insertNewOrder(
                         floatval($priceCalculed['result']), $resPackage["id"],
                         $data["uid"], $data["product"]);
@@ -268,7 +268,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
      */
     private function insertNewPackage ($sender_id, $recipient_id,
             $insured_amount, $express_mode, $weight, $height, $length, $wide,
-            $comment, $package_stat = "DDJ")
+            $cargo_info, $comment, $package_stat = "DDJ")
     {
         if ($GLOBALS['WAYBILLTOOL_DEBUG'])
             echo "写入PACKAGE<br>";
@@ -286,6 +286,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
                 'height',
                 'length',
                 'wide',
+                'cargo_info',
                 'comment'
         );
 
@@ -299,6 +300,7 @@ class WaybillToolModelWaybillCreate extends JModelItem
                 $db->quote($height),
                 $db->quote($length),
                 $db->quote($wide),
+                $db->quote($cargo_info),
                 $db->quote($comment)
         );
 
