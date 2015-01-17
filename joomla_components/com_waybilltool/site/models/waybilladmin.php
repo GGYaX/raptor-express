@@ -33,7 +33,7 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
      * Here we can load anything from DBO...
      * @return string The message to be displayed to the user
      */
-    public function getOrders($uid, $oid = null) {
+    public function getOrders($uid = null, $oid = null) {
        try {
          $db = JFactory::getDBO();
          $query = $db->getQuery(true);
@@ -63,8 +63,9 @@ class WaybillToolModelWaybillAdmin extends JModelItem {
          ->join('INNER', '#__hikashop_address send ON send.address_id=sender_id')
          ->join('INNER', '#__hikashop_address recv ON recv.address_id=recipient_id')
          ->join('LEFT', 't_id_cards t ON t.order_id=o.order_id');
-         $whereclause = 'client_id = '.$uid;
-         if ($oid === null) {
+         $whereclause = '1';
+         if ($uid === null) {
+           $whereclause = 'client_id = '.$uid;
            //$whereclause = $whereclause . ' AND order_id = '.$oid;
          }
          $query->where($whereclause);
