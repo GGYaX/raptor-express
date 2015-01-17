@@ -19,8 +19,6 @@ $solution = $jinput->get('exp-solution', null);
 $waybill = $jinput->get('waybillid', null);
 $getwaybill = $jinput->get('getwaybill', "0");
 
-var_dump($solution);
-var_dump($waybill);
 //Check variable exists
 if(
   ($getwaybill === "1")
