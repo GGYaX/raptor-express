@@ -82,6 +82,7 @@ $allWallet = $model->getAllUserWithTheirWallet();
         	<tbody>
                 <?php
                 foreach ($allWallet as $k => $v) :
+               if(isset($v['name']) && $v['name'] != 'Super User') :
                 ?>
                 <tr>
             		<td><?php echo $k;?></td>
@@ -93,6 +94,7 @@ $allWallet = $model->getAllUserWithTheirWallet();
                     <td><a href="<?php echo JURI::current(); ?>?task=edit&view=edit&uid=<?php echo $v['uid'];?>">点击修改</a></td>
             	</tr>
                 <?php
+                endif;
                 endforeach;
                 ?>
             </tbody>
